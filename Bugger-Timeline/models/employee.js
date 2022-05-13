@@ -54,13 +54,28 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
-    // One to Many Association between Employee and Role
+    // Employee Associations
     Employee.associate = (models) => {
+
+        // Many to One Association between Employee and Role (N Employees -> 1 Role)
         Employee.belongsTo(models.Role, {
             foreignKey: {
                 allowNull: true    // foreignKey : RoleId
             }
         });
+
+        // One to Many Association between Employee and Attendance (1 Employee -> N Attendances)
+        Employee.hasMany(models.Attendance, [
+            {
+                onDelete: 'CASCADE',
+                hooks: true
+            },
+            {
+                onUpdate: 'CASCADE',
+                hooks: true
+            }
+        ]);
+        
     };
 
     return Employee;

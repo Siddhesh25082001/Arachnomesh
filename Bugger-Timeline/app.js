@@ -22,6 +22,10 @@ app.use('/api/arachnomesh/employeeRoles', employeeRoleRoutes);
 const employeeRoutes = require('./routes/employee-routes')
 app.use('/api/arachnomesh/employees', employeeRoutes);
 
+// 3. Attendance Routes
+const attendanceRoutes = require('./routes/attendance-routes');
+app.use('/api/arachnomesh/attendance', attendanceRoutes);
+
 // Home Route
 app.get('/', (req, res) => {
     res.send('Hello');

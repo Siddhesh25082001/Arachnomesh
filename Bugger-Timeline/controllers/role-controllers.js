@@ -30,7 +30,11 @@ const getAllRoles = async (req, res) => {
 
     try{
         let allRoles = await Role.findAll({
-            include: [Employee]
+            attributes: ['id', 'uuid', 'employee_role_name', 'employee_role_isAdmin'],
+            include: {
+                model: Employee,
+                attributes: ['id', 'uuid', 'employee_name', 'employee_email_id']
+            }
         });
         res.status(200).send(allRoles)
     }
@@ -50,7 +54,11 @@ const getOneRole = async (req, res) => {
             where: {
                 id: id
             },
-            include: [Employee]
+            attributes: ['id', 'uuid', 'employee_role_name', 'employee_role_isAdmin'],
+            include: {
+                model: Employee,
+                attributes: ['id', 'uuid', 'employee_name', 'employee_email_id']
+            }
         });
         res.status(200).send(oneRole);
     }
@@ -64,6 +72,7 @@ const getOneRole = async (req, res) => {
 const updateOneRole = async (req, res) => {
 
     const id = req.params.id;
+
     let updatedDetails = {
         employee_role_name: req.body.employee_role_name,
         employee_role_description: req.body.employee_role_description,
@@ -75,16 +84,24 @@ const updateOneRole = async (req, res) => {
             where: {
                 id: id,
             },
-            include: [Employee]
+            attributes: ['id', 'uuid', 'employee_role_name', 'employee_role_isAdmin'],
+            include: {
+                model: Employee,
+                attributes: ['id', 'uuid', 'employee_name', 'employee_email_id']
+            }
         });
 
-        if(updateStatus){
+        if(updateStatus[0]){
             try{
                 let oneRole = await Role.findOne({
                     where: {
                         id: id
                     },
-                    include: [Employee]
+                    attributes: ['id', 'uuid', 'employee_role_name', 'employee_role_isAdmin'],
+                    include: {
+                        model: Employee,
+                        attributes: ['id', 'uuid', 'employee_name', 'employee_email_id']
+                    }
                 });
                 res.status(200).send(oneRole);
             }

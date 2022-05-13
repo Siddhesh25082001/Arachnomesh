@@ -6,6 +6,7 @@ const Relations = require('../models');
 // Accessing Relations
 const Role = Relations.Role;
 const Employee = Relations.Employee;
+const Attendance = Relations.Attendance;
 
 // 1. Add a new employee
 const addNewEmployee = async (req, res) => {
@@ -37,7 +38,17 @@ const getAllEmployees = async (req, res) => {
 
     try{
         let allEmployees = await Employee.findAll({
-            include: [Role]                         
+            attributes: ['id', 'uuid', 'employee_name', 'employee_email_id', 'employee_status'],
+            include: [
+                {
+                    model: Role, 
+                    attributes: ['employee_role_name', 'employee_role_isAdmin']
+                },
+                {
+                    model: Attendance,
+                    attributes: ['attendance_date']
+                }
+            ]       
         });
         res.status(200).send(allEmployees)
     }
@@ -57,7 +68,17 @@ const getOneEmployee = async (req, res) => {
             where: {
                 id: id
             },
-            include: [Role]
+            attributes: ['id', 'uuid', 'employee_name', 'employee_email_id', 'employee_status'],
+            include: [
+                {
+                    model: Role, 
+                    attributes: ['employee_role_name', 'employee_role_isAdmin']
+                },
+                {
+                    model: Attendance,
+                    attributes: ['attendance_date']
+                }
+            ]      
         });
         res.status(200).send(oneEmployee);
     }
@@ -99,7 +120,17 @@ const updateOneEmployee = async (req, res) => {
                     where: {
                         id: id
                     },
-                    include: [Role]
+                    attributes: ['id', 'uuid', 'employee_name', 'employee_email_id', 'employee_status'],
+                    include: [
+                        {
+                            model: Role, 
+                            attributes: ['employee_role_name', 'employee_role_isAdmin']
+                        },
+                        {
+                            model: Attendance,
+                            attributes: ['attendance_date']
+                        }
+                    ]      
                 });
                 res.status(200).send(oneRole);
             }
@@ -123,13 +154,13 @@ const deleteOneEmployee = async (req, res) => {
     const id = req.params.id;
 
     try{
-        let deleteStatus = await Employee.destroy({
+        let empDeleteStatus = await Employee.destroy({
             where: {
                 id: id
             }
         });
 
-        if(deleteStatus){
+        if(empDeleteStatus && attDeleteStatus){
             res.status(200).send('Employee Deleted')
         }
         else{
