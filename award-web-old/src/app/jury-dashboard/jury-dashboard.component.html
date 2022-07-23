@@ -1,0 +1,166 @@
+<app-user-header></app-user-header>
+<!-- <div class="main-content" id="panel">
+   <section class="jury_dashboard_page" id="content">
+      <div class="dashboard-sec">
+         <div class="container container-80">
+            <div class="brown-title">
+               <h1>Companies and Criterias</h1>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="jury_dashboard banner-bg-effect">
+                     <div class="panel-group" id="accordion" *ngFor="let cat1 of nominationsCatLevel1; let i=index;">
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h4 class="panel-title">
+                                 <a data-toggle="collapse" data-parent="#accordion" [href]="'#level_1_collapse'+cat1.productId">
+                                 {{i + 1}}. {{cat1.productName}}</a>
+                              </h4>
+                           </div>
+                           <div [id]="'level_1_collapse'+cat1.productId" class="panel-collapse collapse in" *ngFor="let cat2 of getSubCategoris(cat1.productId, 1)">
+                              <div class="panel-body category_body">
+                                 <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                       <h4 class="panel-title">
+                                          <a data-toggle="collapse" data-parent="#accordion" [href]="'#level_2_collapse'+cat2.productId">
+                                          - {{cat2.productName}}</a>
+                                       </h4>
+                                    </div>
+                                    <div [id]="'level_2_collapse'+cat2.productId" class="panel-collapse collapse in" *ngFor="let cat3 of getSubCategoris(cat2.productId, 2)">
+                                      <div class="panel-body category_body">
+                                         <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                               <h4 class="panel-title">
+                                                  <a *ngIf="!cat3.isDummy" data-toggle="collapse" data-parent="#accordion" [href]="'#level_3_collapse'+cat3.productId" (click)="fetch_x('productSubSubCategory', cat3.productId)">
+                                                  - {{cat3.productName}}</a>
+                                                  <a *ngIf="cat3.isDummy" data-toggle="collapse" data-parent="#accordion" [href]="'#level_3_collapse'+cat3.productId" (click)="fetch_x('productSubCategory', cat3.productId)">
+                                                    - Open Nominations</a>
+                                               </h4>
+                                            </div>
+                                            <div [id]="'level_3_collapse'+cat3.productId" class="panel-collapse collapse in">
+                                              <div class="panel-body subcategory_body">
+                                                 <div class="panel panel-default" *ngFor="let company of companyListTree[cat3.productId]">
+                                                    <div class="panel-heading">
+                                                       <h4 class="panel-title">
+                                                          <a data-toggle="collapse" data-parent="#accordion" [href]="'#company_level_collapse'+cat3.productId+company.userId" (click)="fetch_y('productSubSubCategory', cat3.productId, company.userId)">
+                                                          . {{company.companyName}}</a>
+                                                       </h4>
+                                                    </div>
+                                                    <div [id]="'company_level_collapse'+cat3.productId+company.userId" class="panel-collapse collapse">
+                                                       <div class="panel-body">
+                                                          <div class="slider">
+                                                             <div class="swiper mySwiper1">
+                                                                <div class="swiper-wrapper">
+                                                                   <div class="swiper-slide" *ngFor="let nom of nominationListTree[cat3.productId+company.userId]">
+                                                                      <div class="subcategorybox">
+                                                                         <img src="./assets/images/bhujia.jpg" alt="img1">
+                                                                         <div class="sub-details">
+                                                                            <h3>{{nom.productName}}</h3>
+                                                                            <p>This Product has been nominated for the {{nom.award[0].awardName}}. </p>
+                                                                            <a routerLink="/questions/{{nom._id}}" class="brown-btn hvr-shutter-out-vertical">Proceed To Judging Criteria</a>
+                                                                         </div>
+                                                                      </div>
+                                                                   </div>
+                                                                </div>
+                                                                <div class="swiper-button-next"></div>
+                                                                <div class="swiper-button-prev"></div>
+                                                             </div>
+                                                          </div>
+                                                       </div>
+                                                    </div>
+                                                 </div>
+                                              </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</div> -->
+
+<div class="main-content" id="panel">
+  <section class="jury_dashboard_page" id="content">
+   <div class="dashboard-sec">
+        <div class="container container-80">
+         <div class="row banner-bg-effect p-4 br-8">
+            <div class="col-md-8 col-lg-8">
+               <div class="banner-div">
+                  <h2 class="mb-2">Hello  {{userInfo?.name}}</h2>
+                  <h4 class="text-white mt-0 mb-0">View the status of all your nominations </h4>  
+               </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+               <div class="right-contact">
+                  <p>Name : {{userInfo?.name}}</p>
+                  <p>E-Mail: {{userInfo?.email}}</p>
+                  <p>Contact Number : {{userInfo?.phone}}</p>     
+               </div>
+            </div>
+            <div class="banner-div col-md-12 col-lg-12" style="margin-top: 25px;">
+               <h4 class="mb-2">Judging Guidelines:</h4>
+               <ul>
+                  
+               <li>1. The judges need to assign marks to all the questions answered by the nominees for the companies assigned to you on the scale of 1-10.</li>
+               <li>2. The judges will be requested to give an honest score and submit their decision within 7 days of receiving the nominations and their information.</li>
+               <li>3. It is important that judges use the full scale and are not hesitant to give high marks to good runs and low marks to bad runs.</li>
+               <li>4. There are no bonuses or penalties.</li>
+               <li> 5. The marks once assigned can’t be changed after the final submit.</li>
+               </ul>
+            </div>
+          </div>
+          <br/>
+           <div class="row banner-bg-effect p-4 br-8 mob-pad-00">
+              <div class="col-md-12">
+                 <div class="jury_dashboard">
+                  <div class="panel-group" id="accordion" *ngFor="let company of companyListTree">
+                    <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h4 class="panel-title panel_dash">
+                                  <a data-toggle="collapse" data-parent="#accordion" [href]="'#company_level_collapse'+company.userId" (click)="fetch_y('productSubSubCategory', company.userId)">
+                                  . {{company.companyName}} </a>
+                                  <span>({{company.juryChecked===0 ? 'Not judged' : (company.juryChecked%2===1 ? "Judging in progress" : "Judged")}})</span>
+                              </h4>
+                           </div>
+                            <div [id]="'company_level_collapse'+company.userId" class="panel-collapse collapse">
+                              <div class="panel-body">
+                                  <div class="slider">
+                                    <div class="swiper mySwiper1">
+                                        <div class="swiper-wrapper">
+                                          <div class="swiper-slide" *ngFor="let nom of nominationListTree[company.userId]">
+                                              <div class="subcategorybox">
+                                                <img src="./assets/images/bhujia.jpg" alt="img1">
+                                                <div class="sub-details">
+                                                    <h3>{{nom.productName}}</h3>
+                                                    <p>This Product has been nominated for the {{nom.award[0].awardName}}. </p>
+                                                    <a routerLink="/questions/{{nom._id}}" class="brown-btn hvr-shutter-out-vertical">
+                                                      {{nom.juryChecked===true ? "View Scores" : (nom.juryChecked===false ? "Continue Judging" : 'Proceed To Judging Criteria')}} 
+                                                      </a>
+                                                </div>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+</div>
+<app-footer></app-footer>

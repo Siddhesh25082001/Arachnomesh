@@ -1,0 +1,146 @@
+
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<!-- Main content -->
+<div class="main main-content admin-dashboard" id="panel">
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Leads</h6>
+          </div>
+          
+          <div class="col-lg-6 col-5 text-right">
+            <a (click)="commonService.logout()" class="btn btn-neutral my-4">Logout</a>
+            <!-- <button  >Open Modal</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div style=" display: flex; ">
+          <div class="card-header border-0" style=" padding-right: 400px; ">
+            <h3 class="mb-0">Leads</h3>
+            <div style="margin-top: 10px;">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" (ngModelChange)="didModify()" autocomplete="off" placeholder="Search">
+            </div>
+            
+          </div>
+          <div>
+            
+          </div>
+          <div>
+            <label class="form-control-label" for="" style="margin-top: 10px">From</label>
+            <input
+              class="form-control"
+              type="date"
+              name=""
+              id=""
+             
+              [(ngModel)]="from"
+            />
+          </div>
+          <div>
+            <label class="form-control-label" for="" style="margin-top: 10px">To</label>
+            <input
+              class="form-control"
+              type="date"
+              name=""
+              id=""
+              [(ngModel)]="to"
+              (input)="filterDateLeads()"
+            />
+          </div>
+          <div  class="card-header border-0" *ngIf="btnflag" style="margin-top: 28px">
+            <a  class="btn btn-sm btn-primary" style=" color: aliceblue;" (click)="getArchiveLeads();btnflag = !btnflag" >
+               Show archive data
+            </a>
+          </div>
+          <div  class="card-header border-0" *ngIf="!btnflag" style="margin-top: 28px">
+            <a  class="btn btn-sm btn-primary" style=" color: aliceblue;" (click)="getUserList(archive);btnflag = !btnflag" >
+               Show unarchive data
+            </a>
+          </div>
+        </div>
+          <!-- Light table -->
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" class="sort" data-sort="name" (click)="setOrder('mobile')" style=" cursor: pointer;">Mobile</th>
+                  <th scope="col" class="sort" data-sort="campaign" (click)="setOrder('campaign')" style=" cursor: pointer;">Campaign</th>
+                  <th scope="col" class="sort" data-sort="status" (click)="setOrder('createdAt')" style=" cursor: pointer;">Date</th>
+                  <!-- <th scope="col" class="sort" data-sort="status">Status</th> -->
+                  <th scope="col" class="sort" data-sort="completion">Employee Assigned</th>
+                  <th scope="col" class="sort" data-sort="completion">Status</th>
+                  <th scope="col" class="sort" data-sort="status">Comment</th>
+                  <th scope="col" class="sort" data-sort="completion">Delete</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr *ngFor="let item of leads">                
+                  <td class="budget">
+                   {{item?.mobile}}
+                  </td>
+                  <td>{{item?.campaign}}</td>
+                  <td>
+                    {{item?.createdAt | date}}
+                  </td>
+                  <td>
+                    <select class="form-control" style="width:160px" [value]="item?.leadAssigned"  (change)="onChangeLeadAssigned($event,item?._id)" >
+                      <option value="-1">--Select Employee--</option>
+
+                      <option *ngFor="let employee of employeeData;" value="{{employee.employeeName}}">{{employee.employeeName}}</option>
+
+                    </select >
+                  </td>
+                  <td>
+                    <select (change)="onChangeLeadStatus($event,item?._id)" [value]="item?.leadStatus">
+                      <option value="not a lead">Not a lead</option>
+                      <option value="completed">Completed</option>
+                    </select>
+                  </td>
+                  <td style="width: 30%;">
+                    <input type="text"  class="form-control" [(ngModel)]="action[item?._id+'_status']" style="width: 50%;" (blur)="onBlurMethod(action[item?._id+'_status'],item?._id,'status')">
+                  </td>
+                  <td>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text" [(ngModel)]="action[item?._id+'_cmnt']" (blur)="onBlurMethod(action[item?._id+'_cmnt'],item?._id,'comment')"></textarea>
+                  </td>
+                  <td>
+                    <span (click)="deletePost(item?._id)" class="badge badge-danger" style=" cursor: pointer; ">Delete</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+         
+        </div>
+          <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li class="page-item">
+      <a class="page-link" aria-label="Previous" (click)="previousPage()">
+        <span aria-hidden="true" >&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item text-white mt-2">
+        {{currentPage}} of {{totalPage}}
+    </li>
+ 
+     <li class="page-item">
+      <a class="page-link" aria-label="Next" (click)="nextPage()">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

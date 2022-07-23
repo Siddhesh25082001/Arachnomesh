@@ -1,0 +1,75 @@
+<app-user-header></app-user-header>
+<div class="main-content" id="panel">
+   <!-- Content
+      ============================================= -->
+   <section class="bg-brown section-area nomination-page bg-left-design bg-design" id="content">
+         <div class="container container-80">
+            <div class="brown-title">
+               <h1>Nominations</h1>
+               <div class="filter-icon-div"><i class="fa fa-filter" id="filter-icon"></i></div>
+            </div>
+
+            <div class="nomination-category" id="nomination-category">
+               <h4><i class="fa fa-filter"></i> Product Category : </h4>
+               <ul>
+                 <!-- <li  (click)="searchByCategory('all')">All category</li> -->
+                  <li class="nothing" id="{{category_?.productName}}" (click)="searchByCategory(category_?.productName)" *ngFor="let category_ of category">{{category_?.productName}}</li>
+                
+                 
+               </ul>
+            </div>
+
+            <div class="nomination-details table-responsive">
+
+               <table class="table nomination-table">
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Company Name</th>
+                      <th>Product Name</th>
+                      <th>Product Image</th>
+                      <th>Product Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let nomination of all_nomination;let i=index">
+                      <td >#{{getSerialNumber(i+1)}}</td>
+                      <td>{{nomination?.companyName}}</td>
+                      <td>{{nomination?.productName}}</td>
+                      <td><img src="{{nomination?.productLogo}}" class="nomination-product-img"></td>
+                      <td>{{nomination?.category || 'Yet to be added'}}</td>
+                    </tr>
+              
+
+                  </tbody>
+                </table>
+            </div>
+
+            <div class="nomination-pagination">
+               
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <a class="page-link previous" aria-label="Previous"  (click)="previousPage()">
+                      <i class="fa fa-angle-left"></i>
+                       
+                      </a>
+                    </li>
+                    <!-- <li class="page-item"><a class="page-link active" id="1">1</a></li> -->
+                    
+                    <li *ngFor="let number of numbers" class="page-item"><a  (click)="setPage(number)" class="page-link {{number==1?'active':''}}"   id="{{number}}">{{number}}</a></li>
+                    
+                    <li class="page-item">
+                      <a class="page-link next"  aria-label="Next" (click)="nextPage()">
+                       <i class="fa fa-angle-right"></i>
+                       
+                      </a>
+                    </li>
+                  </ul>
+                
+            </div>
+
+
+         </div>
+   </section>
+</div>
+<app-footer></app-footer>

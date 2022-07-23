@@ -1,0 +1,71 @@
+<app-user-header></app-user-header>
+<div class="main-content" id="panel">
+      <!-- Content
+            ============================================= -->
+
+    <section class="bg-brown section-area blog-page bg-left-design bg-design" id="content">
+        <div class="container container-80">
+          <div class="brown-title">
+            <h1>Blogs</h1>
+          </div>
+
+          <div class="row">
+             <div class="col-lg-4 col-sm-6 col-md-4" *ngFor="let item of blogList">
+                                  <div class="blog-div" [routerLink]="['/blog/'+item.slug]" routerLinkActive="router-link-active">
+                                   <div class="blog-img">
+                                    <img [src]="'/blog/'+item.file"/>
+                                    <div class="blog-head gradient-bg">
+                                     <p>{{item.summery}}</p>
+                                    <span class="date">{{item.createdAt| date }}</span>
+                                  </div>
+                                  </div>
+                                  <p>{{item.summery}} &nbsp; <span>Read More</span></p>
+                               </div>
+                                </div>
+<!-- 
+                               <div class="col-lg-4 col-sm-4">
+                                <div class="blog-div">
+                                  <div class="blog-img">
+                                  <img src="./assets/images/blog-1.png"/>
+                                  <div class="blog-head gradient-bg">
+                                    <p>dummy heading here this is a dummy heading</p>
+                                   <span class="date">27/7/2019</span>
+                                 </div>
+                                 </div>
+                                  <p>A long title which consist of not more than two lines then &nbsp; <a href="javascript:void(0);">Read More</a></p>
+                                 
+                                </div>
+                             </div> -->
+          </div>
+
+  <div class="follow-icons social-ticker md-none">
+   <a href="https://channelier.com/"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-pinterest">
+      <i class="icon_channelier"><img src="./assets/images/logo-icon.png"></i>
+      <i class="icon_channelier"><img src="/assets/images/logo-icon.png"></i>
+   </a>
+   <a href="https://www.facebook.com/channelier/" target="_blank" class="social-icon si-small si-borderless si-colored si-rounded si-facebook">
+   <i class="icon-facebook"></i>
+   <i class="icon-facebook"></i>
+   </a>
+
+   <a href="https://www.instagram.com/channelier_/"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-gplus">
+   <i class="icon-instagram"></i>
+   <i class="icon-instagram"></i>
+   </a>
+   <a href="https://www.linkedin.com/company/channelier/"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-pinterest">
+   <i class="icon-linkedin"></i>
+   <i class="icon-linkedin"></i>
+   </a>
+   <a href="https://twitter.com/Channelier"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-twitter">
+      <i class="icon-twitter"></i>
+      <i class="icon-twitter"></i>
+   </a>
+
+</div>
+
+        </div>
+    </section>
+              
+</div>
+  
+<app-footer></app-footer>

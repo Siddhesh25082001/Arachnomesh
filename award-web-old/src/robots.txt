@@ -1,0 +1,4 @@
+User-agent: *
+allow: /
+Crawl-delay: 15
+Sitemap: https://awards.channelier.com/sitemap.xml

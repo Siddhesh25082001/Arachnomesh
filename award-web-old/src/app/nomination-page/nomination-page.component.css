@@ -1,0 +1,4 @@
+.nomination-category ul li.active {
+    background: linear-gradient(280deg, #c78632 12.08%, #e0b54d 53.53%, #f7df65 95.62%);
+    color: #162545;
+}

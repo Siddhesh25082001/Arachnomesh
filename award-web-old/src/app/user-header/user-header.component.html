@@ -1,0 +1,102 @@
+<header id="header" class="clearfix static-sticky responsive-sticky-header transparent-header">
+    <div id="header-wrap">
+       <div class="container clearfix">
+          <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+          <!-- Logo
+             ============================================= -->
+          <div id="logo">
+             <a [href]="home"  data-scrollto="#slider" class="standard-logo" data-dark-logo="assets/images/logo-channelier.png"><img src="assets/images/logo-channelier.png" alt="Logo"></a>
+             <a [href]="home"  data-scrollto="#slider" class="retina-logo" data-dark-logo="assets/images/logo-channelier.png"><img src="assets/images/logo-channelier.png" alt="Logo"></a>
+          </div>
+          <!-- #logo end -->
+          <!-- Primary Navigation
+             ============================================= -->
+             <nav id="primary-menu" class="d-lg-flex d-xl-flex brown-theme align-items-center justify-content-xl-between justify-content-lg-between fnone">
+               <ul class="not-dark align-self-start"></ul>
+               <ul class="not-dark align-self-center one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
+                  <li>
+                     <a (click)="goabout()" data-href="#">
+                        <div>About</div>
+                     </a>
+                  </li>
+                  <!-- <li>
+                     <a (click)="gocategory()" data-href="#">
+                        <div>Awards Categories</div>
+                     </a>
+                  </li> -->
+                  <li class="dropdown">
+                     <a (click)="goToIndex()" data-href="#">
+                        <div>2021</div>
+                     </a>
+                     <div class="dropdown-content">
+                        <a (click)="gocategory()" data-href="#" *ngIf="ind!=='jury'">
+                           <div style="color: #2C160C;">Categories</div>
+                        </a>
+                        <a (click)="goToBenefit()" data-href="#">
+                           <div style="color: #2C160C;">Benefits</div>
+                        </a>
+                        <a (click)="goToPartner()" data-href="#">
+                           <div style="color: #2C160C;">Partners</div>
+                        </a>
+                        <a href="#/jury;year=2021" data-href="#section-speakers">
+                           <div style="color:#2C160C;">Jury</div>
+                        </a>
+                     </div>
+                 </li>
+                 <li  class="dropdown">
+                  <a (click)="goTo2020()" data-href="#">
+                     <div>2020</div>
+                  </a>
+                  <div class="dropdown-content height-small">
+                     <a (click)="goTo2020()" data-href="#">
+                        <div style="color: #2C160C;">Winners</div>
+                     </a>
+                     <a (click)="goToPartner()" data-href="#">
+                        <div style="color: #2C160C;">Partners</div>
+                     </a>
+                     <a href="#/jury;year=2020" data-href="#section-speakers">
+                        <div style="color: #2C160C;">Jury</div>
+                     </a>
+                  </div>
+               </li>
+                  <li>
+                     <a (click)="gofooter()" data-href="#">
+                        <div>Contact us</div>
+                     </a>
+                  </li>
+                  <!-- <li [ngClass]="{current: (href == '/user-polling')}">
+                     <a href="#/user-polling" onclick="pollingPage()">
+                        <div>Polling</div>
+                     </a>
+                  </li> -->
+                  <li [ngClass]="{current: (href == '/jury-dashboard')}"  *ngIf="isLogin && ind==='jury'">
+                     <a href="#/jury-dashboard" >
+                        <div>dashboard</div>
+                     </a>
+                  </li>                     
+                  <li [ngClass]="{current: (href == '/user-dashboard')}"  *ngIf="isLogin && ind!=='jury'">
+                     <a href="#/user-dashboard" >
+                        <div>dashboard</div>
+                     </a>
+                  </li>
+                  <!-- <li [ngClass]="{current: (href == '/blog')}">
+                     <a href="#/blog" >
+                        <div>Blog</div>
+                     </a>
+                  </li> -->
+               </ul>
+               <ul class="pr-0 header-button" *ngIf="isLogin">
+                  <li id="loginLogout" class="top-btn">
+                     <a (click)="logout()" class="brown-btn hvr-shutter-out-vertical">Logout</a>
+                  </li>
+               </ul>
+               <ul class="pr-0 header-button" *ngIf="!isLogin">
+                  <li class="top-btn">
+                     <a href="#/login" class="brown-btn hvr-shutter-out-vertical">Login</a>
+                  </li>
+               </ul>
+            </nav>
+          <!-- #primary-menu end -->
+       </div>
+    </div>
+ </header>

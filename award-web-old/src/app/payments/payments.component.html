@@ -1,0 +1,162 @@
+<app-header></app-header>
+
+<div class="main-content" id="panel">
+
+  <section class="bg-brown section-area payment-page bg-left-design bg-design" id="content">
+   <div class="container container-80">
+      <div class="brown-title">
+         <h1>Checkout</h1>
+      </div>
+     
+      <div class="row">
+         <div class="col-lg-12">
+
+               <div class="table table-responsive banner-bg-effect cart-table" style="overflow-x:auto;">
+                                        <table class="table category-table">
+                                            <thead >
+                                                <tr *ngIf="paymentData?.result?.length > 0">
+                                                    
+                                                    <th>Award</th>
+                                                    <th>Product Category</th>
+                                                    <th>Product/Brand Name</th>
+                                                    <th>Amount</th>
+                                                    
+                                                </tr>
+                                                <tr *ngIf="!paymentData?.result?.length">
+                                                  <th> No Details Available</th>
+                                                  <th></th>
+                                                  <th></th>
+                                                  <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="cart-row" *ngIf="paymentData?.result?.length > 0">
+                                                <tr *ngFor="let item of paymentData.result">
+                                                    <td style="padding-left: 10px; position: relative;">
+                                                      <i style="padding-right: 10px; position: relative; cursor: pointer" (click)="removeData(item?._id)" class="fa fa-trash"></i>
+ 
+                                                    {{item?.awardCategory?.awardName}}</td>
+                                                    <!-- <td style="padding-left: 30px; position: relative;"><span style="width: 30px;cursor:pointer;display:inline-block;position: absolute;left: 0;"> <img (click)="removeData(item?._id)" width="20px" src="./assets/images/cross.svg"></span>{{item?.awardCategory?.awardName}}</td> -->
+                                                    <td>{{item?.productCategoryName}}</td>
+                                                    <td>{{item?.productName}}</td>
+                                                    <td><i class="fa fa-inr"></i>{{item?.awardCategory?.discountAmount| number : '1.0-0'}}</td>
+                                                </tr>
+                                                <tr *ngIf="paymentData?.firstNomineeDiscount!=0">
+                                                  <td colspan="3" style="border:0;"></td>
+                                                  <td class="gst text-inherit">First time discount :&nbsp; <i class="fa fa-inr"></i>{{paymentData?.firstNomineeDiscount | number : '1.0-0'}}</td>
+  
+                                                </tr>
+                                                <tr>
+                                                  <td colspan="3" style="border:0;"></td>
+                                                  <td class="referal" id="promoHide">
+                                                    <div class="referal-row" >
+                                                    <input class="form-control" type="text" (change)="ApplyReferal($event)" name="referalcode" id="referalcode" placeholder="Referral code here">
+                                                    
+                                                    <button type="button" (click)=ApplyPromo(); class="brown-btn hvr-shutter-out-vertical">Apply</button>
+
+                                                  </div>
+                                                   <div class="referal-row">
+                                                    <span id="invalid-referal" style="font-size:smaller;color: red;display: none;"><i class="fa fa-exclamation"></i> Invalid Referral Code</span>
+                                                    <span id="amount-zero" style="font-size:smaller;color: red;display: none;"><i class="fa fa-exclamation"></i> Amount is already zero</span>
+                                                    <span id="valid-referal" style="font-size:smaller;color:#1af5cb;display: none;">Coupon Applied <i class="fa fa-exclamation"></i></span>
+
+                                                    </div>
+
+                                                  </td>
+                                                  
+                                              </tr>
+                                               <tr style="display: none;" id="subtotal-toggle" >
+                                                <td colspan="3" style="border:0;"></td>
+                                                <td class="discount"><span id="discount-toggle" style="display: none;">
+                                                 Discount :&nbsp; <i class="fa fa-inr"></i>{{ discountAmount | number : '1.0-0'}} </span>
+                                                 <span class="code-applied">Code Applied Successfully</span>
+                                               </td>
+
+                                              </tr>
+                                              <tr style="display: none;" id="subtotal-toggle" >
+                                                <td colspan="3" style="border:0;"></td>
+                                                <td class="sub-total">Sub-Total : &nbsp; <i class="fa fa-inr"></i>{{paymentData?.totalwithoutgst/100-discountAmount | number : '1.0-0'}}</td>
+
+                                              </tr>
+                                              <tr>
+                                                <td colspan="3" style="border:0;"></td>
+                                                <td class="gst text-inherit">*GST(18%) :&nbsp; <i class="fa fa-inr"></i>{{paymentData?.GST | number : '1.0-0'}}</td>
+
+                                              </tr>
+                                             
+                                                <tr>
+                                                    <td colspan="3" style="border:0;"></td>
+                                                    <td class="total">Total : &nbsp; 
+                                                      <i class="fa fa-inr"></i>{{paymentData?.amount/100 | number : '1.0-0'}} </td>
+                                                </tr>
+                                               
+                                                <tr>
+                                                  <td colspan="3" style="border:0;"></td>
+                                                  
+                                               
+                                                <td class="text-inherit">
+                                                  *Our team will contact you for GST Invoice.
+                                                </td>
+                                                </tr>
+                                                </tbody>
+                                            <!-- <div *ngIf="!paymentData?.result?.length">
+                                                
+                                              
+                                            No Details Available
+                                           
+                                            </div> -->
+                                                    
+                                        </table>
+                                    </div>
+
+         </div>
+       </div>
+          <div class="row">
+                            <div class="col-sm-12 text-right cart-mb-btn">
+                                <div class="d-flex float-right border-cart-btn">
+                                <input type="submit" class="border-btn mr-3 text-inherit" (click)="goCart()"  value="Go back to cart" *ngIf="paymentData?.result?.length > 0">
+                              
+                                   <div class="brown-btn hvr-shutter-out-vertical">
+                                    <input type="submit" (click)="payment()" 
+                                    class="bg-transparent border-0"   value="Make payment" *ngIf="paymentData?.result?.length > 0">
+                                  </div>
+                                    </div>
+                              </div>
+
+                                    <div class="popup-btn w-100 text-center" hidden>
+                                        <button id="demo" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                            Launch demo modal
+                 </button>
+                                    </div>
+                                    <div class="popup-btn w-100 text-center">
+                                      <input type="submit" (click)="goBack()" class="brown-btn hvr-shutter-out-vertical"   value="go back" *ngIf="!paymentData?.result?.length">
+                                  </div>
+                                </div>
+     </div>
+   </section>
+ </div>
+
+
+ <!-- Modal -->
+ <div class="modal fade payment-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Payment Successful</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="goBack()">
+            <span aria-hidden="true"><img width="20px" src="./assets/images/cross.svg"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+ 
+          <div class="payment-body">
+             <p>You can see your payment/nomination details on dashboard.</p>
+             <input _ngcontent-msy-c1="" class="bg-red button"  (click)="dashboardPage()" type="submit" value="Go to dashboard page">
+          </div>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<app-footer></app-footer>

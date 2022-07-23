@@ -1,0 +1,38 @@
+.input-group-text i {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.admin-login .card-body {
+    width: 40%;
+    margin: 0 auto;
+    padding: 30px 30px 10px;
+}
+
+.admin-login .form-control {
+    background: transparent;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    box-shadow: none;
+    padding-left: 5px !important;
+    color: #fff !important;
+}
+
+.admin-login .form-control::placeholder {
+    color: #ffffff;
+}
+
+.admin-login .input-group-text {
+    background: transparent !important;
+}
+
+
+@media only screen and (max-width:767px) { 
+
+    .admin-login .card-body {
+        width: 100%;
+        margin: 0 auto;
+        padding: 10px 10px 5px;
+    }
+
+}

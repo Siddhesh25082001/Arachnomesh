@@ -1,0 +1,131 @@
+.juryMain {
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #210e0a;
+  position: relative;
+}
+.juryMain > h3 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 400;
+
+  position: absolute;
+  top: 8%;
+  left: 3%;
+}
+.juryContainer {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(0%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  min-height: fit-content;
+}
+.juryCard {
+  --border-rad: 1rem;
+  --size: 30vh;
+  --animation-duration: 0.8s;
+
+  min-height: var(--size);
+  height: var(--size);
+  min-width: var(--size);
+  width: var(--size);
+  background-color: #fff;
+  margin: 1vmax;
+  padding: 0;
+
+  border-radius: var(--border-rad);
+  overflow: hidden;
+  position: relative;
+  transition: 0.5s;
+}
+.juryCard.juryCardActive {
+  animation: juryCardActive var(--animation-duration) ease-in forwards;
+}
+.juryCard.juryCardInactive {
+  animation: juryCardActive var(--animation-duration) ease-in forwards reverse;
+}
+@keyframes juryCardActive {
+  0% {
+    height: var(--size);
+    min-width: var(--size);
+    width: var(--size);
+  }
+  100% {
+    height: calc(var(--size) * 2);
+    min-width: calc(var(--size) * 1.15);
+    width: calc(var(--size) * 1.15);
+  }
+}
+.juryCard > .section {
+  z-index: 10;
+  object-fit: cover;
+  height: var(--size);
+  /* max-height: var(--size); */
+  width: 100%;
+  background-color: rgb(207, 178, 178);
+  padding: 0;
+  position: relative;
+}
+.sectionActive {
+  animation: sectionActive var(--animation-duration) ease-in forwards;
+}
+.sectionInactive {
+  animation: sectionActive var(--animation-duration) ease-in forwards reverse;
+}
+@keyframes sectionActive {
+  0% {
+    height: var(--size);
+    width: var(--size);
+  }
+  100% {
+    height: calc(var(--size) * 1.6);
+    width: calc(var(--size) * 1.15);
+  }
+}
+.juryCard .juryName {
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding: 0.8rem;
+  position: absolute;
+  bottom: 0%;
+  margin: 0;
+  transform-origin: 0 100%;
+
+  color: #fff;
+  background-color: #030f13;
+  transition: 0.6s;
+  transform: rotate(-90deg) translateY(100%);
+}
+.juryCard .juryNameActive {
+  animation: juryName var(--animation-duration) ease forwards;
+}
+.juryCard .juryNameInactive {
+  animation: juryName var(--animation-duration) ease forwards reverse;
+}
+@keyframes juryName {
+  0% {
+    transform: rotate(-90deg) translateY(100%);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0%);
+  }
+}
+.juryCard .juryImage {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+.juryCard .brandLogo {
+  height: calc(var(--size) * 0.36);
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 0;
+}

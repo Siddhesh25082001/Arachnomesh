@@ -1,0 +1,105 @@
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<div class="main main-content admin-dashboard" id="panel">
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Edit Nomination</h6>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a (click)="_commonService.logout()" class="btn btn-neutral my-4"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--6">
+    <div class="card">
+      <!--Edit Nomination Form-->
+      <form *ngIf="nominationForm" class="nom-form row m-0 w-100" [formGroup] = "nominationForm" (submit)="saveData()">
+
+        <div class="col-sm-6 mb-4 nom-form-field">
+          <label>Product Name</label>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Product Name" formControlName="productName">
+            <mat-error *ngIf="nominationForm.get('productName').invalid">
+              Product Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6 mb-4 nom-form-field">
+          <label>Award Category</label>
+          <mat-form-field appearance="outline" class="input-type-wrapper">
+            <mat-select formControlName="awardCategory" placeholder="Select award category" id="">
+              <mat-option *ngFor="let category of awardCategory" [value]="category._id" (click)="awardSelectAction()">
+                {{category.awardName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="nominationForm.get('awardCategory').invalid">
+              Award category is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6 mb-4 nom-form-field">
+          <label>Product Category</label>
+          <mat-form-field appearance="outline" class="input-type-wrapper">
+            <mat-select formControlName="productCategory" placeholder="Select product category">
+              <mat-option *ngFor="let prodCat of productCategory" [value]="prodCat._id" (click)="fetchProductSubCategory(prodCat._id)">
+                {{prodCat.productName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="nominationForm.get('productCategory').invalid">
+              Product category is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6 mb-4 nom-form-field">
+          <label>Product Sub Category</label>
+          <mat-form-field appearance="outline" class="input-type-wrapper">
+            <mat-select formControlName="productSubCategory" placeholder="Select product sub category">
+              <mat-option *ngFor="let prodCat of productSubCategory" [value]="prodCat._id" (click)="fetchProductSubSubCategory(prodCat._id)">
+                {{prodCat.productName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="nominationForm.get('productSubCategory').invalid">
+              Product sub category is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6 mb-4 nom-form-field">
+          <label>Product Sub Sub Category</label>
+          <mat-form-field appearance="outline" class="input-type-wrapper">
+            <mat-select formControlName="productSubSubCategory" placeholder="Select product sub sub category">
+              <mat-option *ngFor="let prodCat of productSubSubCategory" [value]="prodCat._id">
+                {{prodCat.productName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="nominationForm.get('productSubSubCategory').invalid">
+              Product sub sub category is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <section class="col-sm-6 mt-4">
+          <mat-slide-toggle formControlName="archive">
+            Archive
+          </mat-slide-toggle>
+        </section>
+
+        <div class="col-12">
+          <div>
+          <button class="btn btn-primary" type="submit">Save</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

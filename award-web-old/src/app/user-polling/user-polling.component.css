@@ -1,0 +1,184 @@
+.search-category{
+    padding:0 35px;
+}
+
+.search-category input.form-control {
+    background: transparent;
+    border-radius: 0;
+    border: 2px solid #fb6567;
+    height: 40px;
+    margin-top: 5px;
+    margin-right: -5px;
+}
+
+
+/* modal -css */
+
+.vote-modal{
+    background: rgba(0,0,0,0.9);
+    padding-top: 100px;
+}
+.vote-modal .modal-content {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #333;
+    border-radius: 0;
+    text-align: center;
+}
+
+.vote-modal .modal-header {
+    padding: 30px;
+    background: rgba(138, 107, 107, 0.2);
+    border-radius: 0;
+    position: relative;
+}
+
+.vote-modal h5.modal-title {
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.vote-modal .modal-header .close {
+    padding: 0;
+}
+
+.modal-body .vote-btn img {
+    background: rgba(138, 107, 107, 0.2);
+    border-radius: 50%;
+    padding: 10px;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+}
+
+
+
+/*  vote section css */
+
+.heading-black {
+    background: #000000;
+    padding: 15px;
+}
+
+.heading-black h3 {
+    color: #ffffff;
+    line-height: 1;
+}
+
+.vote-product {
+    background: rgba(0,0,0,0.5);
+    display: inline-block;
+    padding: 30px;
+    width:100%;
+}
+
+.vote-product ul {
+    width: 100%;
+    display: inline-block;
+}
+
+.vote-product ul li {
+    float: left;
+    width: 15.7%;
+    list-style: none;
+    text-align: center;
+    padding: 10px;
+    margin: 5px 5px 20px;
+    border: 1px solid transparent;
+}
+
+.vote-product ul li:hover, .vote-product ul li.active {
+    background: #000;
+    border: 1px solid #fb6567;
+}
+
+.vote-product li h4 {
+    color: #ffffff;
+    margin-bottom:5px;
+}
+
+.vote-product li h5 {
+    color: #fb6567;
+    margin-bottom:10px;
+}
+
+.vote-btn img.fill-star {
+    display: none;
+}
+
+.vote-btn.active img.fill-star {
+    display: block;
+}
+
+.vote-btn.active img.normal-star {
+    display: none;
+}
+
+.load-more {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.load-more .btn {
+    color: #fff;
+    background: #FB6567;
+}
+
+/* client search page additional css */
+
+.vote-product.client-search ul li {
+    width: 23.7%;
+}
+
+.refresh-btn {
+    position: fixed;
+    right: 30px;
+    top: 40%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+@media (min-width: 767px) and (max-width:992px) {
+
+	.vote-product ul li, .vote-product.client-search ul li {
+        width: 50%;
+    }
+
+}
+
+@media (min-width: 480px) and (max-width:766px) {
+
+	.search-category {
+        padding: 0 15px;
+    }
+
+    .vote-product ul li , .vote-product.client-search ul li {
+        width: 47.7%;
+    }
+
+    .refresh-btn {
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width:479px) {
+
+    .search-category {
+        padding: 0 15px;
+    }
+
+    .vote-product ul li , .vote-product.client-search ul li {
+        width: 100%;
+    }
+    .refresh-btn {
+        display: none;
+    }
+
+}

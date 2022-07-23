@@ -1,0 +1,165 @@
+.benefitSec {
+  overflow: hidden;
+}
+.benefitSec > .section_title {
+  margin: 5vh 0;
+}
+.benifitsMain {
+  /* min-height: 80vh; */
+  height: fit-content;
+  /* max-height: 80vh; */
+  width: 100%;
+  /* overflow: hidden; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 5vh 10vw 0;
+}
+.benifitsMain > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.benifitsMain > div:last-child {
+  margin: 1vh 0;
+}
+.benifitsMain .cardContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0 2vh;
+}
+.benifitsMain > h2 {
+  font-size: 3rem;
+  font-weight: 400;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.topBlob {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  background-color: var(--blob-color);
+  transform: translate(-50%, -20%);
+  z-index: 10;
+
+  display: grid;
+  place-items: center;
+  text-transform: uppercase;
+}
+
+.swingingCard {
+  position: relative;
+  width: fit-content;
+  perspective: 100vmax;
+  margin: 0 2vw 3vh;
+}
+.swingingCard > h4 {
+  position: absolute;
+  bottom: -16%;
+  left: 50%;
+  width: max-content;
+  font-size: clamp(0.8rem, 2.8vh, 1.4rem);
+  transform: translate(-50%, 0);
+}
+.swingCardIMG {
+  height: 42vh;
+  animation: swinginout 2s ease-in-out alternate infinite;
+  animation-delay: var(--animation-delay);
+  transform-origin: top center;
+  transform: rotateZ(var(--swing-angle)) rotateY(calc(3 * var(--swing-angle)));
+}
+@keyframes swinginout {
+  0% {
+    transform: rotateZ(var(--swing-angle)) rotateY(calc(3 * var(--swing-angle)));
+  }
+  100% {
+    transform: rotateZ(calc(-1 * var(--swing-angle)))
+      rotateY(calc(-3 * var(--swing-angle)));
+  }
+}
+
+.blobContainer {
+  margin-bottom: 3vh;
+}
+
+.blobContainer > div {
+  background-color: var(--blob-color);
+  border-radius: 6vh;
+  /* margin: 2vh 0; */
+}
+.blobContainer > div,
+.topBlob {
+  min-width: fit-content;
+  width: var(--blob-width);
+  font-size: 2.2vh;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  height: 6.6vh;
+  border-radius: 6vh;
+
+  display: grid;
+  place-items: center;
+  padding: 0 1vh;
+}
+.blobContainer.blobFall > div {
+  animation: blobFall 1.4s ease-in forwards;
+  animation-delay: var(--animation-delay);
+  transform: translateY(-66vh) rotate(0);
+}
+@keyframes blobFall {
+  0% {
+    transform: translateY(-66vh) rotate(0);
+  }
+  85% {
+    transform: translateY(2vh) rotate(0);
+  }
+  95% {
+    transform: translateY(0vh) rotate(calc(var(--fall-angle) * 1.3));
+  }
+  100% {
+    transform: translateY(0vh) rotate(var(--fall-angle));
+  }
+}
+
+@media all and (orientation: portrait) {
+  .benifitsMain {
+    padding: 0 5vw;
+    min-height: 94vh;
+    max-height: 94vh;
+  }
+  .swingingCard {
+    margin: 4vh 1vw;
+  }
+  .swingCardIMG {
+    height: 28vh;
+  }
+  .swingingCard > h4 {
+    font-size: 0.8rem;
+  }
+  .blobContainer {
+    /* margin-top: 2vh; */
+    margin-bottom: 0;
+  }
+  .blobContainer > div,
+  .topBlob {
+    /* color: transparent; */
+    font-size: 0.7rem;
+    font-weight: 500;
+    height: 3.6vh;
+    border-radius: 6vh;
+    width: calc(var(--blob-width) * 0.7);
+  }
+  .blobContainer > div {
+    margin-top: 1.4vh;
+  }
+}

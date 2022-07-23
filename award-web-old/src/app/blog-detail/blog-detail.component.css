@@ -1,0 +1,152 @@
+.blog-detail-page .custom-pading {
+    padding: 20px 40px 40px;
+}
+
+.blog-img img {
+    border: 10px solid #EC008B;
+    border-radius: 10px;
+}
+
+.blog-detail h1 {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.timing span {
+    width: 50%;
+    display: inline-block;
+    padding: 15px 0;
+}
+
+.blog-titles ul li {
+    float: left;
+    width: 50%;
+    list-style: none;
+    margin-bottom: 32px;
+    padding-left: 50px;
+    position:relative;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.blog-titles ul li span {
+    position: absolute;
+    left: 0;
+    top:-10px;
+    width: 40px;
+    height: 40px;
+}
+
+.blog-social {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    padding: 20px 0;
+}
+
+.blog-social ul {
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: center;
+    margin:0;
+}
+
+.blog-social ul li {
+    margin: 0 10px;
+}
+
+.blog-person {
+    background: #ff8a00;
+    padding: 50px;
+    text-align: center;
+}
+
+span.blog-icon {
+    color: #ffffff;
+    font-size: 100px;
+    line-height: 0.5;
+}
+
+.blog-person h6 {
+    color: #ffffff;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: -30px;
+}
+
+.blog-person p {
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0;
+}
+
+.blog-div {
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.blog-div p {
+    margin: 15px 0;
+    color: #fff;
+    font-size: 16px;
+}
+
+.blog-div img {
+    width: 100%;
+}
+
+a.carousel-control-prev {
+    padding: 0;
+    width: 35px;
+    opacity: 1;
+    left: -50px;
+}
+
+a.carousel-control-next {
+    padding: 0;
+    width: 35px;
+    opacity: 1;
+    right: -50px;
+}
+
+
+.blog-detail-page h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a {
+    color: #eeeeee !important;
+}
+
+.blog-detail-page h2 > span {
+    color: #eeeeee !important;
+}
+
+.blog-detail-page a, .blog-detail-page a:hover {
+    color:#EC008B !important;
+}
+
+.blog-detail-page p br {
+    display: none;
+}
+
+p br {
+    display: none;
+}
+
+
+.blog-detail-page h2 span {
+    color:#e9c557 !important;
+}
+
+@media only screen and (max-width:479px) {
+    .blog-titles ul li {
+        width: 100%;
+    }
+
+    .blog-img {
+        margin-bottom: 20px;
+    }
+
+    .blog-detail-page .dark .display-4 {
+        font-size: 30px;
+    }
+
+}

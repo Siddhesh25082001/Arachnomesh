@@ -1,0 +1,103 @@
+
+<!-- <div>
+    <ngx-editor [(ngModel)]="doc"></ngx-editor>
+</div>
+
+ -->
+ <!-- <div id="editor-container">
+</div> -->
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<!-- Main content -->
+<div class="main main-content admin-dashboard" id="panel">
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Add Blog</h6>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a class="btn btn-neutral my-4" [href]="['#/blog-list']">Add Blog</a>
+            <a  class="btn btn-neutral my-4">Blogs</a>
+            <a (click)="commonService.logout()" class="btn btn-neutral my-4">Logout</a>
+            <!-- <button  >Open Modal</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div style=" display: flex; ">
+          <div class="card-header border-0" style=" padding-right: 686px; ">
+            <h3 class="mb-0">Blog</h3>
+          </div>
+        </div>
+          <!-- Light table -->
+          <div class="card-body">
+            <form>
+              <h6 class="heading-small text-muted mb-4">List Page</h6>
+              <div class="pl-lg-4">
+                 <div class="row">
+                    <div class="col-lg-6">
+                       <div class="form-group">
+                          <label class="form-control-label" for="input-username">Name</label>
+                          <input type="text" id="input-username" class="form-control" placeholder="Blog Name" [(ngModel)]="dataObj.name"  [ngModelOptions]="{standalone: true}">
+                       </div>
+                    </div>
+                    <div class="col-lg-6">
+                       <div class="form-group">
+                          <label class="form-control-label" for="input-email">Sort</label>
+                          <input type="number" id="input-email" class="form-control"  placeholder="Enter sorting order" [(ngModel)]="dataObj.sort"  [ngModelOptions]="{standalone: true}">
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-lg-6">
+                      
+                      <label class="form-control-label" for="input-username">Upload File</label>
+                      <div class="form-group custom-file">
+                        <input class="custom-file-input" id="customFileLang" lang="en" type="file" (change)="handleFileInput($event)">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Paragraph</label>
+                        <textarea rows="4" class="form-control" [(ngModel)]="dataObj.summery"  [ngModelOptions]="{standalone: true}" placeholder="A few words about blog ..."></textarea>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+              <hr class="my-4">
+              <!-- Address -->
+              <h6 class="heading-small text-muted mb-4">Blog Detail Page</h6>
+              <div class="pl-lg-4">
+                <quill-editor [(ngModel)]="dataObj.doc"  [ngModelOptions]="{standalone: true}"></quill-editor>
+              </div>
+              <hr class="my-4">
+              <div class="row">
+                <div class="col-lg-12">
+                   <div class="form-group">
+                      <label class="form-control-label" for="input-username">Slug Url</label>
+                      <input type="text" id="input-username" class="form-control" placeholder="Enter slug" [(ngModel)]="dataObj.slug"  [ngModelOptions]="{standalone: true}">
+                   </div>
+                </div>
+                </div>
+              <div class="text-center" *ngIf="!updateBtn">
+                <button type="button" class="btn btn-primary my-4" (click)="Save()">Add</button>
+              </div>
+              <div class="text-center" *ngIf="updateBtn">
+                <button type="button" class="btn btn-primary my-4" (click)="update()">Update</button>
+              </div>
+           </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

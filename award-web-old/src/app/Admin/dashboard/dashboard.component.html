@@ -1,0 +1,226 @@
+<app-admin-dashboard-header></app-admin-dashboard-header>
+
+<!-- Main content -->
+<div class="main main-content admin-dashboard" id="panel">
+
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Dashboard</h6>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a (click)="commonService.logout()" class="btn btn-neutral my-4">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <!-- Card header -->
+            <div style=" display: flex; ">
+            <div class="card-header border-0" style=" padding-right: 686px; ">
+              <h3 class="mb-0">Statistics</h3>
+
+            </div>
+
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-dark" style="line-height:40px;">
+                      <tr class="table-row">
+                        <th scope="col" class="sort" data-sort="name" style="font-weight:900;font-size: 20px;">Component</th>
+                        <th scope="col" class="sort" data-sort="status" style="font-weight:900;font-size: 20px;">Active</th>
+                        <th scope="col" class="sort" data-sort="status" style="font-weight:900;font-size: 20px;">Archive</th>
+
+                      </tr>
+                    </thead>
+                    <tbody class="list">
+                      <tr>
+                          <td class="table-data">Users</td>
+                          <td class="table-small-data">{{usersCount}}</td>
+                          <td class="table-archive-data">{{usersArchiveCount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="table-data">Jury</td>
+
+                        <td>
+
+                          <table class="table align-items-center table-flush">
+                              <thead class="thead-light">
+                                  <tr class="table-row">
+                                    <th scope="col"  data-sort="name">2020</th>
+                                    <th scope="col" class="sort" data-sort="status">2021</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody class="list">
+                                  <tr>
+                                      <td class="table-small-data">{{jury2020Count}}</td>
+                                      <td class="table-small-data">{{jury2021Count}}</td>
+
+                                  </tr>
+                                </tbody>
+                          </table>
+
+                  </td>
+
+                        <td class="table-archive-data">{{juryArchiveCount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="table-data">Payment</td>
+                        <td>
+
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                        <tr class="table-row">
+                                          <th scope="col"  data-sort="name">Created</th>
+                                          <th scope="col" class="sort" data-sort="status">Success + Paid</th>
+                                          <th scope="col" class="sort" data-sort="status">Success + Unpaid</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody class="list">
+                                        <tr>
+                                            <td class="table-small-data">{{paymentCreatedCount}}</td>
+                                            <td class="table-small-data">{{paymentSuccessPaidCount}}</td>
+                                            <td class="table-small-data">{{paymentSuccessUnpaidCount}}</td>
+                                        </tr>
+                                      </tbody>
+                                </table>
+
+                        </td>
+                        <td class="table-archive-data">{{paymentArchiveCount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="table-data">User Queries</td>
+                        <td class="table-small-data">{{userQueriesCount}}</td>
+                        <td class="table-archive-data">{{userQueriesArchiveCount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="table-data">Leads</td>
+                        <td class="table-small-data">{{leadsCount}}</td>
+                        <td class="table-archive-data">{{leadsArchiveCount}}</td>
+                      </tr>
+                      <tr>
+                        <td class="table-data">Campaigns</td>
+                        <td>
+
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                        <tr class="table-row">
+                                          <th scope="col"  data-sort="name">Campaign Name</th>
+                                          <th scope="col" class="sort" data-sort="status">Total Clicks</th>
+
+                                        </tr>
+                                      </thead>
+                                      <tbody class="list">
+                                        <tr *ngFor="let item of campaignList">
+
+                                          <td class="table-small-data">
+                                            {{item?._id.slice(0,10)}}
+                                          </td>
+
+                                          <td class="table-small-data">
+                                            {{item?.count}}
+                                          </td>
+
+                                        </tr>
+                                      </tbody>
+                                </table>
+
+                        </td>
+                        <td class="table-archive-data">NA</td>
+                      </tr>
+                      <tr>
+                        <td class="table-data">Nominations</td>
+                        <td>
+
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                        <tr class="table-row">
+                                          <th scope="col"  data-sort="name">Total</th>
+                                          <th scope="col" class="sort" data-sort="status">Cart</th>
+                                          <th scope="col"  data-sort="name">Check Out</th>
+                                          <th scope="col" class="sort" data-sort="status">Cart Attempted</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody class="list">
+                                        <tr>
+                                            <td>{{totalNominations}}</td>
+                                            <td>{{totalCartTrue}}</td>
+                                            <td>{{totalCheckoutTrue}}</td>
+                                            <td>{{totalNominations-totalCartTrue-totalCheckoutTrue-totalNominationArchive}}</td>
+
+                                        </tr>
+                                      </tbody>
+                                </table>
+
+                        </td>
+                        <td class="table-archive-data">{{totalNominationArchive}}</td>
+                      </tr>
+                      <!--Nomination by award category start-->
+                      <tr>
+                        <td class="table-data">Award Category</td>
+                        <td>
+
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                        <tr class="table-row">
+                                          <th scope="col"  *ngFor="let category of nominationByAwardCategory">{{category.awardCategoryName}}</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody class="list">
+                                        <tr>
+                                            <td *ngFor="let category of nominationByAwardCategory">{{category.count}}</td>
+
+                                        </tr>
+                                      </tbody>
+                                </table>
+
+                        </td>
+                      </tr>
+                      <!--Nomination by award category end-->
+
+                      <!--Nomination by product category start (Tree View)-->
+                      <tr>
+                        <td class="table-data">Product Category</td>
+                        <td>
+                          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                                {{node.productName}} : {{node.count}}
+                            </mat-tree-node>
+                            <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                                <div class="mat-tree-node">
+                                  <button mat-icon-button matTreeNodeToggle
+                                          [attr.aria-label]="'Toggle ' + node.name">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                  </button>
+                                  {{node.productName}} : {{node.count}}
+                                </div>
+                                <div [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+                                    role="group">
+                                  <ng-container matTreeNodeOutlet></ng-container>
+                              </div>
+                            </mat-nested-tree-node>
+                          </mat-tree>
+                        </td>
+                      </tr>
+                      <!--Nomination by product category end-->
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

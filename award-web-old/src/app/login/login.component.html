@@ -1,0 +1,63 @@
+<app-header *ngIf="query == 'insert'"></app-header>
+<app-user-header *ngIf="query == 'update-number'"></app-user-header>
+<section class="bg-brown section-area benefit-page bg-left-design bg-design" id="content">
+   <div class="container container-80">
+      <div class="brown-title">
+         <h1 *ngIf="query == 'insert'">Login</h1>
+         <!-- <span class="display-4 t700 gradient-underline font-primary" *ngIf="query == 'update-number'">Update Contact</span> -->
+      </div>
+     
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="login-form banner-bg-effect">
+               <h2 *ngIf="tempOTP!='' && OTPHtmlFlag !=0 " (click)="backToLogin()" style="line-height: 1;margin: 0; cursor: pointer;"><img src="assets/images/back-arrow.png" width="30px" alt=""></h2>
+               <h3 class="mb-3" *ngIf="query == 'insert'">Login</h3>
+               <h3 class="mb-3" *ngIf="query == 'update-number'">Login With New Number</h3>
+               <p style="color: #ffffff;margin-bottom: 5px;font-size: 17px;" *ngIf="!OTPHtmlFlag">Please Enter Your Mobile Number</p>
+               <p style="color: #ffffff;margin-bottom: 5px;font-size: 17px;" *ngIf="OTPHtmlFlag">Please enter  your OTP</p>
+               <p style="color: #ffffff;margin-bottom: 5px;font-size: 17px;" *ngIf="error">{{error}}</p>
+               <form>
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="login-input">
+                           <ng-container *ngIf="!OTPHtmlFlag">
+                              <input type="tel" class="form-control" id="usr" [(ngModel)]="loginCredential.phoneNumber" name="phoneNumber" minlength="10" maxlength="10" appNumberOnly>
+                              <div class="submit-btn">
+                                 <span class="input-group-text brown-btn" (click)="sendOTP()">Submit</span>
+                              </div>
+                           </ng-container>
+                           <ng-container *ngIf="OTPHtmlFlag">
+                              <input type="tel" class="form-control" placeholder="OTP" id="usr" [(ngModel)]="loginCredential.OTP" name="otp" minlength="5" maxlength="5" appNumberOnly>
+                              <div class="input-group-prepend">
+                                 <span class="input-group-text" (click)="verifyOTP()"><img class="arrow-login" src="assets/images/arrow-login.png"></span>
+                              </div>
+                           </ng-container>
+                        </div>
+                        <label *ngIf="inval" id="userEmail-error" class="error" for="userEmail" style=" margin:0 0 10px; ">Enter your valid mobile number.</label>
+                        <!--<div class="custom-control custom-checkbox mb-3">
+                           <ng-container *ngIf="!OTPHtmlFlag">
+                             <input type="checkbox" class="custom-control-input" id="customCheck" name="rem"   [(ngModel)]="rememberMe">
+                             <label class="custom-control-label" for="customCheck" >Remember me</label>
+                           </ng-container> 
+                           </div>-->
+                     </div>
+                     <!-- <div class="otp-div" *ngIf="tempOTP">
+                         <span (click)="copyText()">   {{tempOTP}} <br>
+                         Copy OTP</span>
+                     </div> -->
+                     <div class="col-md-12" *ngIf="!OTPHtmlFlag">
+                        <span class="text-white">*Do not add 0 or +91 before your mobile number.</span>
+                     </div>
+                     <div class="col-md-12" *ngIf="OTPHtmlFlag">
+                        <span class="text-white" *ngIf="timeLeft != 0">If you do not receive OTP in the next {{timeLeft}} seconds, request a new OTP.</span>
+                        <span *ngIf="timeLeft == 0" (click)="sendOTP()" class="brown-btn"> Resend OTP </span>
+                     </div>
+                  </div>
+               </form>
+               <div class="border-bg"><img src="assets/images/border-bg.png" alt="border-bg"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<app-footer></app-footer> 

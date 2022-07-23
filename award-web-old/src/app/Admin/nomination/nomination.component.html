@@ -1,0 +1,466 @@
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<div class="main main-content admin-dashboard" id="panel">
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Nominations</h6>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a (click)="commonService.logout()" class="btn btn-neutral my-4">Logout</a>
+            <!-- <button  >Open Modal</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row" *ngIf="id">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div>
+            <div class="card-header border-0">
+              <div class="row" style="margin: 26px 0px">
+                <div class="col-4"><b>Name:</b>{{ userInfo?.name }}</div>
+                <div class="col-4"><b>Email:</b>{{ userInfo?.email }}</div>
+                <div class="col-4"><b>Number:</b>{{ userInfo?.phone }}</div>
+              </div>
+              <div class="row" style="margin: 26px 0px">
+                <div class="col-4">
+                  <b>Company:</b>{{ userInfo?.companyName }}
+                </div>
+                <div class="col-4"><b>Website:</b>{{ userInfo?.website }}</div>
+                <!-- <div class="col-4">
+                  <a
+                    (click)="showAllNomination()"
+                    class="btn btn-sm btn-primary"
+                    >View all nominations</a
+                  >
+                </div> -->
+              </div>
+              <div class="row" style="margin: 26px 0px">
+                <div class="col-4">
+                  <b>Logo:</b><img class="navbar-brand-img" [src]="userInfo?.companyLogo" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div>
+            <div class="card-header border-0" style="padding-right: 686px">
+              <h3 class="mb-0">Nominations</h3>
+              <!-- <div  (click)="getArchiveUsers()">
+            <a *ngIf="!archive" class="btn btn-sm btn-primary" style=" color: aliceblue;">Show archive data</a>
+            <a *ngIf="archive" class="btn btn-sm btn-primary" style=" color: aliceblue;">Show data</a>
+          </div> -->
+            </div>
+
+
+            <div class="row">
+
+              <div class="col-md-6" style="padding-left: 39px;"> <span style="font-weight: 660;">Total:</span><span>{{
+                  total }}</span><br>
+                <span style="font-weight: 660;">Cart Total:</span><span>{{ cartTrue }}</span><br>
+                <span style="font-weight: 660;">Checkout Total:</span><span>{{ checkoutTrue }}</span> <br>
+                <span style="font-weight: 660;">Cart Attempted:</span><span>{{ total-cartTrue-checkoutTrue-totalArchive
+                  }}</span> <br>
+                <span style="font-weight: 660;" *ngIf="totalArchive > 0">Archive Total:</span><span
+                  *ngIf="totalArchive > 0">{{ totalArchive }}</span>
+              </div>
+
+
+              <div class="col-md-6" style="justify-content: flex-end;display: flex;padding-right: 32px;">
+                <!-- <div class="searchCompleteDeiv">
+                  <input type="text" (input)="searchField($event)">
+                  <div>
+                    <ul *ngFor="let field of searchContent" class="searchDiv">
+                      <li id="{{getKey(field)}}" (click)=search(field)>{{getValue(field)}}</li>
+                    </ul>
+                  </div>
+                </div> -->
+                <div *ngIf="!id">
+                  <label class="form-control-label" for="">Search</label>
+                  <input class="form-control" type="text" name="search" [(ngModel)]="searchText"
+                    (ngModelChange)="didModify()" autocomplete="off" placeholder="Search">
+                </div>
+                <div style="width: 170px; margin: 0px 10px;">
+                  <label class="form-control-label" for="">Type</label>
+                  <select class="form-control" [(ngModel)]="type" (change)="filterNomination()">
+                    <option value="-1">Select</option>
+                    <option value="cart">Cart</option>
+                    <option value="payment">Checkout</option>
+                    <option value="archive">Archive</option>
+                  </select>
+                </div>
+                <div style="width: 170px; margin: 0px 10px;">
+                  <label class="form-control-label" for="">Questionnaire</label>
+                  <select class="form-control" [(ngModel)]="answerSubmitted" (change)="filterNomination()">
+                    <option value="">All</option>
+                    <option value="true">Filled</option>
+                    <option value="false">Pending</option>
+                  </select>
+                </div>
+                <div style="width: 170px; margin: 0px 10px;">
+                  <label class="form-control-label" for="">P.Received</label>
+                  <select class="form-control" [(ngModel)]="orderReceived" (change)="filterNomination()">
+                    <option value="">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-control-label" for="">From</label>
+                  <input class="form-control" type="date" name="" id="" (input)="filterNomination()"
+                    [(ngModel)]="from" />
+                </div>
+                <div>
+                  <label class="form-control-label" for="">To</label>
+                  <input class="form-control" type="date" name="" id="" [(ngModel)]="to" (input)="filterNomination()" />
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <!-- Light table -->
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" class="sort" data-sort="name" (click)="setOrder('awardName')"
+                    style=" cursor: pointer;">Award Category</th>
+                  <th scope="col" class="sort" data-sort="name" (click)="setOrder('productCatName')"
+                    style=" cursor: pointer; width:150px">Product Category</th>
+                  <th scope="col" class="sort" data-sort="name" (click)="setOrder('companyName')"
+                    style=" cursor: pointer;">Company</th>
+                  <!-- <th scope="col" class="sort" data-sort="budget">Category</th> -->
+                  <th scope="col" class="sort" data-sort="budget" (click)="setOrder('productName')"
+                    style=" cursor: pointer;">P.Name</th>
+                  <th scope="col" class="sort" data-sort="completion">
+                    Action
+                  </th>
+                  <th scope="col" class="sort" data-sort="completion" *ngIf="!id">
+                    User
+                  </th>
+                  <th scope="col" class="sort" data-sort="completion" (click)="setOrder('createdAt')"
+                    style=" cursor: pointer;">
+                    Date Added
+                  </th>
+                  <th scope="col" class="sort" data-sort="completion" *ngIf="!id">
+                    Questionnaire
+                  </th>
+                  <th scope="col" class="sort" data-sort="completion" *ngIf="!id">
+                    Total Marks
+                  </th>
+                  <th scope="col" class="sort" data-sort="budget" (click)="setOrder('orderReceived')"
+                    style=" cursor: pointer;">
+                    P.Received
+                  </th>
+                  <th scope="col" class="sort" data-sort="completion" *ngIf="!id">
+                    Employee
+                  </th>
+                  <th scope="col" class="sort" data-sort="completion">
+                    Comment
+                  </th>
+                  <th scope="col" class="sort" data-sort="completion">Archive</th>
+                  <th *ngIf="auth.isSuperAdmin()">
+                    Edit Nomination
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr *ngFor="let item of nominationsList; let i = index">
+                  <td class="budget">
+                    {{ item?.award[0]?.awardName }}
+                  </td>
+                  <td class="budget" style="width:150px">
+                    <span *ngIf="item?.productCat?.length > 0">{{ item?.productCat[0]?.productName}}</span> >
+                    <span *ngIf="item?.productSubCat?.length > 0">{{ item?.productSubCat[0]?.productName}}</span> >
+                    <span *ngIf="item?.productSubSubCat?.length > 0">{{ item?.productSubSubCat[0]?.productName}}</span>
+                  </td>
+                  <td class="budget">
+                    {{ item?.user[0]?.companyName }}
+                  </td>
+                  <!-- <td>
+                    {{ item?.productCategoryAll }}
+                  </td> -->
+                  <td>
+                    {{ item?.productName }}
+                  </td>
+                  <td>
+                    <b>Cart:</b>{{ item?.cart ? item?.cart : false }}><b>Checkout:</b>{{ item?.payment ? item?.payment :
+                    false }}><b>Archive:</b>{{ item?.archive ? item?.archive : false }}
+                  </td>
+                  <td *ngIf="!id">
+                    <i class="icon-eye" style="cursor: pointer" (click)="viewUser(item?.user[0], item)"
+                      data-toggle="modal" data-target="#loginModal"></i>
+                  </td>
+                  <td>
+                    {{item?.createdAt | date}}
+                  </td>
+                  <!-- <td style="width: 30%">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="action[item?._id + '_status']"
+                      style="width: 100%"
+                      (blur)="
+                        onBlurMethod(
+                          action[item?._id + '_status'],
+                          item?._id,
+                          'status'
+                        )
+                      "
+                    />
+                  </td> -->
+                  <td>
+                    <div *ngIf="item.answerSubmitted===false || !item.answerSubmitted">Pending
+                      <i class="icon-eye" style="cursor: pointer"
+                        (click)="viewQuestionAnswers(item?._id, item?.user[0])" data-toggle="modal"
+                        data-target="#questionModal"></i>
+                    </div>
+                    <div *ngIf="item.answerSubmitted===true">View
+                      <i class="icon-eye" style="cursor: pointer"
+                        (click)="viewQuestionAnswers(item?._id, item?.user[0]?._id)" data-toggle="modal"
+                        data-target="#questionModal"></i>
+                    </div>
+                  </td>
+                  <td>
+                    {{item.totalMarks}}
+                  </td>
+                  <td>
+                    <select class="form-control" style="width:80px" [(ngModel)]="item.orderReceived"
+                      (change)="updateOrderReceived($event.target.value,item?._id)">
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </td>
+                  <td *ngIf="!id">
+                    <select class="form-control" style="width:160px" [(ngModel)]="item.employeeName"
+                      (change)="selectEmployee($event.target.value,item?._id)">
+                      <option value="-1">--Select Employee--</option>
+
+                      <option *ngFor="let employee of employeeData;" value="{{employee.employeeName}}">
+                        {{employee.employeeName}}</option>
+
+                    </select>
+                  </td>
+                  <td>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"
+                      [(ngModel)]="action[item?._id + '_cmnt']" (blur)="
+                        onBlurMethod(
+                          action[item?._id + '_cmnt'],
+                          item?._id,
+                          'comment'
+                        )
+                      " style="width: 250px"></textarea>
+                  </td>
+                  <td>
+                    <span (click)="deletePost(item?._id)" class="badge badge-danger" style=" cursor: pointer; "
+                      *ngIf="type!='archive'">Archive</span>
+                    <span (click)="deletePost(item?._id)" class="badge badge-danger" style=" cursor: pointer; "
+                      *ngIf="type=='archive'">Undo</span>
+                  </td>
+                  <td *ngIf="auth.isSuperAdmin()">
+                    <button (click)="goToEditPage(item._id)">Edit</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <li class="page-item">
+              <a class="page-link" aria-label="Previous" (click)="previousPage()">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item text-white mt-2">
+              {{currentPage}} of {{totalPage}}
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" aria-label="Next" (click)="nextPage()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade login" id="loginModal">
+  <div class="modal-dialog login animated">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Name</label>
+            <input class="form-control" type="text" id="example-text-input" name="juryName" [(ngModel)]="name"
+              disabled="true" />
+          </div>
+          <div class="form-group">
+            <label for="example-email-input" class="form-control-label">Email</label>
+            <input class="form-control" type="email" id="example-text-input" [(ngModel)]="email" name="email"
+              disabled="true" />
+          </div>
+          <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Phone</label>
+            <input class="form-control" type="text" id="example-tel-input" [(ngModel)]="phone" name="phone"
+              disabled="true" />
+          </div>
+          <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Company</label>
+            <input class="form-control" type="text" id="example-tel-input" [(ngModel)]="company" name="company"
+              disabled="true" />
+          </div>
+          <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Website</label>
+            <input class="form-control" type="text" id="example-tel-input" [(ngModel)]="website" name="website"
+              disabled="true" />
+          </div>
+          <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Jury assigned</label>
+            <input class="form-control" type="text" id="example-tel-input" [(ngModel)]="juryName" name="juryAssign"
+              disabled="true" />
+            <button (click)="assignJury()">Assign New Jury</button>
+          </div>
+          <div class="form-group" *ngIf="showJuries">
+            <div *ngFor="let j of jury;">
+              <input type="radio" name="juries" id={{j._id}} value={{j._id}}>
+              <label>{{j.name}}, {{j.phone}}</label>
+            </div>
+            <button (click)="updateJury()">Update Jury</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade login questionire_modal" id="questionModal">
+  <div class="modal-dialog login animated">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div>
+            <h3>Part A Questionnaire</h3>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label">Product / Brand name</label>
+              <textarea class="form-control" type="text" [value]="partAanswer.productName" disabled="true"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label">Brand Logo (jpg, png) *</label>
+
+              <img [src]="getImageSource(partAanswer.brandLogo.image)" alt="" width="20%">
+
+            </div>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label">Product Image (jpg, png) * (jpg, png) *</label>
+              <img [src]="getImageSource(partAanswer.productImage.image)" alt="" width="20%">
+            </div>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label">Can you send the product sample to the below
+                mentioned address? (Minimum quantity : 3)</label>
+              <textarea class="form-control" type="text" [value]="partAanswer.sampleAcceptance"
+                disabled="true"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label"> Enter your Billing Address</label>
+              <textarea class="form-control" type="text" [value]="partAanswer.billingAddress"
+                disabled="true"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label"> Enter your Shipping Address</label>
+              <textarea class="form-control" type="text" [value]="partAanswer.shippingAddress"
+                disabled="true"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label"> GSTIN</label>
+
+              <textarea class="form-control" type="text" [value]="partAanswer.gst" disabled="true"></textarea>
+
+
+
+
+            </div>
+          </div>
+          <div *ngFor="let question of questionnaire; let i=index">
+            <div *ngIf="i===0">
+              <h3>Channelier Questionnaire </h3>
+            </div>
+            <div *ngIf="i===6">
+              <h3>Awards Questionnaire 1 </h3>
+            </div>
+            <div *ngIf="i===11">
+              <h3>Awards Questionnaire 2 </h3>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label">{{question.question}}</label>
+              <div *ngIf="question.id==='qc-015'">
+                <div id="viewFile" style="display: none;">
+                  <div *ngIf="imgFile">
+                    <img [src]="'/uploads/'+imgFile" alt="img">
+                  </div>
+                  <div *ngIf="videoFile">
+                    <video width="100%" height="100%" controls>
+                      <source [src]="'/uploads/'+videoFile" type="video/mp4">
+                      <source [src]="'/uploads/'+videoFile" type="video/ogg">
+                      <source [src]="'/uploads/'+videoFile" type="video/webm">
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <div *ngIf="pdfFile">
+                    <ngx-doc-viewer [url]="currUrl+'/uploads/'+pdfFile" viewer="google" style="width:100%;height:93vh;">
+                    </ngx-doc-viewer>
+                  </div>
+                  <div *ngIf="anotherFile">
+                    Please download the file to continue.
+                    <a class="brown-btn hvr-shutter-out-vertical" href="'/uploads/'+anotherFile">Download File</a>
+                  </div>
+                </div>
+                <p *ngIf="viewFileActive===1"> View File
+                  <i class="icon-eye" style=" cursor: pointer; " (click)="showDiv(true)"></i>
+                </p>
+                <p *ngIf="viewFileActive===2"> Close File
+                  <i class="icon-eye" style=" cursor: pointer; " (click)="showDiv(false)"></i>
+                </p>
+              </div>
+              <textarea class="form-control" type="text" id="question{{i}}-text-input" name="question{{i}}Name"
+                [(ngModel)]="question.answer" disabled="true"></textarea>
+              <div *ngIf="question.scores.length>0">
+                Marks:
+                <div *ngFor="let sc of question.scores; let j=index">
+                  {{sc.juryName}}: {{sc.score}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,406 @@
+<app-user-header></app-user-header>
+<div class="main-content" id="panel">
+   <section class="q_ans_page" id="content">
+      <div class="dashboard-sec">
+         <div class="container container-80">
+            <div class="brown-title">
+               <h1>Questions</h1>
+            </div>
+            <div class="form-container" *ngIf="mappedAnswers && mappedAnswers.length > 0 && user.role === 'user'">
+            <mat-horizontal-stepper #stepper>
+               <mat-step [stepControl]="firstFormGroup">
+                     <ng-template matStepLabel>Channelier Questionnaire</ng-template>
+                     <div class="col-md-12 col-lg-12 m-p-0" *ngFor="let val of mappedAnswers | slice:0:6; let i = index;">
+                        <div class="extra-benefits banner-bg-effect q_ans_div">
+                           <h2 class="text-white"><span class="text_yellow">{{i + 1}}. </span>{{val.questionText}}
+                           </h2>
+
+                           <div appearance="outline" class="text_area_div" *ngIf="val.answerType === 'TEXT'">
+                              <textarea class="answers" matInput cdkTextareaAutosize cdkAutosizeMinRows="4" [disabled]="isFinalSubmitted" placeholder="Enter your answer" [(ngModel)]="val.field.text"></textarea>
+                           </div>
+                           <div class="multi_custom" *ngIf="val.answerType === 'MULTI_SELECT'">
+                            <mat-checkbox [(ngModel)]="val.field.opt_0" [disabled]="isFinalSubmitted">
+                              Beat management
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_1" [disabled]="isFinalSubmitted">
+                              Multiple levels of channel partners
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_2" [disabled]="isFinalSubmitted">
+                              Custom Schemes and Pricing for Outlets
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_3" [disabled]="isFinalSubmitted">
+                              Login for Channel Partners
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_4" [disabled]="isFinalSubmitted">
+                              Works offline
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_5" [disabled]="isFinalSubmitted">
+                              Custom Forms and surveys
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_6" [disabled]="isFinalSubmitted">
+                              Module for delivery person, merchandiser
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_7" [disabled]="isFinalSubmitted">
+                              Measure Productivity
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_8" [disabled]="isFinalSubmitted">
+                              Predictive Analytics
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_9" [disabled]="isFinalSubmitted">
+                              Targets and Achievements
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_10" [disabled]="isFinalSubmitted">
+                              Daily Tasks Scheduling
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_11" [disabled]="isFinalSubmitted">
+                              Inventory visibility at retailer outlets
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_12" [disabled]="isFinalSubmitted">
+                              Track Payment Status
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_13" [disabled]="isFinalSubmitted">
+                              Reminders for Follow-ups
+                            </mat-checkbox>
+                            <mat-checkbox [(ngModel)]="val.field.opt_14" [disabled]="isFinalSubmitted">
+                              Track Location
+                            </mat-checkbox>
+                           </div>
+                        </div>
+                     </div>
+                     <div>
+                        <div class="col-md-12 col-lg-12 m-p-0 m-m-15">
+                           <button class="brown-btn hvr-shutter-out-vertical mr-3" (click)="saveAnswers()" *ngIf="!isFinalSubmitted">Save</button>
+                           <button class="brown-btn hvr-shutter-out-vertical" (click)="nextQuesPage()">Proceed</button>
+                        </div>
+                     </div> 
+               </mat-step>
+               <mat-step [stepControl]="secondFormGroup" label="Awards Questionnaire 1">
+                    <div class="col-md-12 col-lg-12 m-p-0" *ngFor="let val of mappedAnswers | slice:6:11; let i = index;">
+                      <div class="extra-benefits banner-bg-effect q_ans_div">
+                         <h2 class="text-white"><span class="text_yellow">{{i + 1}}. </span>{{val.questionText}}
+                         </h2>
+                        <div *ngIf="val.mapId==='qc-007'">
+                           <mat-radio-group [(ngModel)]="val.field.selected" [disabled]="isFinalSubmitted">
+                              <div>
+                                 <mat-radio-button value="1">1-5 SKU</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="2">6-10 SKU</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="3">11-15 SKU</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="4">16-20 SKU</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="5">More than 20 SKUs</mat-radio-button>
+                              </div>
+                            </mat-radio-group>
+                        </div>
+                        <div *ngIf="val.mapId==='qc-008'">
+                           <mat-radio-group [(ngModel)]="val.field.selected" [disabled]="isFinalSubmitted">
+                              <div>
+                                 <mat-radio-button value="0">0 States</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="1">1-5 States</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="2">6-10 States</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="3">11-15 States</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="4">16-20 States</mat-radio-button>
+                              </div>
+                              <div>
+                                 <mat-radio-button value="5">More than 20 States</mat-radio-button>
+                              </div>
+                            </mat-radio-group>
+                        </div>
+                        <div *ngIf="val.mapId === 'qc-009'">
+                           <div class="web_url_div">
+                              <mat-checkbox id="sellingWebsite-1" value="amazon" [(ngModel)]="val.field.opt_0" [disabled]="isFinalSubmitted">Amazon</mat-checkbox>
+                              <div appearance="none" class="url_div">
+                                 <input id="inputSellingWebsite-1" class="url" matInput placeholder="Enter URL Here" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.text_0">
+                              </div>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox id="sellingWebsite-2" value="flipkart" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.opt_1">Flipkart</mat-checkbox>
+                              <div class="url_div" appearance="none">
+                                 <input id="inputSellingWebsite-2" class="url" [disabled]="isFinalSubmitted" matInput placeholder="Enter URL Here" [(ngModel)]="val.field.text_1">
+                              </div>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox id="sellingWebsite-3" value="Big Baskets" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.opt_2">Big Baskets</mat-checkbox>
+                              <div class="url_div" appearance="none">
+                                 <input id="inputSellingWebsite-3" class="url" [disabled]="isFinalSubmitted" matInput placeholder="Enter URL Here" [(ngModel)]="val.field.text_2">
+                              </div>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox id="sellingWebsite-4" value="Groffers" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.opt_3">Grofers</mat-checkbox>
+                              <div class="url_div" appearance="none">
+                                 <input class="url" id="inputSellingWebsite-4" [disabled]="isFinalSubmitted" matInput placeholder="Enter URL Here" [(ngModel)]="val.field.text_3">
+                              </div>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox id="sellingWebsite-5" value="CompanyWebsite" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.opt_4">Company Website</mat-checkbox>
+                              <div class="url_div" appearance="none">
+                                 <input class="url" id="inputSellingWebsite-5" [disabled]="isFinalSubmitted" matInput placeholder="Enter URL Here" [(ngModel)]="val.field.text_4">
+                              </div>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox id="sellingWebsite-6" value="others" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.opt_5">Others</mat-checkbox>
+                              <div class="url_div" appearance="none">
+                                 <input class="url" id="inputSellingWebsite-6" [disabled]="isFinalSubmitted" matInput placeholder="Enter URL Here" [(ngModel)]="val.field.text_5">
+                              </div>
+                           </div>
+
+                        </div>
+                        <div *ngIf="val.mapId === 'qc-010'">
+                           <div class="web_url_div">
+                              <mat-checkbox [(ngModel)]="val.field.opt_0" [disabled]="isFinalSubmitted">Instagram</mat-checkbox>
+                              <mat-form-field appearance="none" class="url_div">
+                                 <input class="url" matInput placeholder="Enter URL Here" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.text_0">
+                              </mat-form-field>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox [(ngModel)]="val.field.opt_1" [disabled]="isFinalSubmitted">Twitter</mat-checkbox>
+                              <mat-form-field class="url_div" appearance="none">
+                                 <input class="url" matInput placeholder="Enter URL Here" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.text_1">
+                              </mat-form-field>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox [(ngModel)]="val.field.opt_2" [disabled]="isFinalSubmitted">Facebook</mat-checkbox>
+                              <mat-form-field class="url_div" appearance="none">
+                                 <input class="url" matInput placeholder="Enter URL Here" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.text_2">
+                              </mat-form-field>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox [(ngModel)]="val.field.opt_3" [disabled]="isFinalSubmitted">Linkedin</mat-checkbox>
+                              <mat-form-field class="url_div" appearance="none">
+                                 <input class="url" matInput placeholder="Enter URL Here" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.text_3">
+                              </mat-form-field>
+                           </div>
+                           <div class="web_url_div">
+                              <mat-checkbox [(ngModel)]="val.field.opt_4" [disabled]="isFinalSubmitted">Others</mat-checkbox>
+                              <mat-form-field class="url_div" appearance="none">
+                                 <input class="url" matInput placeholder="Enter URL Here" [disabled]="isFinalSubmitted" [(ngModel)]="val.field.text_4">
+                              </mat-form-field>
+                           </div>
+
+                        </div>
+                        <div *ngIf="val.mapId === 'qc-011'">
+                           <div class="SubQuestions">
+                              <h5 class="text-white">
+                                 <span class="text_yellow">a.</span>
+                                 Environmentally friendly packaging
+                              </h5>
+                              <mat-radio-group [(ngModel)]="val.field.opt_0" [disabled]="isFinalSubmitted">
+                                    <mat-radio-button class="subOptions" value="1">Yes</mat-radio-button>
+                                    <mat-radio-button value="2" class="subOptions">No</mat-radio-button>
+                                    <mat-radio-button value="3" class="subOptions">Don't Know</mat-radio-button>
+                              </mat-radio-group>
+                              <h5 class="text-white">
+                                 <span class="text_yellow">b.</span>
+                                 Is the material biodegradable/green packaging
+                              </h5>
+                              <mat-radio-group [(ngModel)]="val.field.opt_1" [disabled]="isFinalSubmitted">
+                                 <mat-radio-button class="subOptions" value="1">Yes</mat-radio-button>
+                                 <mat-radio-button value="2" class="subOptions">No</mat-radio-button>
+                                 <mat-radio-button value="3" class="subOptions">Don't Know</mat-radio-button>
+                           </mat-radio-group>
+                              <h5 class="text-white">
+                                 <span class="text_yellow">c.</span>
+                                 Packaging meets standard specified by regulatory body
+                              </h5>
+                              <mat-radio-group [(ngModel)]="val.field.opt_2" [disabled]="isFinalSubmitted">
+                                 <mat-radio-button class="subOptions" value="1">Yes</mat-radio-button>
+                                 <mat-radio-button value="2" class="subOptions">No</mat-radio-button>
+                                 <mat-radio-button value="3" class="subOptions">Don't Know</mat-radio-button>
+                           </mat-radio-group>
+                              <h5 class="text-white">
+                                 <span class="text_yellow">d.</span>
+                                 Is the package reusable
+                              </h5>
+                              <mat-radio-group [(ngModel)]="val.field.opt_3" [disabled]="isFinalSubmitted">
+                                 <mat-radio-button class="subOptions" value="1">Yes</mat-radio-button>
+                                 <mat-radio-button value="2" class="subOptions">No</mat-radio-button>
+                                 <mat-radio-button value="3" class="subOptions">Don't Know</mat-radio-button>
+                              </mat-radio-group>
+                              <h5 class="text-white">
+                                 <span class="text_yellow">e.</span>
+                                 Does it follow packaging and labelling regulation in India?
+                              </h5>
+                              <mat-radio-group [(ngModel)]="val.field.opt_4" [disabled]="isFinalSubmitted">
+                                 <mat-radio-button class="subOptions" value="1">Yes</mat-radio-button>
+                                 <mat-radio-button value="2" class="subOptions">No</mat-radio-button>
+                                 <mat-radio-button value="3" class="subOptions">Don't Know</mat-radio-button>
+                              </mat-radio-group>
+                           </div>
+                        </div>
+                      </div>
+                   </div>
+                     <div class="col-md-12 col-lg-12 m-p-0 m-m-15">
+                        <button class="brown-btn hvr-shutter-out-vertical mr-3" (click)="prevQuesPage()">Back</button>
+                        <button class="brown-btn hvr-shutter-out-vertical mr-3" type="button" (click)="saveAnswers()" *ngIf="!isFinalSubmitted">Save</button>
+                        <button class="brown-btn hvr-shutter-out-vertical" (click)="nextQuesPage()">Proceed</button>
+                     </div>
+               </mat-step>
+               <mat-step [stepControl]="thirdFormGroup">
+                  <ng-template matStepLabel>Awards Questionnaire 2</ng-template>
+                  <div class="col-md-12 col-lg-12 m-p-0" *ngFor="let val of mappedAnswers | slice:11:17; let i = index;">
+                    <div class="extra-benefits banner-bg-effect q_ans_div">
+                       <h2 class="text-white"><span class="text_yellow">{{i + 1}}. </span>{{val.questionText}}
+                       </h2>
+                        <mat-form-field appearance="outline" class="text_area_div" *ngIf="val.answerType === 'TEXT'">
+                           <textarea class="answers" matInput cdkTextareaAutosize cdkAutosizeMinRows="4" [disabled]="isFinalSubmitted" placeholder="Enter your answer" [(ngModel)]="val.field.text"></textarea>
+                        </mat-form-field>
+                        <div *ngIf="val.answerType === 'FILE'">
+                        <mat-form-field appearance="outline" class="text_area_div">
+                          <textarea class="answers" matInput cdkTextareaAutosize cdkAutosizeMinRows="4" [disabled]="isFinalSubmitted" placeholder="Enter your answer" [(ngModel)]="val.field.text"></textarea>
+                       </mat-form-field>
+                       <label class="btn fileUpload btn-default">
+                        Upload file <input (change)="onFileChange($event)" id="fileUpload1" type="file" hidden="" [disabled]="isFinalSubmitted"></label>
+                        <span class="text-white ml-1">{{fileName}}</span>
+                        <span class="text-white ml-1"> Max size : 25mb</span>
+                     </div>
+                     <mat-radio-group *ngIf="val.answerType === 'SINGLE_SELECT'" [(ngModel)]="val.field.opt_1" [disabled]="isFinalSubmitted">
+                      <mat-radio-button class="subOptions" value="1">Yes</mat-radio-button>
+                      <mat-radio-button value="2" class="subOptions">No</mat-radio-button>
+                   </mat-radio-group>
+                    </div>
+                 </div>
+                   <div class="col-md-12 col-lg-12 m-p-0 m-m-15">
+                        <button class="brown-btn hvr-shutter-out-vertical mr-3" (click)="prevQuesPage()">Back</button>
+                        <button class="brown-btn hvr-shutter-out-vertical mr-3" (click)="saveAnswers()" *ngIf="!isFinalSubmitted">Save</button>
+                        <button class="brown-btn hvr-shutter-out-vertical" type="button" (click)="finalSubmission()" *ngIf="!isFinalSubmitted">Final Submit</button>
+                    </div>
+               </mat-step>
+            </mat-horizontal-stepper>
+          </div>
+          <div class="form-container" *ngIf="mappedAnswers && mappedAnswers.length > 0 && user.role === 'jury' && scoreObject.length > 0">
+            <mat-horizontal-stepper #stepper>
+               <mat-step>
+                  <ng-template matStepLabel>Awards Questionnaire</ng-template>
+                  <div class="col-md-12 col-lg-12 m-p-0" *ngFor="let val of mappedAnswers; let i = index;">
+                    <div class="extra-benefits banner-bg-effect q_ans_div">
+                      <h2 class="text-white"><span class="text_yellow">{{i + 1}}. </span>{{val.questionText}}</h2>
+                        <p>Ans: {{val.field.text}}</p>
+                        <div *ngIf="val.answerType==='FILE'">
+                           <p>File: {{val.field.file}}
+                              <i class="icon-eye" style=" cursor: pointer; " data-toggle="modal" (click)="getFile(val)" data-target="#loginModal"></i>
+                           </p>
+                        </div>
+                       <div class="app_score_div">
+                         <app-score [answerId]="val._id" [score]="getScore(val._id)" [disabled]="juryChecked" (scoreChnages)="scoreChanged($event)">
+
+                         </app-score>
+                       </div>
+                    </div>
+                </div>
+                   <div class="col-md-12 col-lg-12 m-p-0 m-m-15">
+                        <button class="brown-btn hvr-shutter-out-vertical mr-3" (click)="saveScores(false)">Save</button>
+                        <button class="brown-btn hvr-shutter-out-vertical mr-3" (click)="saveScores(true)">Final Submit</button>
+                    </div>
+               </mat-step>
+            </mat-horizontal-stepper>
+          </div>
+            <div class="row">
+               <!--User View start-->
+               <!-- <div class="form-container">
+                  <form class="w-100">
+                    <div class="col-md-12 col-lg-12">
+                      <div class="extra-benefits banner-bg-effect q_ans_div">
+                        <h2 class="text-white"><span class="text_yellow">1. </span>What is the number of stock keeping units in terms of size and variants ?
+                        </h2>
+                        <mat-form-field appearance="outline" class="text_area_div">
+                          <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4" placeholder="Enter your answer"></textarea>
+                        </mat-form-field>
+
+
+                      </div>
+                  </div>
+
+                    <div class="col-md-12 col-lg-12 text-right">
+                      <a class="brown-btn hvr-shutter-out-vertical" (click)="saveAnswers()">Submit</a>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 text-right">
+                      <a class="brown-btn hvr-shutter-out-vertical" (click)="nextQuesPage()">Next</a>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 text-right">
+                      <a class="brown-btn hvr-shutter-out-vertical" (click)="prevQuesPage()">Back</a>
+                    </div>
+                  </form>
+                  </div> -->
+               <!--User View End-->
+               <!--Jury View start-->
+               <!-- <div class="form-container">
+                  <div class="w-100">
+                    <div class="col-md-12 col-lg-12" *ngFor="let val of mappedAnswers; let i = index;">
+                      <div class="extra-benefits banner-bg-effect q_ans_div" *ngIf="isShow(i)">
+                        <h2 class="text-white"><span class="text_yellow">{{i + 1}}. </span>{{val.questionText}}</h2>
+                          <p>{{val.text}}</p>
+
+                         <div class="app_score_div">
+                           <app-score [answerId]="val._id" [score]="getScore(val._id)" (scoreChnages)="scoreChanged($event)">
+
+                           </app-score>
+                         </div>
+                      </div>
+                  </div>
+
+                    <div class="col-md-12 col-lg-12 text-right">
+                      <a class="brown-btn hvr-shutter-out-vertical" (click)="saveScores()">Submit</a>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 text-right">
+                      <a class="brown-btn hvr-shutter-out-vertical" (click)="nextQuesPage()">Next</a>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 text-right">
+                      <a class="brown-btn hvr-shutter-out-vertical" (click)="prevQuesPage()">Back</a>
+                    </div>
+                  </div>
+                  </div> -->
+               <!--Jury View start-->
+            </div>
+         </div>
+      </div>
+   </section>
+</div>
+<div class="modal fade login questionire_modal" id=loginModal>
+   <div class="modal-dialog login animated">
+      <div class=modal-content>
+         <div class=modal-header>
+            <button type=button class=close data-dismiss=modal aria-hidden=true>&times;</button>
+         </div>
+         <div class=modal-body>
+            <div *ngIf="imgFile">
+               <img [src]="'/uploads/'+imgFile" alt="img">
+            </div>
+            <div *ngIf="videoFile">
+               <video width="100%" height="100%" controls>
+                  <source [src]="'/uploads/'+videoFile" type="video/mp4">
+                  <source [src]="'/uploads/'+videoFile" type="video/ogg">
+                  <source [src]="'/uploads/'+videoFile" type="video/webm">
+                  Your browser does not support the video tag.
+                </video>
+            </div>
+            <div *ngIf="pdfFile">
+               <ngx-doc-viewer [url]="currUrl+'/uploads/'+pdfFile" viewer="google" style="width:100%;height:93vh;">
+               </ngx-doc-viewer>
+            </div>
+            <div *ngIf="anotherFile">
+               Please download the file to continue.
+               <a class="brown-btn hvr-shutter-out-vertical" href="'/uploads/'+anotherFile">Download File</a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<app-footer></app-footer>

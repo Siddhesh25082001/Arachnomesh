@@ -1,0 +1,102 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>Document</title>
+    
+
+
+
+</head>
+<body> -->
+
+    <style>
+        @font-face {
+        font-family: '18thCentury';
+        src: url('./assets/css/fonts/18thCentury-Regular.woff2') format('woff2'),
+            url('./assets/css/fonts/18thCentury-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Georgia';
+        src: url('./assets/css/fonts/Georgia-Bold.woff2') format('woff2'),
+            url('./assets/css/fonts/Georgia-Bold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    .jury-post{
+        width: 1920px;
+        position: relative;
+        margin:0 auto;
+    }
+    
+    .jury-post img{
+        width: 1920px;
+    }
+    
+    
+    .jury-content {
+        position:absolute;
+        top:14%;
+        left: 8%;
+        right: 0;
+    }
+    
+    .jury-content h1 {
+        font-family: 'Georgia';
+        text-transform: uppercase;
+        font-weight: bold;
+        color:#ff00b3;
+        margin-bottom: 0;
+        margin-left: -5px;
+        font-size: 60px;
+    }
+    
+    .jury-content h2 {
+        font-family: '18thCentury';
+        text-transform: uppercase;
+        font-weight: normal;
+        color:#ffffff;
+        margin: 0;
+        font-size: 50px;
+        line-height: 1.6;
+    }
+    </style>
+
+<div class="row">
+    <div class="col-sm-2"> <input  class="form-control ng-pristine ng-valid ng-touched" type="number" [(ngModel)]="start"></div>
+    <div class="col-sm-2" ><input  class="form-control ng-pristine ng-valid ng-touched" type="number" [(ngModel)]="end"></div>
+    <div class="col-sm-8"> <button (click)="downloadImage()" class="button button-effect">Download Certificate</button></div>
+  </div>
+  
+<ng-container *ngFor="let item of juryObj | slice:start:end">
+<section class="jury-post" [id]="'my-node-'+item.srNo">
+    <img src="./assets/images/jury-post.png"/>
+    <div class="jury-content">   
+        <h1>{{item.name}}</h1>
+        <h2>{{item.company}}</h2>
+    </div>
+</section>
+</ng-container>
+
+
+    
+<!-- </body>
+</html> -->
+<!-- <div id="download">
+    <img #canvas>
+    <a #downloadLink (click)="downloadImage()">download</a>
+  </div> -->
+  <!-- <div id="my-node">
+    You will get a image downloaded.
+  </div> -->
+  
+  <!-- <button (click)="downloadImage()">download img</button> -->
+  
+<!-- <button  >download</button> -->

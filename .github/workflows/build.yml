@@ -1,0 +1,58 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+
+name: build
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: web-build
+        run: |
+          cd award-web/
+          source ~/.nvm/nvm.sh
+          nvm install 16
+          nvm use 16
+          npm install
+          CI=false npm run build
+          sudo mkdir -p /tmp/builds/ng-award/${{github.sha}}
+          sudo tar -czf /tmp/builds/ng-award/${{github.sha}}/ng-award.tgz -C build/ .
+          sudo aws s3 cp /tmp/builds/ng-award/${{github.sha}}/ng-award.tgz s3://arachnomesh-build/award/ng-award/${{github.sha}}/
+          sudo rm -rf /tmp/builds/ng-award/${{github.sha}}
+      - name: award-server
+        run: |
+          cd channelier-award-backend/
+          source ~/.nvm/nvm.sh
+          nvm use 16
+          npm install
+          npm run build
+          cp package* build/
+          sudo mkdir -p /tmp/builds/award-server/${{github.sha}}
+          sudo tar -czf /tmp/builds/award-server/${{github.sha}}/award-server.tgz -C build/ .
+          sudo aws s3 cp /tmp/builds/award-server/${{github.sha}}/award-server.tgz s3://arachnomesh-build/award/award-server/${{github.sha}}/
+          sudo rm -rf /tmp/builds/award-server/${{github.sha}}
+      - name: ngWeb-build
+        run: |
+          cd award-web-old/
+          source ~/.nvm/nvm.sh
+          nvm install 16
+          nvm use 16
+          npm install
+          npm run build
+          sudo mkdir -p /tmp/builds/award-admin/${{github.sha}}
+          sudo tar -czf /tmp/builds/award-admin/${{github.sha}}/award-admin.tgz -C dist/award-web/ .
+          sudo aws s3 cp /tmp/builds/award-admin/${{github.sha}}/award-admin.tgz s3://arachnomesh-build/award/award-admin/${{github.sha}}/
+          sudo rm -rf /tmp/builds/award-admin/${{github.sha}}

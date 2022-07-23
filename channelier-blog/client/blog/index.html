@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <base href="https://award-test.arachnomesh.com/blog" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/_content/images/logo.png" type="image/png" />
+    <link rel="icon" href="/_content/images/logo.png" type="image/png" />
+
+
+    <title><%- locals.metaTitle || "MEANie Blog" %></title>
+    <meta name="description" content="<%- locals.metaDescription || "MEANie Blog" %>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* custom */
+        <%- include('_dist/app.css') %>
+        /* fonts & icons */
+        <%- include('_content/icomoon/font.css') %>
+        <%- include('_content/icomoon/style.css') %>
+        <%- include('_content/icomoon/dark.css') %>
+        <%- include('_content/icomoon/conference.css') %>
+        <%- include('_content/icomoon/responsive.css') %>
+        /* bootstrap */
+        <%- include('_content/bootstrap.css') %>
+
+        /* syntax higlighter */
+        /* <%- include('_content/syntaxhighlighter/css/shCore.css') %> */
+        /* <%- include('_content/syntaxhighlighter/css/shThemeDefault.css') %> */
+
+        
+    </style>
+
+    <% if(!locals.loggedIn) { // don't record traffic if logged in %>
+        <!-- analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '/analytics.js?d=' + new Date().toISOString().slice(0, 13), 'ga');
+            ga('create', '<%= locals.googleAnalyticsAccount %>', 'auto');
+        </script>
+    <% } %>
+</head>
+<body>
+    <!-- nav -->
+    <header id="header" class="clearfix static-sticky responsive-sticky-header transparent-header dark">
+        <div id="header-wrap">
+           <div class="container clearfix">
+              <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+              <!-- Logo
+                 ============================================= -->
+              <div id="logo">
+                 <a [href]="home"  data-scrollto="#slider" class="standard-logo" data-dark-logo="_content/images/logo-channelier.png"><img src="_content/images/logo-channelier.png" alt="Logo"></a>
+                 <a [href]="home"  data-scrollto="#slider" class="retina-logo" data-dark-logo="_content/images/logo-channelier.png"><img src="_content/images/logo-channelier.png" alt="Logo"></a>
+              </div>
+              <!-- #logo end -->
+              <!-- Primary Navigation
+                 ============================================= -->
+              <nav id="primary-menu" class="d-lg-flex d-xl-flex align-items-center justify-content-xl-between justify-content-lg-between">
+                 <ul class="not-dark align-self-start"></ul>
+                 <ul class="not-dark align-self-center one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
+                  
+                 </ul>
+                 <ul class="pr-0 header-button" style="margin: -15px;">
+                    <li>
+                      <a [href]="home">
+                         <img src="_content/images/icons8_home.svg" class="pt-2" width="50" height="50">
+                      </a>
+                    </li>
+                 </ul>
+              </nav>
+              <!-- #primary-menu end -->
+           </div>
+        </div>
+     </header>
+    
+    <!-- <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-click="showNav = !showNav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <img src="/_content/images/logo.png" />
+                    <span>MEANie</span>
+                </a>
+            </div>
+            <div class="navbar-collapse ng-cloak" ng-class="{'in': showNav, 'collapse': !showNav}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/archive">Archive</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- main -->
+    <main ui-view>
+        <% if(locals.templateUrl) { %>
+            <div ng-non-bindable>
+                <%- include(locals.templateUrl) %>
+            </div>
+        <% } %>
+	</main>
+
+    <!-- footer -->
+    <footer id="footer" class="dark"  style="background:rgba(0,0,0,0.9); border-top-color: #222;">
+        <div class="container">
+        <!-- Footer Widgets
+           ============================================= -->
+        <div class="footer-widgets-wrap clearfix">
+        <div class="row clearfix">
+        <div class="col-lg-3 col-md-3">
+        <div class="widget clearfix">
+        <h3 class="gradient-underline d-inline-flex mb-4">Who we are</h3>
+        <img src="_content/images/logo-channelier.png" alt="Logo" style="display: block; margin-bottom: 10px;">
+        <p>Channelier FMCG Awards acknowledge excellence in areas such as brand strength, product launch, innovation in advertising and marketing across FMCG sectors.</p>
+        <div class="w-100">
+        <h3 class="gradient-underline d-inline-flex mb-20px">Follow us</h3>
+        </div>
+        <div class="follow-icons">
+        <a href="https://www.facebook.com/channelier/" target="_blank" class="social-icon si-small si-borderless si-colored si-rounded si-facebook">
+            <i class="fa fa-facebook icon-facebook"></i>
+            <i class="fa fa-facebook icon-facebook"></i>
+        </a>
+        <a href="https://twitter.com/Channelier"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-twitter">
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/channelier_/"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-gplus">
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/channelier/"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-pinterest">
+            <i class="fa fa-linkedin-square"></i>
+            <i class="fa fa-linkedin-square"></i>
+        </a></div>
+        </div>
+        </div>
+        <div class="col-lg-3 col-md-3 info">
+        <h3 class="gradient-underline d-inline-flex mb-4">Our Address</h3>
+        <h4 class="t400 text-capitalize mb-4">Hiranandani Crystal Plaza, PF-43, B-Wing, Sector 7,<br>
+                 Kharghar, Navi Mumbai, Maharashtra 410210</h4>
+        <h4 class="mb-2">+91 7291085339</h4>
+        <h4 class="mb-2">+91 7290099727</h4>
+       <h4 class="mb-2 text-lower"><a href="mailto:awards@channelier.com;">awards@channelier.com</a></h4>
+        </div>
+        <div class="col-lg-6 col-md-6">
+        <h3 class="gradient-underline d-inline-flex mb-4">Get in Touch</h3>
+        <div id="contact-success"></div>
+        <form action="#" class="footer-form" name="contact" id="contact" method="post">
+        <div class="row"> 
+        <div class="col-md-6"> 
+        <div class="form-group">
+        <label for="username">Name</label>
+        <input type="text" class="form-control" placeholder="Enter Name" name="userName" id="userName" required>
+        </div>
+        </div>
+        <div class="col-md-6"> 
+        <div class="form-group">
+        <label for="useremail">Email</label>
+        <input type="email" class="form-control" placeholder="Enter email" name="userEmail" id="userEmail" required>
+        </div>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="query"> Message</label>
+        <textarea placeholder="Message" class="form-control" name="query"  id="query" rows="3" required></textarea>
+        </div>
+        <!-- <div class="form-group form-check">
+           <label class="form-check-label">
+             <input class="form-check-input" type="checkbox"> Remember me
+           </label>
+           </div> -->
+        <input type="submit" class="button button-effect" value="Submit">
+        </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- Copyrights
+           ============================================= -->
+        <div id="copyrights" class="nobg notoppadding">
+        <div class="container clearfix">
+        <div class="col_half">
+        Copyrights &copy; 2020 All Rights Reserved by Arachnomesh Technologies.<br>
+        <div class="copyright-links"><a href="terms-use.html">Terms of Use</a> / <a href="privacy-policy.html">Privacy Policy</a></div>
+        </div>
+        </div>
+        </div><!-- #copyrights end -->
+        </footer>
+    
+    <!-- syntax highlighter -->
+    <script src="blog/_content/syntaxhighlighter/js/shCore.js"></script>
+    <script src="blog/_content/syntaxhighlighter/js/shBrushCSharp.js"></script>
+    <script src="blog/_content/syntaxhighlighter/js/shBrushCss.js"></script>
+    <script src="blog/_content/syntaxhighlighter/js/shBrushJScript.js"></script>
+    <script src="blog/_content/syntaxhighlighter/js/shBrushPlain.js"></script>
+    <script src="blog/_content/syntaxhighlighter/js/shBrushSql.js"></script>
+    <script src="blog/_content/syntaxhighlighter/js/shBrushVb.js"></script>
+    <script src="blog/_content/syntaxhighlighter/js/shBrushXml.js"></script>
+    <script>
+        SyntaxHighlighter.defaults['gutter'] = true;
+        SyntaxHighlighter.defaults['smart-tabs'] = true;
+        SyntaxHighlighter.defaults['auto-links'] = true;
+        SyntaxHighlighter.defaults['collapse'] = false;
+        SyntaxHighlighter.defaults['light'] = false;
+        SyntaxHighlighter.defaults['tab-size'] = 4;
+        SyntaxHighlighter.defaults['toolbar'] = true;
+        SyntaxHighlighter.defaults['wrap-lines'] = true;
+    </script>
+
+    <!-- jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            window.setTimeout(function () {
+                // wait a couple of seconds to show ad
+                $('.carbonads-container').fadeIn();
+            }, 2000);
+
+            // enable closing of ad
+            $('.close-ad').click(function () {
+                $('.carbonads-container').hide();
+            });
+        });
+      //  alert(123);
+    </script>
+
+    <!-- angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+
+    <!-- meanie -->
+    <script src="/_dist/app.min.js"></script>
+</body>
+</html>

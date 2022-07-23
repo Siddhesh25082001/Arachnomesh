@@ -1,0 +1,15 @@
+.main{
+    margin: 0 0 0 249px;
+}
+.searchDiv{
+    list-style-type: none;
+
+}
+.searchCompleteDeiv{
+    background-color: darkgray;
+}
+
+.questionire_modal .modal-dialog {
+    max-width: 80%;
+    height: 100vh;
+}

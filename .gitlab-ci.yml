@@ -1,0 +1,216 @@
+variables:
+  AWS_ACCESS_KEY_ID: "AKIAWS2HDDP4QWLZXG5R"
+  AWS_SECRET_ACCESS_KEY: "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"
+
+
+stages:
+    - build
+    - deploy-test
+    - deploy-prod
+
+## Define the stages for test sever
+
+web-build:
+  stage: build
+  script:
+    - cd award-web/
+    - source ~/.nvm/nvm.sh
+    - nvm install 16
+    - nvm use 16
+    - npm install
+    - CI=false npm run build
+    - mkdir -p /tmp/builds/ng-award/${CI_COMMIT_SHA}
+    - tar -czf /tmp/builds/ng-award/${CI_COMMIT_SHA}/ng-award.tgz -C build/ .
+    - aws s3 cp /tmp/builds/ng-award/${CI_COMMIT_SHA}/ng-award.tgz s3://arachnomesh-build/test/ng-award/${CI_COMMIT_SHA}/
+    - rm -rf /tmp/builds/ng-award/${CI_COMMIT_SHA}
+  only:
+    - master
+  tags:
+    -  aws-cd
+
+ngWeb-build:
+  stage: build
+  script:
+    - cd award-web-old/
+    - source ~/.nvm/nvm.sh
+    - nvm install 16
+    - nvm use 16
+    - npm install
+    - npm run build
+    - mkdir -p /tmp/builds/award-admin/${CI_COMMIT_SHA}
+    - tar -czf /tmp/builds/award-admin/${CI_COMMIT_SHA}/award-admin.tgz -C dist/award-web/ .
+    - aws s3 cp /tmp/builds/award-admin/${CI_COMMIT_SHA}/award-admin.tgz s3://arachnomesh-build/test/award-admin/${CI_COMMIT_SHA}/
+    - rm -rf /tmp/builds/award-admin/${CI_COMMIT_SHA}
+  only:
+    - master
+  tags:
+    -  aws-cd
+  
+award-server:
+  stage: build
+  script:
+    - cd channelier-award-backend/
+    - source ~/.nvm/nvm.sh
+    - nvm use 16
+    - npm install
+    - npm run build
+    - cp package* build/
+    - mkdir -p /tmp/builds/award-server/${CI_COMMIT_SHA}
+    - tar -czf /tmp/builds/award-server/${CI_COMMIT_SHA}/award-server.tgz -C build/ .
+    - aws s3 cp /tmp/builds/award-server/${CI_COMMIT_SHA}/award-server.tgz s3://arachnomesh-build/test/award-server/${CI_COMMIT_SHA}/
+    - aws s3 cp /tmp/builds/award-server/${CI_COMMIT_SHA}/award-server.tgz s3://arachnomesh-build/prod/award-server/${CI_COMMIT_SHA}/
+    - rm -rf /tmp/builds/award-server/${CI_COMMIT_SHA}
+  only:
+    - master
+  tags:
+    -  aws-cd
+
+web-build-prod:
+  stage: build
+  script:
+    - cd award-web/
+    - source ~/.nvm/nvm.sh
+    - nvm install 16
+    - nvm use 16
+    - npm install
+    - CI=false npm run build
+    - mkdir -p /tmp/builds/ng-award-prod/${CI_COMMIT_SHA}
+    - tar -czf /tmp/builds/ng-award-prod/${CI_COMMIT_SHA}/channelierawards.tgz -C build/ .
+    - aws s3 cp /tmp/builds/ng-award-prod/${CI_COMMIT_SHA}/channelierawards.tgz s3://arachnomesh-build/prod/ng-award/${CI_COMMIT_SHA}/
+    - rm -rf /tmp/builds/ng-award-prod/${CI_COMMIT_SHA}
+  only:
+    - master
+  tags:
+    - aws-cd
+  environment:
+    name: production
+
+deploy-web:
+  stage: deploy-test
+  script:
+    - mkdir -p /tmp/builds/ng-award/${CI_COMMIT_SHA}
+    - aws s3 cp s3://arachnomesh-build/test/ng-award/${CI_COMMIT_SHA}/ng-award.tgz /tmp/builds/ng-award/${CI_COMMIT_SHA}/ 
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'mkdir -p /tmp/ng-award/'
+    - scp -i ~/.ssh/arach-test-mumbai.pem /tmp/builds/ng-award/${CI_COMMIT_SHA}/ng-award.tgz ec2-user@3.7.50.8:/tmp/ng-award/
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo rm -rf /var/www/ng-award.bak/'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mv /var/www/ng-award/ /var/www/ng-award.bak/'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mkdir /var/www/ng-award/; sudo tar -xzf /tmp/ng-award/ng-award.tgz -C /var/www/ng-award/'
+    - rm -rf /tmp/builds/ng-award/${CI_COMMIT_SHA}
+  when: manual
+  only:
+    - master
+  tags:
+    - aws-cd
+
+deploy-ngWeb:
+  stage: deploy-test
+  script:
+    - mkdir -p /tmp/builds/award-admin/${CI_COMMIT_SHA}
+    - aws s3 cp s3://arachnomesh-build/test/award-admin/${CI_COMMIT_SHA}/award-admin.tgz /tmp/builds/award-admin/${CI_COMMIT_SHA}/ 
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'mkdir -p /tmp/award-admin/'
+    - scp -i ~/.ssh/arach-test-mumbai.pem /tmp/builds/award-admin/${CI_COMMIT_SHA}/award-admin.tgz ec2-user@3.7.50.8:/tmp/award-admin/
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo rm -rf /var/www/award-admin.bak/'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mv /var/www/award-admin/ /var/www/award-admin.bak/'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mkdir /var/www/award-admin/; sudo tar -xzf /tmp/award-admin/award-admin.tgz -C /var/www/award-admin/'
+    - rm -rf /tmp/builds/award-admin/${CI_COMMIT_SHA}
+  when: manual
+  only:
+    - master
+  tags:
+    - aws-cd
+
+deploy-server:
+  stage: deploy-test
+  script:
+    - mkdir -p /tmp/builds/award-server.test/${CI_COMMIT_SHA}
+    - aws s3 cp s3://arachnomesh-build/test/award-server/${CI_COMMIT_SHA}/award-server.tgz /tmp/builds/award-server.test/${CI_COMMIT_SHA}/ 
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'mkdir -p /tmp/award-server.test/'
+    - scp -i ~/.ssh/arach-test-mumbai.pem /tmp/builds/award-server.test/${CI_COMMIT_SHA}/award-server.tgz ec2-user@3.7.50.8:/tmp/award-server.test/
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'rm -rf /opt/node_apps/award-server.bak'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'mv /opt/node_apps/award-server /opt/node_apps/award-server.bak || true'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'mkdir /opt/node_apps/award-server; tar -xzf /tmp/award-server.test/award-server.tgz -C /opt/node_apps/award-server/'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'cd /opt/node_apps/award-server; npm install;'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'pm2 restart award-server;'
+    - rm -rf /tmp/builds/award-server.test/${CI_COMMIT_SHA}
+  when: manual
+  only:
+    - master
+  tags:
+    - aws-cd
+
+
+
+deploy-web-prod:
+  stage: deploy-prod
+  script:
+    - mkdir -p /tmp/builds/award-prod/${CI_COMMIT_SHA}
+    - aws s3 cp s3://arachnomesh-build/prod/ng-award/${CI_COMMIT_SHA}/channelierawards.tgz /tmp/builds/award-prod/${CI_COMMIT_SHA}/ 
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@172.31.47.216 'mkdir -p /tmp/award-prod/'
+    - scp -i ~/.ssh/arach-prod-mumbai.pem /tmp/builds/award-prod/${CI_COMMIT_SHA}/channelierawards.tgz ec2-user@172.31.47.216:/tmp/award-prod/
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@172.31.47.216 'sudo rm -rf /var/www/award-prod.bak || true'
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@172.31.47.216 'sudo mkdir -p /var/www/award-prod/' 
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@172.31.47.216 'sudo mv /var/www/award-prod/ /var/www/award-prod.bak/ || true'
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@172.31.47.216 'sudo mkdir /var/www/award-prod/; sudo tar -xzf /tmp/award-prod/channelierawards.tgz -C /var/www/award-prod/'
+    - rm -rf /tmp/builds/award-prod/${CI_COMMIT_SHA}
+  when: manual
+  only:
+    - master
+  tags:
+    - aws-cd
+  environment:
+    name: production
+
+deploy-static-web-prod:
+  stage: deploy-prod
+  script:
+    - cd web/
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'rm -rf /var/www/award-frontend.bak || true'
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'mv /var/www/award-frontend /var/www/award-frontend.bak || true ; mkdir -p /var/www/award-frontend'
+    - scp -r -i ~/.ssh/arach-prod-mumbai.pem ./* ec2-user@13.234.68.166:/var/www/award-frontend
+  when: manual
+  only:
+    - master
+  tags:
+    -  aws-cd
+  environment:
+    name: production
+
+deploy-ngWeb:
+  stage: deploy-prod
+  script:
+    - mkdir -p /tmp/builds/award-admin/${CI_COMMIT_SHA}
+    - aws s3 cp s3://arachnomesh-build/test/award-admin/${CI_COMMIT_SHA}/award-admin.tgz /tmp/builds/award-admin/${CI_COMMIT_SHA}/ 
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@13.234.68.166 'mkdir -p /tmp/award-admin/'
+    - scp -i ~/.ssh/arach-test-mumbai.pem /tmp/builds/award-admin/${CI_COMMIT_SHA}/award-admin.tgz ec2-user@13.234.68.166:/tmp/award-admin/
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@13.234.68.166 'sudo rm -rf /var/www/award-admin.bak/'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@13.234.68.166 'sudo mv /var/www/award-admin/ /var/www/award-admin.bak/'
+    - ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@13.234.68.166 'sudo mkdir /var/www/award-admin/; sudo tar -xzf /tmp/award-admin/award-admin.tgz -C /var/www/award-admin/'
+    - rm -rf /tmp/builds/award-admin/${CI_COMMIT_SHA}
+  when: manual
+  only:
+    - master
+  tags:
+    - aws-cd
+
+deploy-server-prod:
+  stage: deploy-prod
+  script:
+    - mkdir -p /tmp/builds/award-server.prod/${CI_COMMIT_SHA}
+    - aws s3 cp s3://arachnomesh-build/prod/award-server/${CI_COMMIT_SHA}/award-server.tgz /tmp/builds/award-server.prod/${CI_COMMIT_SHA}/ 
+    - ssh -o StrictHostKeyChecking=no -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'mkdir -p /tmp/award-server.prod/'
+    - scp -o StrictHostKeyChecking=no -i ~/.ssh/arach-prod-mumbai.pem /tmp/builds/award-server.prod/${CI_COMMIT_SHA}/award-server.tgz ec2-user@13.234.68.166:/tmp/award-server.prod/
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'rm -rf /opt/node_apps/award-server.bak'
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'mv /opt/node_apps/award-server /opt/node_apps/award-server.bak || true'
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'mkdir /opt/node_apps/award-server; tar -xzf /tmp/award-server.prod/award-server.tgz -C /opt/node_apps/award-server/'
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'cd /opt/node_apps/award-server; npm install;'
+    - ssh -i ~/.ssh/arach-prod-mumbai.pem ec2-user@13.234.68.166 'pm2 restart award-server;'
+    - rm -rf /tmp/builds/award-server.prod/${CI_COMMIT_SHA}
+  when: manual
+  only:
+    - master
+  tags:
+    - aws-cd
+  environment:
+    name: production
+
+

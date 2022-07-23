@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <meta name="author" content="SemiColonWeb" />
+      <!-- Stylesheets
+         ============================================= -->
+      <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700|Roboto:400,700" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+      <link rel="stylesheet" href="css/style.css" type="text/css" />
+      <link rel="stylesheet" href="css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+      <link rel="stylesheet" href="css/animate.css" type="text/css" />
+      <link rel="stylesheet" href="css/responsive.css" type="text/css" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!-- Conference Demo Specific Stylesheet -->
+      <link rel="stylesheet" href="css/font.css" type="text/css" />
+      <link rel="stylesheet" href="css/color.css" type="text/css" />
+      <link rel="stylesheet" href="css/conference.css" type="text/css" />
+       <link rel="stylesheet" href="css/custom.css" type="text/css" />
+      <!-- / -->
+      <!-- Document Title
+         ============================================= -->
+      <title>Registration</title>
+   </head>
+   <body class="stretched brown-theme">
+      <!-- Document Wrapper
+         ============================================= -->
+      <div id="wrapper" class="clearfix">
+         <!-- Header
+            ============================================= -->
+         <header id="header" class="clearfix static-sticky responsive-sticky-header transparent-header dark">
+            <div id="header-wrap">
+               <div class="container clearfix">
+                  <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+                  <!-- Logo
+                     ============================================= -->
+                <div id="logo">
+                  <a href="index.html"  data-scrollto="#slider" class="standard-logo" data-dark-logo="images/logo-channelier.png"><img src="images/logo-channelier.png" alt="Logo"></a>
+                  <a href="index.html"  data-scrollto="#slider" class="retina-logo" data-dark-logo="images/logo-channelier.png"><img src="images/logo-channelier.png" alt="Logo"></a>
+               </div>
+                  <!-- #logo end -->
+                  <!-- Primary Navigation
+                     ============================================= -->
+                     <nav id="primary-menu" class="d-lg-flex d-xl-flex brown-theme align-items-center justify-content-xl-between justify-content-lg-between fnone">
+                     <ul class="not-dark align-self-start"></ul>
+                     <ul class="not-dark align-self-center one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
+                        <li>
+                           <a href="index.html" data-href="#section-about">
+                              <div>About</div>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="javascript:void(0)" onclick="juryPage()" >
+                              <div>Jury</div>
+                           </a>
+                        </li>
+                        <li id="categoryURL">
+                           <a href="award-category.html" >
+                              <div>Awards Categories</div>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="javascript:void(0)" onclick="benefitPage()">
+                              <div>Benefits</div>
+                           </a>
+                         </li>
+                        <li>
+                           <a href="index.html" data-href="#footer">
+                              <div>Contact us</div>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="javascript:void(0)" onclick="dasboard()">
+                            <div>Dashboard</div>
+                           </a>
+                          </li>
+                     </ul>
+                     <ul class="pr-0 header-button">
+                        <li>
+                           <a href="javascript:void(0)" onclick="logout()" class="brown-btn hvr-shutter-out-vertical" >Logout</a>
+                        </li>
+                     </ul>
+                  </nav>
+                  <!-- #primary-menu end -->
+               </div>
+            </div>
+         </header>
+         <!-- #header end -->
+
+         <!-- Content
+            ============================================= -->
+   <section class="bg-brown section-area benefit-page bg-left-design bg-design" id="content">
+      <div class="container container-80">
+         <div class="brown-title">
+            <h1>Registration</h1>
+         </div>
+
+         <div class="row">
+            <div class="col-lg-12 col-md-12">
+               <div id="registration-success"></div>
+                        <form class="registration-form banner-bg-effect" enctype="multipart/form-data" name="registration" id="registration" method="post">
+                           <h4 class="text-center">Please enter the details here</h4>
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="name">Name<span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="name" id="name" required>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="email">Email<span class="required">*</span></label>
+                                    <input type="email" class="form-control" name="email" id="email" required>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="website">Website<span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="website" name="website" required>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="companyname">Company Name<span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="companyName" name="companyName" required>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="file">Upload Company Logo </label>
+                                 <input class="text-white" type="file" onchange="previewFile()" id="clogo" name="clogo">
+                                </div>
+                              </div>
+                           </div>
+                           <div class="form-group form-check mb-0 mobile-b-10">
+                              <label class="form-check-label" for="t&c" style="text-decoration: underline;text-transform: inherit;">
+                              <input class="form-check-input"  type="checkbox"  id="tandc" name="tandc" required> I agree to <a style="color: #fff;" href="terms-use.html" target="_blank">Terms & Conditions</a> of Channelier Awards
+                              </label>
+                           </div>
+                           <div class="text-right w-100">
+                           <button type="submit" class="brown-btn btn-medium hvr-shutter-out-vertical">Submit</div>
+
+                           <div class="border-bg"><img src="./images/border-bg.png" alt="border-bg"></div>
+                        </form>
+            </div>
+            </div>
+         </div>
+      </section>
+         <!-- #content end -->
+         <!-- Footer
+   ============================================= -->
+  <footer id="footer" class="">
+     <div class="container">
+        <!-- Footer Widgets
+           ============================================= -->
+        <div class="footer-widgets-wrap clearfix">
+           <div class="row clearfix">
+              <div class="col-lg-3 col-md-3">
+                 <div class="widget clearfix">
+                    <h3 class="d-inline-flex mb-4">Who we are</h3>
+                    <img src="images/logo-channelier.png" alt="Logo" style="display: block; margin-bottom: 10px;">
+                    <p class="text-white">Channelier is India's First Distribution Management Platform on Cloud that offers a unified business suite to manage the entire distribution network With features like Smart Ordering, Partner Classification, Salesman integration and many more, Channelier offers a one stop solution for every sales and distribution need.</p>
+                    <div class="w-100 social-icon-none">
+                       <h3 class="d-inline-flex mb-4">Follow us</h3>
+                    </div>
+                    <div class="follow-icons social-icon-none">
+                       <a href="https://www.facebook.com/channelier/" target="_blank" class="social-icon si-small si-borderless si-colored si-rounded si-facebook">
+                       <i class="icon-facebook"></i>
+                       <i class="icon-facebook"></i>
+                       </a>
+                       <a href="https://twitter.com/Channelier"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-twitter">
+                       <i class="icon-twitter"></i>
+                       <i class="icon-twitter"></i>
+                       </a>
+                       <a href="https://www.instagram.com/channelier_/"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-gplus">
+                       <i class="icon-instagram"></i>
+                       <i class="icon-instagram"></i>
+                       </a>
+                       <a href="https://www.linkedin.com/company/channelier/"  target="_blank"  class="social-icon si-small si-borderless si-colored si-rounded si-pinterest">
+                       <i class="icon-linkedin"></i>
+                       <i class="icon-linkedin"></i>
+                       </a>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-lg-3 col-md-3 info">
+                 <h3 class="d-inline-flex mb-4 ">Our Address</h3>
+                 <h4 class="t400 text-white">#28, JSSATE-STEP, <br>
+                  C-20/1, Sector 62, Noida <br>
+                  Uttar Pradesh <br>
+                  India - 201 309
+                 </h4>
+                 <h4 class="mb-2 text-white"><a href="tel:8882957186;">+91 8882957186 </a></h4>
+                 <h4 class="mb-2 text-white"><a href="tel:7290099727;">+91 7290099727 </a></h4>
+                 <h4 class="mb-2 "><a class="text-white" href="mailto:awards@channelier.com;">awards@channelier.com</a></h4>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                 <h3 class="d-inline-flex mb-4">Get in touch</h3>
+                 <div id="contact-success"></div>
+                 <form action="#" class="footer-form" name="contact" id="contact" method="post">
+                    <div class="row">
+                       <div class="col-md-6">
+                          <div class="form-group">
+                             <label for="username">Name</label>
+                             <input type="text" class="form-control" name="userName" id="userName" required>
+                          </div>
+                       </div>
+                       <div class="col-md-6">
+                          <div class="form-group">
+                             <label for="useremail">Email</label>
+                             <input type="email" class="form-control" name="userEmail" id="userEmail" required>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="form-group">
+                       <label for="query"> Message</label>
+                       <textarea class="form-control" name="query"  id="query" rows="3" required></textarea>
+                    </div>
+                    <!-- <div class="form-group form-check">
+                       <label class="form-check-label">
+                       <input class="form-check-input" type="checkbox"> Remember me
+                       </label>
+                       </div> -->
+                    <div class="w-100 text-right"> 
+                      <div class="brown-btn hvr-shutter-out-vertical"><input type="submit" class="bg-transparent border-0" value="Submit"></div></div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- Copyrights
+        ============================================= -->
+     <div id="copyrights" class="nobg notoppadding">
+        <div class="container clearfix">
+           <div class="col_half text-white">
+              Copyrights &copy; 2021 All Rights Reserved by Arachnomesh Technologies.<br>
+              <div class="copyright-links"><a class="text-white" href="terms-use.html">Terms of Use</a> / <a class="text-white" href="privacy-policy.html">Privacy Policy</a></div>
+           </div>
+        </div>
+     </div>
+     <!-- #copyrights end -->
+     
+  </footer>
+<!-- #footer end -->
+      </div>
+      <!-- #wrapper end -->
+      <!-- Go To Top
+         ============================================= -->
+      <div id="gotoTop" class="icon-angle-up"></div>
+      <!-- External JavaScripts
+         ============================================= -->
+         <script src="js/jquery.js"></script>
+         <script src="js/plugins.js"></script>
+         <!-- Footer Scripts
+            ============================================= -->
+         <script src="js/functions.js"></script>
+         <script async src="js/gtag.js"></script>
+         <script>
+         var img;
+         String.prototype.ltrim = function() {
+           return this.replace(/^\s+/,"");
+         }
+         $(function() {
+           
+            var sessionData = sessionStorage.getItem('userId');
+            var local = localStorage.getItem("userId");
+            var apiUrl="/api";
+
+            if(localStorage.getItem('_rl')==='jury') {
+               document.getElementById('categoryURL').style.display = "none";
+            }
+           
+            if(local){
+               
+               var res = $.ajax({type: "POST",data: JSON.stringify({id:local}),contentType: 'application/json',url: `${apiUrl}/check-registration-data`});
+               res.done(function(data){
+                  if(data[0].hasOwnProperty("tandc")){
+                     var url = "./award-category.html?id="+local;
+                     localStorage.setItem('registration', 'done');
+                     $(location).attr('href',url);  
+                  }
+               })                                                       
+              
+            }else{
+               alert('random');
+               var url = "./index.html";
+               $(location).attr('href',url); 
+            }
+            //sessionStorage.setItem('myCat', 'Tom');
+            jQuery.validator.addMethod("noSpace", function(value, element) { 
+     return !(value.ltrim() != value) && value != ""; 
+   }, "Spaces are not allowed.");
+            $("form[name='registration']").validate({
+              rules: {
+                        name: {
+                           required: true,
+                           noSpace: true
+                        },
+                        email: {
+                           required: true
+                        },
+                        companyName: {
+                              required: true,
+                              noSpace: true
+                        },
+                        website: {
+                           required: true,
+                           noSpace: true
+                        },
+                        tandc:{
+                           required: true
+                        },
+                      
+            
+              },
+              messages: {
+                    // name: "Enter your name.",
+                     
+                     email: "Please enter a valid Email address.",
+                     tandc: "You must accept terms and conditions.",
+                   
+                     
+              },
+              submitHandler: function(form) {
+               //  sendData(form);
+                     var formData = $(form).serializeArray();
+                    // alert(formData);
+                    // console.log(img);
+                     
+
+
+                     var request = $.ajax({
+                     
+                     type: "POST",
+                     data: JSON.stringify({data:formData,id:local,base64:img}),
+                     contentType: 'application/json',
+                     url: `${apiUrl}/update-user-profile`,
+                     
+                           });
+                     
+                     request.done(function(msg) {
+                        if(msg['nModified'] > 0){
+                        //sessionStorage.setItem('uuid',msg['_id']);
+                        var url = "./award-category.html?id="+local;
+                        localStorage.setItem('registration', 'done');
+                        $(location).attr('href',url);    
+                        }
+                     });
+                     
+                     request.fail(function(jqXHR, textStatus) {
+                        alert( "Request failed: " + textStatus );
+                     
+                     });
+               }
+            });
+            $("form[name='contact']").validate({
+              // Specify validation rules
+              rules: {
+                        userName: {
+                                  required: true,
+                                  noSpace: true
+                              },
+                              userEmail: {
+                                  required: true
+                              },
+                              query: {
+                                  required: true,
+                                  noSpace: true
+                     }
+            
+              },
+              // Specify validation error messages
+              messages: {
+            //userName: "Enter your name.",
+            
+            userEmail: "Enter your valid email.",
+            
+            //query: "Enter your query."
+            
+              },
+              // Make sure the form is submitted to the destination defined
+              // in the "action" attribute of the form when valid
+              submitHandler: function(form) {
+            //alert();
+            window.location = "/award-category.html";
+            var formData = JSON.stringify($(form).serializeArray());
+            //alert(formData);
+            console.log($(form).serializeArray());
+            var request = $.ajax({
+            
+            type: "POST",
+            data: formData,
+            contentType: 'application/json',
+            url: `${apiUrl}/user-query`,
+            
+                  });
+            
+            request.done(function(msg) {
+          
+            if(msg['_id']){
+            $('#contact').each(function(){
+            this.reset();
+            $("#contact-success" )
+            .html( '<div class="alert contact-success alert-success" role="alert" id="contact-success">Hello! Thanks for sharing your details. Our team will get in touch with you shortly.</div>');
+            
+            setTimeout(function() {
+               $('#contact-success').fadeOut('fast');
+              }, 3000);
+              //
+                 });
+            }
+            
+             //console.log(msg);
+            });
+            
+            request.fail(function(jqXHR, textStatus) {
+               //window.location = "file:///home/ashish/channelier-award/web/award-category.html";
+    
+             alert( "Request failed: " + textStatus );
+             });
+              }
+            });
+   
+         //    window.addEventListener('beforeunload', function (e) { 
+             
+         //       e.preventDefault(); 
+         //       e.returnValue = ''; 
+         //   });
+            });
+         
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){
+               dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+          var t =  localStorage.getItem('userId');
+          console.log(t);
+            gtag('config', 'UA-166657922-1');
+            function pollingPage(){
+               var url = `https://${window.location.hostname}/ng-award/#/user-polling`;
+               $(location).attr('href',url); 
+            }
+            function logout(){
+               localStorage.removeItem('userId');
+               localStorage.removeItem("registration");
+               location.reload();
+            }
+            function dasboard(){
+               var ind=localStorage.getItem('_rl')==='jury' ? 'jury' : 'user';
+               var url = `https://${window.location.hostname}/ng-award/#/${ind}-dashboard`;
+               $(location).attr('href',url); 
+            }
+            function juryPage(){
+               var url = `https://${window.location.hostname}/ng-award/#/jury`;
+               $(location).attr('href',url); 
+            }
+            // function blogPage(){
+            //     var url = `https://${window.location.hostname}/ng-award/#/blog`;
+            //     $(location).attr('href',url); 
+            // }
+            function benefitPage(){
+                var url = `https://${window.location.hostname}/ng-award/#/benefit`;
+                $(location).attr('href',url); 
+             }
+            function previewFile() {
+               const file = document.querySelector('input[type=file]').files[0];
+               const reader = new FileReader();
+   
+               reader.addEventListener("load", function () {
+                  // convert image file to base64 string
+                  img = reader.result;
+               }, false);
+   
+               if (file) {
+                  reader.readAsDataURL(file);
+               }
+            }
+         </script>
+   </body>
+</html>

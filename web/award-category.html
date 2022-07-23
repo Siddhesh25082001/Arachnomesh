@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+   <meta http-equiv="Pragma" content="no-cache" />
+   <meta http-equiv="Expires" content="0" />
+   <meta name="author" content="SemiColonWeb" />
+   <!-- Stylesheets
+         ============================================= -->
+   <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700|Roboto:400,700" rel="stylesheet"
+      type="text/css" />
+   <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+   <link rel="stylesheet" href="css/style.css" type="text/css" />
+   <link rel="stylesheet" href="css/dark.css" type="text/css" />
+   <link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+   <link rel="stylesheet" href="css/animate.css" type="text/css" />
+   <link rel="stylesheet" href="css/responsive.css" type="text/css" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <!-- Conference Demo Specific Stylesheet -->
+   <link rel="stylesheet" href="css/font.css" type="text/css" />
+   <link rel="stylesheet" href="css/font-awesome.css" type="text/css" />
+   <link rel="stylesheet" href="css/color.css" type="text/css" />
+   <link rel="stylesheet" href="css/conference.css" type="text/css" />
+   <link rel="stylesheet" href="css/custom.css" type="text/css" />
+   <!-- / -->
+   <!-- Document Title
+         ============================================= -->
+   <title>Awards Category</title>
+</head>
+
+<body class="stretched brown-theme">
+   <!-- Document Wrapper
+         ============================================= -->
+   <div id="wrapper" class="clearfix">
+      <!-- Header
+            ============================================= -->
+      <header id="header" class="clearfix static-sticky responsive-sticky-header transparent-header dark">
+         <div id="header-wrap">
+            <div class="container clearfix">
+               <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+               <!-- Logo
+                     ============================================= -->
+               <div id="logo">
+                  <a href="index.html" data-scrollto="#slider" class="standard-logo"
+                     data-dark-logo="images/logo-channelier.png"><img src="images/logo-channelier.png" alt="Logo"></a>
+                  <a href="index.html" data-scrollto="#slider" class="retina-logo"
+                     data-dark-logo="images/logo-channelier.png"><img src="images/logo-channelier.png" alt="Logo"></a>
+               </div>
+               <!-- #logo end -->
+               <!-- Primary Navigation
+                     ============================================= -->
+               <nav id="primary-menu"
+                  class="d-lg-flex d-xl-flex align-items-center justify-content-xl-between justify-content-lg-between fnone">
+                  <ul class="not-dark align-self-start"></ul>
+                  <ul class="not-dark align-self-center one-page-menu" data-easing="easeInOutExpo" data-speed="1250"
+                     data-offset="160">
+                     <li>
+                        <a href="index.html#section-about" data-scrollto="#section-about">
+                           <div>About</div>
+                        </a>
+                     </li>
+                     <!-- <li>
+                           <a href="#" >
+                              <div>Awards Category</div>
+                           </a>
+                        </li> -->
+                     <li class="dropdown">
+                        <a href="index.html#section-tickets" data-scrollto="#section-tickets">
+                           <div>2021</div>
+                        </a>
+                        <div class="dropdown-content">
+                           <a href="award-category.html">
+                              <div style="color: #2C160C;">Categories</div>
+                           </a>
+                           <a href="index.html#benefit-sec" data-scrollto="#benefit-sec">
+                              <div style="color: #2C160C;">Benefits</div>
+                           </a>
+                           <a href="index.html#section-sponsors" data-scrollto="#section-sponsors">
+                              <div style="color: #2C160C;">Partners</div>
+                           </a>
+                           <a href="javascript:void(0)" onclick="juryPage('2021')">
+                              <div style="color: #2C160C;">Jury</div>
+                           </a>
+                           <a href="javascript:void(0)" onclick="allNomination()">
+                              <div style="color: #2C160C;">Nominations</div>
+                           </a>
+                        </div>
+                     </li>
+                     <li class="dropdown">
+                        <a href="winner.html">
+                           <div>2020</div>
+                        </a>
+                        <div class="dropdown-content height-small">
+                           <a href="winner.html">
+                              <div style="color: #2C160C;">Winners</div>
+                           </a>
+                           <a href="index.html#section-sponsors" data-scrollto="#section-sponsors">
+                              <div style="color: #2C160C;">Partners</div>
+                           </a>
+                           <a href="javascript:void(0)" onclick="juryPage('2020')">
+                              <div style="color: #2C160C;">Jury</div>
+                           </a>
+
+                        </div>
+                     </li>
+                     <li>
+                        <a href="index.html#footer" data-scrollto="#footer">
+                           <div>Contact us</div>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="javascript:void(0)" onclick="dasboard()">
+                           <div>Dashboard</div>
+                        </a>
+                     </li>
+                     <!-- <li>
+                           <a href="javascript:void(0)" onclick="blogPage()">
+                              <div>Blog</div>
+                           </a>
+                        </li> -->
+                  </ul>
+                  <ul class="pr-0 header-button">
+                     <li>
+                        <a href="javascript:void(0)" onclick="logout()"
+                           class="brown-btn hvr-shutter-out-vertical">Logout</a>
+                     </li>
+                  </ul>
+               </nav>
+               <!-- #primary-menu end -->
+            </div>
+         </div>
+      </header>
+      <!-- #header end -->
+      <!-- Content
+            ============================================= -->
+      <section class="bg-brown section-area category-page bg-left-design bg-design" id="content">
+         <div class="container container-80">
+
+
+            <div class="brown-title back-award-btn">
+
+               <h1 id="page-name"></h1>
+
+               <button id="go-award" class="brown-btn hvr-shutter-out-vertical"
+                  onClick="window.location.reload();">Back</button>
+            </div>
+            <!-- <p>Breadcrumb</p> -->
+            <!-- <a href="award-category.html">Back</a> -->
+            <ul class="breadcrumb_1">
+               <!-- <li><a id="firstLevel" >Category</a></li> -->
+
+            </ul>
+
+
+            <!-- first row -->
+            <div class="row">
+               <div class="col-lg-12 col-sm-12">
+                  <div class="category-chose">
+                     <ul id="award-categories" class="category_center"></ul>
+                     <!-- <ul id="">
+                          <li class="banner-bg-effect">
+                            <div class="category-design">
+                              <h5>Product of the Year</h5>
+                               <img src="images/banner-welcome.png" alt="banner-welcome">
+                            </div>
+                            <img class="seal-img" src="images/product-launch-of-the-year.png" alt="seal-1">
+                          </li>
+
+                           <li class="banner-bg-effect">
+                            <div class="category-design">
+                              <h5>Product Launch of the Year</h5>
+                               <img src="images/banner-welcome.png" alt="banner-welcome">
+                            </div>
+                            <img class="seal-img" src="images/product-launch-of-the-year.png" alt="seal-1">
+                          </li>
+
+                          <li class="banner-bg-effect">
+                            <div class="category-design">
+                              <h5>Brand of the Year</h5>
+                               <img src="images/banner-welcome.png" alt="banner-welcome">
+                            </div>
+                            <img class="seal-img" src="images/brand-of-the-year.png" alt="seal-1">
+                          </li>
+
+
+                          <li class="banner-bg-effect">
+                            <div class="category-design">
+                              <h5>FMCG Retailer of the Year</h5>
+                               <img src="images/banner-welcome.png" alt="banner-welcome">
+                            </div>
+                            <img class="seal-img" src="images/fmcg-seal.png" alt="seal-1">
+                          </li>
+
+                        </ul> -->
+                  </div>
+               </div>
+            </div>
+            <h5>Note: For filling Questionnaire 
+               <a href="javascript:void(0)" style="color: aliceblue;" onclick="dasboard()">
+                  Click
+               </a> here
+            </h5>
+
+            <!-- after row -->
+            <!-- <div class="row">
+                  <div class="col-lg-12 col-sm-12">
+                     <div class="choose-category">
+                        <ul id="award-categories"></ul>
+                     </div>
+                  </div>
+               </div> -->
+         </div>
+      </section>
+      <!-- Footer
+            ============================================= -->
+      <footer id="footer" class="">
+         <div class="container">
+            <!-- Footer Widgets
+                  ============================================= -->
+            <div class="footer-widgets-wrap clearfix">
+               <div class="row clearfix">
+                  <div class="col-lg-6 col-md-6">
+                     <h3 class="d-inline-flex mb-4">Get in touch</h3>
+                     <div id="contact-success"></div>
+                     <form action="#" class="footer-form" name="contact" id="contact" method="post">
+                        <div class="form-group">
+                           <div class="form-group">
+                              <label for="username">Name</label>
+                              <input type="text" class="form-control" name="userName" id="userName" required>
+                           </div>
+                           <div class="form-group">
+                              <label for="useremail">Email</label>
+                              <input type="email" class="form-control" name="userEmail" id="userEmail" required>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="query"> Message</label>
+                           <textarea class="form-control" name="query" id="query" rows="3" required></textarea>
+                        </div>
+                        <!-- <div class="form-group form-check">
+                              <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox"> Remember me
+                              </label>
+                              </div> -->
+                        <div class="w-100 text-right">
+                           <div class="brown-btn hvr-shutter-out-vertical"><input type="submit"
+                                 class="bg-transparent border-0" value="Submit"></div>
+                        </div>
+                     </form>
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                     <div class="widget clearfix">
+                        <h3 class="d-inline-flex mb-4">Who we are</h3>
+                        <img src="images/logo-channelier.png" alt="Logo" style="display: block; margin-bottom: 10px;">
+                        <p class="text-white">Channelier is India's First Distribution Management Platform on Cloud that
+                           offers a unified business suite to manage the entire distribution network With features like
+                           Smart Ordering, Partner Classification, Salesman integration and many more, Channelier offers
+                           a one stop solution for every sales and distribution need.</p>
+                        <div class="w-100">
+                           <h3 class="d-inline-flex mb-4">Follow us</h3>
+                        </div>
+                        <div class="follow-icons">
+                           <a href="https://www.facebook.com/channelier/" target="_blank"
+                              class="social-icon si-small si-borderless si-colored si-rounded si-facebook">
+                              <i class="icon-facebook"></i>
+                              <i class="icon-facebook"></i>
+                           </a>
+                           <a href="https://twitter.com/Channelier" target="_blank"
+                              class="social-icon si-small si-borderless si-colored si-rounded si-twitter">
+                              <i class="icon-twitter"></i>
+                              <i class="icon-twitter"></i>
+                           </a>
+                           <a href="https://www.instagram.com/channelier_/" target="_blank"
+                              class="social-icon si-small si-borderless si-colored si-rounded si-gplus">
+                              <i class="icon-instagram"></i>
+                              <i class="icon-instagram"></i>
+                           </a>
+                           <a href="https://www.linkedin.com/company/channelier/" target="_blank"
+                              class="social-icon si-small si-borderless si-colored si-rounded si-pinterest">
+                              <i class="icon-linkedin"></i>
+                              <i class="icon-linkedin"></i>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 info">
+                     <h3 class="d-inline-flex mb-4 ">Our Address</h3>
+                     <h4 class="t400 text-white">#28, JSSATE-STEP, <br>
+                        C-20/1, Sector 62, Noida <br>
+                        Uttar Pradesh <br>
+                        India - 201 309
+                     </h4>
+                     <h4 class="mb-2 text-white"><a href="tel:8882957186;">+91 8882957186 </a></h4>
+                     <h4 class="mb-2 text-white"><a href="tel:7290099727;">+91 7290099727 </a></h4>
+                     <h4 class="mb-2 "><a class="text-white"
+                           href="mailto:awards@channelier.com;">awards@channelier.com</a></h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Copyrights
+               ============================================= -->
+         <div id="copyrights" class="nobg notoppadding">
+            <div class="container clearfix">
+               <div class="col_half text-white">
+                  Copyrights &copy; 2020 All Rights Reserved by Arachnomesh Technologies.<br>
+                  <div class="copyright-links"><a class="text-white" href="terms-use.html">Terms of Use</a> / <a
+                        class="text-white" href="privacy-policy.html">Privacy Policy</a></div>
+               </div>
+            </div>
+         </div>
+         <!-- #copyrights end -->
+      </footer>
+      <!-- #footer end -->
+   </div>
+   <!-- #wrapper end -->
+   <!-- Go To Top
+         ============================================= -->
+   <div id="gotoTop" class="icon-angle-up"></div>
+   <!-- External JavaScripts
+         ============================================= -->
+   <script src="js/jquery.js"></script>
+   <script src="js/plugins.js"></script>
+   <!-- Footer Scripts
+            ============================================= -->
+   <script src="js/functions.js"></script>
+   <script async src="js/gtag.js"></script>
+   <script>
+      var local = localStorage.getItem("userId");
+      const isRegistered = localStorage.getItem("registration");
+      var apiUrl = "/api";
+
+
+
+      String.prototype.ltrim = function () {
+         return this.replace(/^\s+/, "");
+      }
+      //alert(sessionStorage.getItem('myCat'));
+      // Wait for the DOM to be ready
+      $(function () {
+         jQuery.validator.addMethod("noSpace", function (value, element) {
+            return !(value.ltrim() != value) && value != "";
+         }, "Spaces are not allowed.");
+         document.getElementById("go-award").style.display = "none";
+         if (local) {
+         } else {
+            var url = "./index.html";
+            $(location).attr('href', url);
+         }
+         var request1 = $.ajax({
+            type: "GET",
+            //   url: "/api/award-list/"
+            url: `${apiUrl}/award-list/`
+
+         });
+         request1.done(function (data) {
+            $("#page-name").append("Choose Award Categories");
+            var cards = $();
+            data.forEach(function (item, i) {
+               cards = cards.add(addCategories(item, 'awardName', "0", "0"));
+            });
+            $('#award-categories').append(cards);
+         });
+
+
+         // Initialize form validation on the registration form.
+         // It has the name attribute "registration"
+         $("form[name='contact']").validate({
+            // Specify validation rules
+            rules: {
+               userName: {
+                  required: true,
+                  noSpace: true
+               },
+               userEmail: {
+                  required: true
+               },
+               query: {
+                  required: true,
+                  noSpace: true
+               }
+
+            },
+            // Specify validation error messages
+            messages: {
+               // userName: "Enter your name.",
+
+               userEmail: "Enter your valid email.",
+
+               //  query: "Enter your query."
+
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+               //alert();
+               var formData = JSON.stringify($(form).serializeArray());
+               //alert(formData);
+               console.log($(form).serializeArray());
+               var request = $.ajax({
+                  type: "POST",
+                  data: formData,
+                  contentType: 'application/json',
+                  //   url: "/api/user-query"
+                  url: `${apiUrl}/user-query`
+               });
+
+               request.done(function (msg) {
+                  //alert(msg);
+                  if (msg['_id']) {
+                     $('#contact').each(function () {
+                        this.reset();
+                        $("#contact-success")
+                           .html('<div class="alert contact-success alert-success" role="alert" id="contact-success">Hello! Thanks for sharing your details. Our team will get in touch with you shortly. </div>');
+
+                        setTimeout(function () {
+                           $('#contact-success').fadeOut('fast');
+                        }, 3000);
+                        //
+                     });
+                  }
+
+               });
+
+               request.fail(function (jqXHR, textStatus) {
+                  alert("Request failed: " + textStatus);
+               });
+            }
+         });
+      });
+
+      function addCategories(categoryList, key, level, nomineeId) {
+         var res = $('#page-name').text();
+         if (res === 'Choose Award Categories') {
+            var template = [`<li onclick="getProductCat('` + categoryList._id + `','` + categoryList.level + `','` + key + `','` + level + `','` + nomineeId + `');setLevel('` + categoryList._id + `','` + categoryList.level + `','` + key + `','` + level + `','` + nomineeId + `','` + categoryList[key] + `','` + key + `')" class="banner-bg-effect">
+                  <div class="category-design">
+                                 <h5>`+ categoryList[key] + `</h5>
+                                  <img src="images/banner-welcome.png" alt="banner-welcome">
+                               </div>
+                               <img class="seal-img" src="images/`+ categoryList[key] + `.png" alt="seal-1">
+                             </li>`];
+            return $(template.join(''));
+         } else {
+            document.getElementById("go-award").style.display = "block";
+            var template = [`<li class="prodct-ctgry hvr-shutter-out-vertical" onclick="getProductCat('` + categoryList._id + `','` + categoryList.level + `','` + key + `','` + level + `','` + nomineeId + `');setLevel('` + categoryList._id + `','` + categoryList.level + `','` + key + `','` + level + `','` + nomineeId + `','` + categoryList[key] + `','` + key + `')" ><a>` + categoryList[key] + `</a></li>`];
+            return $(template.join(''));
+         }
+      }
+
+      function setLevel(categoryList, category_List, key, level, nomineeId, level, key) {
+
+         let html = `<li class="bread-level"><a  onclick="getProductCat('` + categoryList + `','` + category_List + `','` + key + `','` + level + `','` + nomineeId + `','prev')">${level}</a></li>`
+         $(".breadcrumb_1").append(html);
+
+      }
+
+
+      function getProductCat(id, lv, key, level, nomineeId, flag = "") {
+         if (!isRegistered) {
+            const url = "./register.html";
+            $(location).attr('href', url);
+         }
+
+         if (flag == "prev") {
+            let element = $(`li.bread-level`);
+            if (element) {
+               element.nextAll().remove();
+            }
+         }
+
+         if (key == 'awardName') {
+            var body = JSON.stringify({ user: local, awardId: id, level: lv });
+            var response = $.ajax({ type: "POST", data: body, contentType: 'application/json', url: `${apiUrl}/save-nominee` });
+            response.done(function (data) {
+               if (data.awardLevel == "1") {
+                  var url = "./cart.html";
+                  $(location).attr('href', url);
+               } else {
+                  if (data.products.length > 0) {
+                     $("#page-name").empty();
+                     $('#award-categories').empty();
+                     var cards = $();
+                     data.products.forEach(function (item, i) {
+
+                        cards = cards.add(addCategories(item, 'productName', data.awardLevel, data.nomineeId));
+                     });
+                     $('#page-name').append("Choose Product Categories");
+                     $('#award-categories').append(cards);
+                  }
+               }
+            });
+         } else {
+            var tmp = JSON.stringify({ user: local, productId: id, productlevel: lv, awardLevel: level, nomId: nomineeId });
+            //console.log(data);
+            var res = $.ajax({ type: "POST", data: tmp, contentType: 'application/json', url: `${apiUrl}/update-nominee-details` });
+            res.done(function (data) {
+               if (data.awardLevel == "completed") {
+                  var url = "./cart.html";
+                  $(location).attr('href', url);
+               } else {
+                  if (data.products.length > 0) {
+                     $('#award-categories').empty();
+                     var cards = $();
+                     data.products.forEach(function (item, i) {
+                        cards = cards.add(addCategories(item, 'productName', data.awardLevel, data.nomineeId));
+                     });
+                     //   comment
+                     $('#award-categories').append(cards);
+                  } else {
+                     var url = "./cart.html";
+                     $(location).attr('href', url);
+                  }
+               }
+            });
+         }
+      }
+      function pollingPage() {
+         var url = `https://${window.location.hostname}/ng-award/#/user-polling`;
+         $(location).attr('href', url);
+      }
+      function logout() {
+         localStorage.removeItem('userId');
+         localStorage.removeItem("registration");
+         localStorage.removeItem('_tk');
+         localStorage.removeItem('_rl');
+         location.reload();
+      }
+      function dasboard() {
+         var ind=localStorage.getItem('_rl')==='jury' ? 'jury' : 'user';
+         var url = `https://${window.location.hostname}/ng-award/#/${ind}-dashboard`;
+         $(location).attr('href', url);
+      }
+      function juryPage(year) {
+         var url = `https://${window.location.hostname}/ng-award/#/jury;year=${year}`;
+         $(location).attr('href', url);
+      }
+      // function blogPage(){
+      //    var url = `https://${window.location.hostname}/ng-award/#/blog`;
+      //    $(location).attr('href',url); 
+      // }
+      function benefitPage() {
+         var url = `https://${window.location.hostname}/ng-award/#/benefit`;
+         $(location).attr('href', url);
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+         dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-166657922-1');
+   </script>
+</body>
+
+</html>

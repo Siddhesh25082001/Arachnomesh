@@ -1,0 +1,123 @@
+<app-user-header></app-user-header>
+<div class="main-content" id="panel">
+   <!-- Content
+      ============================================= -->
+   <section class="pt-0 bg-brown section-area bg-left-design bg-design dashboard-page" id="content">
+    <div class="dashboard-sec">
+      <div class="container container-80">
+        <div class="row banner-bg-effect p-4 br-8">
+          <div class="col-md-8 col-lg-8">
+            <div class="banner-div">
+            <h2 class="mb-2">Hello  {{userInfo?.name}}</h2>
+            <h4 class="text-white mt-0 mb-0">View the status of all your <br> nominations and payments here.</h4>
+            <div class="mt-2"><a  (click)="goToCategory()" href="javascript:void(0)" class="brown-btn hvr-shutter-out-vertical ml-0">Add Category</a></div>
+
+
+          </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+
+
+                <div class="right-contact">
+                  <p>Name : {{userInfo?.name}}</p>
+                  <p>E-Mail: {{userInfo?.email}}</p>
+                  <p>Company Name : {{userInfo?.companyName}}</p>
+                  <p>Contact Number : {{userInfo?.phone}}</p>
+
+                   <div class="mt-2"><a  (click)="changeNumber()" href="javascript:void(0)" class="brown-btn hvr-shutter-out-vertical ml-0 text-inherit">Change mobile number</a></div>
+
+                </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-details">
+      <div class="container container-80">
+          <div class="row cart-detail-row banner-bg-effect mt-5 p-4 br-8" *ngIf="tableData?.length > 0">
+
+            <div class="col-md-12 col-lg-12">
+                          <div class="dashboard-head" *ngIf="userInfo.duePayment > 0">
+
+                             <div class="brown-title">
+                                <h1 class="mb-4">Cart</h1>
+                             </div>
+                            <a _ngcontent-bao-c1="" class="brown-btn hvr-shutter-out-vertical float-right text-inherit" [href]="cartUrl">Edit Cart</a>
+
+
+
+
+                         </div>
+                        <!-- Light table -->
+                        <div class="table-responsive table-cart"  infiniteScroll
+                        [infiniteScrollDistance]="1.5"
+                        [infiniteScrollThrottle]="50"
+                        (scrolled)="onScroll()">
+                          <table class="table align-items-center table-flush table-850">
+                            <thead class="thead-light bg-light-brown">
+                              <tr>
+                                <th scope="col" class="sort">S.No</th>
+                                <th scope="col" class="sort" data-sort="name">Award</th>
+                                <th scope="col" class="sort" data-sort="budget">Product Category</th>
+                                <th scope="col" class="sort" data-sort="budget">Product Name</th>
+                                <th scope="col" class="sort" data-sort="status">Status</th>
+                                <th scope="col" class="sort">Remove</th>
+                                <th scope="col" class="sort">Question</th>
+                              </tr>
+                            </thead>
+
+                             <tbody class="list">
+                              <ng-container *ngIf="tableData?.length > 0">
+                             <tr *ngFor="let item of tableData; let i = index;">
+                              <td>{{i+1}}.</td>
+                              <td>{{item?.awardName[0]}}</td>
+                              <td *ngIf="item?.productCategory[0] && item?.productSubCategory[0] && item?.productSubSubCategory[0]">{{item?.productCategory[0]+' | '+item?.productSubCategory[0]+' | '+item?.productSubSubCategory[0] }}</td>
+                              <td *ngIf="item?.productCategory[0] && item?.productSubCategory[0] && !item?.productSubSubCategory[0]">{{item?.productCategory[0]+' | '+item?.productSubCategory[0] }}</td>
+                              <td *ngIf="item?.productCategory[0] && !item?.productSubCategory[0] && !item?.productSubSubCategory[0]">{{item?.productCategory[0]}}</td>
+                              <td *ngIf="!item?.productCategory[0] && !item?.productSubCategory[0] && !item?.productSubSubCategory[0]">NA</td>
+                              <td>{{(item?.productName)?item?.productName:'Not filled'}}</td>
+                              <td *ngIf="!item?.payment"><img src="assets/images/history.png" style="width: 15px; margin-right: 5px;"/>Pending</td>
+                              <td *ngIf="item?.payment">Completed</td>
+                              <td *ngIf="item?.payment"><a style=" color: #e9c557; " href="javascript:void(0)" (click)="setDataForModal(i)" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                              <td *ngIf="!item?.payment"><a (click)="removeData(item?.hasOwnProperty('paymentDetails'),item?._id,i)" href="javascript:void(0)"><img src="assets/images/remove-icon.png" style="width: 11px;margin-right:5px;"/></a>Remove</td>
+                              <td *ngIf="item?.payment"><a style=" color: #e9c557; " [routerLink]="'/questions/'+item?._id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                             </tr>
+                            </ng-container>
+                            </tbody>
+                          </table>
+
+
+
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+  <div class="modal fade payment-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Payment Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><img width="20px" src="./assets/images/cross.svg"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="payment-body">
+           <p> <strong>Payment Date</strong> <span>:</span> {{modalData?.date | date}}</p>
+            <p><strong>Order Id</strong><span>:</span> {{modalData?.id}}</p>
+            <p> <strong>Payment For </strong><span>:</span> {{modalData?.for}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>

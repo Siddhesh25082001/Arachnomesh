@@ -1,0 +1,107 @@
+﻿<!-- <div class="post-sec">
+    <div class="container">
+        <div class="post-list row">
+            <% posts.forEach(function(post) {
+                console.log(post); %>
+                <div class="col-md-4">
+                    <div class="post">
+                        <div class="publish-date"><%= post.publishDateFormatted %></div>
+                        <h2 class="post-title">
+                            <a href="<%= post.url %>"><%= post.title %></a>
+                        </h2>
+                        <div class="post-summary"><%= post.summary %></div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div> -->
+
+<!-- static blog section -->
+ <div class="post-sec">
+    <div class="container">
+        <div class="mb-4 dark">
+            <span class="display-4 t700 gradient-underline mb-0">Blogs</span>
+        </div>
+    </div>
+    <div class="container">
+        <!-- row start -->
+        <div class="post-list row">
+            <% posts.forEach(function(post) { %>
+                <div class="col-md-4">
+                    <div class="post">
+                       <div class="post-img"> 
+                           <img src="<%= post.image %>">
+                        </div>
+                        <div class="post-content">
+                            <div class="publish-date"><i class="fa fa-calendar"></i> &nbsp;<%= post.publishDateFormatted %></div>
+                            <h2 class="post-title">
+                                <a href="<%= post.url %>"><%= post.title %></a>
+                            </h2>
+                            <div class="post-summary"><%= post.summary %></div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                <!-- <div class="col-md-4">
+                    <div class="post">
+                       <div class="post-img"> 
+                           <img src="_content/images/blog-1.png">
+                        </div>
+                        <div class="post-content">
+                            <div class="publish-date"><i class="fa fa-calendar"></i> &nbsp;25/6/2020</div>
+                            <h2 class="post-title">
+                                <a href="#">Post title</a>
+                            </h2>
+                            <div class="post-summary">At some point during the disputed US election of 2000 - when Al Gore was famously defeated by a few hanging chads - Joshua Micah Marshall lost patience. Despite working as a magazine editor, Marshall chose to vent on the web. Eight years later.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="post">
+                       <div class="post-img"> 
+                           <img src="_content/images/blog-1.png">
+                        </div>
+                        <div class="post-content">
+                            <div class="publish-date"><i class="fa fa-calendar"></i> &nbsp;25/6/2020</div>
+                            <h2 class="post-title">
+                                <a href="#">Post title</a>
+                            </h2>
+                            <div class="post-summary">At some point during the disputed US election of 2000 - when Al Gore was famously defeated by a few hanging chads - Joshua Micah Marshall lost patience. Despite working as a magazine editor, Marshall chose to vent on the web. Eight years later.</div>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+</div>
+<!-- ends here static -->
+
+<% if(locals.pager && locals.pager.endPage > 1) { %>
+    <div class="post-pager">
+        <ul class="pagination">
+            <% if(locals.pager.currentPage > 1) { %>
+                <li class="first"><a href="?page=1">First</a></li>
+                <li class="previous"><a href="?page=<%= locals.pager.currentPage - 1 %>">Previous</a></li>
+            <% } else { %>
+                <li class="first disabled"><a>First</a></li>
+                <li class="previous disabled"><a>Previous</a></li>
+            <% } %>
+
+            <% for(var page = locals.pager.startPage; page <= locals.pager.endPage; page++) { %>
+                <li class="<%= page === locals.pager.currentPage ? 'active' : '' %>">
+                    <a href="?page=<%= page %>"><%= page %></a>
+                </li>
+            <% } %>
+
+            <% if(locals.pager.currentPage < locals.pager.totalPages) { %>
+                <li class="next"><a href="?page=<%= locals.pager.currentPage + 1 %>">Next</a></li>
+                <li class="last"><a href="?page=<%= locals.pager.totalPages %>">Last</a></li>
+            <% } else { %>
+                <li class="next disabled"><a>Next</a></li>
+                <li class="last disabled"><a>Last</a></li>
+            <% } %>
+        </ul>
+    </div>
+<% } %>

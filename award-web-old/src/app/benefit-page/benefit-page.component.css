@@ -1,0 +1,112 @@
+.extra-benefits h1 {
+    margin-bottom: 10px;
+}
+
+.extra-benefits h1 img {
+    max-width:200px;
+}
+
+
+
+/* swiper slider css */
+
+.swiper-container {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    overflow: hidden;
+}
+  
+.swiper-slide {
+    width: 450px;
+    height: 300px;
+    overflow: auto;
+    box-shadow: 0 0 15px rgba(137,137,137,0.3);
+    filter: blur(2px);
+    /* Track */
+    /* Handle */
+    /* Handle on hover */
+}
+  
+  
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 15px;
+    color:#162545;
+    background: -webkit-linear-gradient( 280deg,  #c78632 12.08%, #e0b54d 53.53%,#f7df65 95.62%);
+    background: -o-linear-gradient( 280deg, #c78632 12.08%, #e0b54d 53.53%, #f7df65 95.62%);
+    background: linear-gradient( 280deg, #c78632 12.08%, #e0b54d 53.53%, #f7df65 95.62%);
+    padding: 7px;
+    width: 30px;
+    height: 28px;
+    text-align: center;
+    line-height: 1;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 5px #ddd;
+}
+
+.swiper-pagination.swiper-pagination-bullets {
+    display: none;
+}
+
+.swiper-slide p {
+  margin-bottom: 15px;
+}
+
+.swiper-slide.swiper-slide-active {
+  filter: blur(0px);
+  display: inline-block;
+}
+
+.benefit-seals-ul {
+  display: flex;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.benefit-seals-ul li {
+  max-width: 100px;
+  margin-right: 10px;
+}
+
+.benefit-seals-ul li img {
+  max-width: 100px !important;
+}
+  
+/* Extra small devices (phones, 760px and down) */
+@media only screen and (max-width: 767px) {
+    .swiper-slide {
+      height: 280px;
+      width: 340px;
+    }
+
+    .swiper-wrapper .benefit{
+      height: 100%;
+      margin-bottom: 0;
+    }
+
+    .swiper-wrapper .leaf-bg::after {
+      background-size: 90%;
+    }
+
+    .swiper-wrapper .benefit.leaf-bg > h5 {
+        margin: 10px auto;
+        width: 70%;
+    }
+
+    p {
+      font-size: 14px !important;
+    }
+    .swiper-container {
+      width: 100%;
+    }
+
+    .benefit {
+      padding: 10px;
+    }
+
+    .benefit-seals-ul li img {
+      max-width: 80px !important;
+    }
+}
+  

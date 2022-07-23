@@ -1,0 +1,206 @@
+
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<!-- Main content -->
+<div class="main main-content admin-dashboard" id="panel">
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Slider</h6>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a (click)="commonService.logout()" class="btn btn-neutral my-4">Logout</a>
+            <!-- <button  >Open Modal</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div style=" display: flex; ">
+          <div class="card-header border-0" style=" padding-right: 686px; ">
+            <h3 class="mb-0">Nomination Slider</h3>
+            <div style="margin-top: 10px;">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" (ngModelChange)="didModify()" autocomplete="off" placeholder="Search">
+            </div>
+          </div>
+          <div class="card-header border-0">
+            <a class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#loginModal">Add Nomination</a>
+          </div>
+          <div class="card-header border-0" (click)="getArchive()">
+            <a *ngIf="!archive" class="btn btn-sm btn-primary" style=" color: aliceblue;">Show archive data</a>
+            <a *ngIf="archive" class="btn btn-sm btn-primary" style=" color: aliceblue;">Show data</a>
+          </div>
+        </div>
+          <!-- Light table -->
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                 <th scope="col" class="sort" data-sort="name" (click)="setOrder('companyName')" style=" cursor: pointer;">Company Name</th>
+                  <th scope="col" class="sort" data-sort="name" (click)="setOrder('productName')" style=" cursor: pointer;">Product Name</th>
+                  <th scope="col" class="sort" data-sort="budget">Company Logo</th>
+                  <th scope="col" class="sort" data-sort="status">Product Logo</th>
+                  <th scope="col" class="sort" data-sort="status" (click)="setOrder('sorting')" style=" cursor: pointer;">Sorting</th>
+                  <th scope="col" class="sort" data-sort="status">Edit</th>
+              
+                 
+                  <th scope="col" class="sort" data-sort="completion"  *ngIf="!archive">Archive</th>
+                  <th scope="col" class="sort" data-sort="completion"  *ngIf="archive">Undo</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr *ngFor="let item of nominationData">   
+                        
+                  <td>
+                    {{item?.companyName}}
+                  </td>
+                  <td>
+                    {{item?.productName}}
+                  </td>
+                  <td>
+                      <img  src="{{item?.companyLogo}}" alt="">
+
+                      
+                  </td>
+                  <td>
+                      <img class="productImage" src="{{item?.productLogo}}" alt="">
+                  
+                  </td>
+                  <td><input type="text" id="{{item._id}}" value="{{item?.sorting}}"  (change)="editSorting($event,item._id)" ></td>
+                  <td ><button data-toggle="modal" data-target="#loginModal"  (click)="EditFile(item)">Change Image</button> </td>
+                 
+                  
+                  <td>
+                    <span (click)="deletePost(item?._id)" class="badge badge-danger" style=" cursor: pointer; " *ngIf="!archive">Archive</span>
+                    <span (click)="deletePost(item?._id)" class="badge badge-danger" style=" cursor: pointer; " *ngIf="archive">Undo</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+   
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <li class="page-item">
+              <a class="page-link" aria-label="Previous" (click)="previousPage()">
+                <span aria-hidden="true" >&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item text-white mt-2">
+                {{currentPage}} of {{totalPage}}
+            </li>
+         
+             <li class="page-item">
+              <a class="page-link" aria-label="Next" (click)="nextPage()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade login" id="loginModal">
+  <div class="modal-dialog login animated">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+          id="myCheck"
+          (click)="closeModal()"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="modalForm">
+          <div class="form-group" >
+            <label for="example-text-input" class="form-control-label"
+              >Company Name</label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="example-text-input"
+              name="companyName"
+              [(ngModel)]="companyName"
+              required
+            />
+            
+            <span style="color:red" *ngIf="errors?.companyName">Company name is required</span>
+          </div>
+          <div class="form-group">
+            <label for="example-email-input" class="form-control-label"
+              >Product Name</label
+            >
+            <input
+              class="form-control"
+              type="text"
+            
+              id="example-email-input"
+              [(ngModel)]="productName"
+              name="productName"
+
+            />
+            <span style="color:red" *ngIf="errors?.productName">Product name is required</span>
+          </div>
+           <div class="form-group">
+            <label for="example-email-input" class="form-control-label"
+              >Product Category</label
+            >
+            <select class="form-control" name="product-category" id="product-category" [(ngModel)]="selectedCategory">
+              <option value="">Select Cateogry</option>
+              <option value="{{productCategory?.productName}}" *ngFor="let productCategory of category">{{productCategory?.productName}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="example-tel-input" class="form-control-label"
+              >Company Logo</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              (change)="handleFileInput($event)"
+              id="companyLogo"
+              name="companyLogo"
+           
+            />
+            <span style="color:red" *ngIf="errors?.companyLogo">Company Logo is required</span>
+          </div>
+          <div class="form-group">
+            <label for="example-tel-input" class="form-control-label"
+              >Product Image</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              (change)="handleFileInput($event)"
+              id="productLogo"
+              name="productLogo"
+       
+            />
+            <span style="color:red" *ngIf="errors?.productLogo" >Product Image is required</span>
+          </div>
+          <button  *ngIf="!editFlag" class="btn btn-secondary" (click)="saveNominationSlider()" >Save</button>
+          <button *ngIf="editFlag" class="btn btn-secondary" (click)="editNominationSlider()"   data-dismiss="modal">Edit</button>
+         
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>

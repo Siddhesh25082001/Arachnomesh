@@ -1,0 +1,40 @@
+<!-- Navbar -->
+  
+  <!-- Main content -->
+  <div class="main-content admin-login">
+    <!-- Page content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="border-0 mb-0">
+        
+            <div class="card-body banner-bg-effect">
+              <h3 class="text-center mb-3">Admin Panel</h3>
+              <form role="form" class="mb-0">
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Username"  name="userName" [(ngModel)]="userName" type="text">
+                  </div>
+                </div>
+                <div class="form-group mb-0">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Password" name="password" [(ngModel)]="password" type="password">
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="brown-btn hvr-shutter-out-vertical my-4" (click)="login()">Sign in</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

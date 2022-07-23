@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "http://localhost:5002/",
+    "secure": false
+  },
+  "/uploads": {
+    "target": "../channelier-award-backend/uploads/awards/"
+  }
+}

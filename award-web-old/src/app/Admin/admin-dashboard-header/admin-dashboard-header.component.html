@@ -1,0 +1,102 @@
+<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+  <div class="scrollbar-inner">
+    <!-- Brand -->
+    <div class="sidenav-header  align-items-center">
+      <a class="navbar-brand" href="javascript:void(0)">
+        <img src="./assets/images/footer-channelier.png" class="navbar-brand-img" alt="...">
+      </a>
+    </div>
+    <div class="navbar-inner">
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Nav items -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" [href]="['#/stats-dashboard']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-app text-primary"></i>
+              <span class="nav-link-text">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [href]="['#/users']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-circle-08 text-primary"></i>
+              <span class="nav-link-text">User</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [href]="['#/admin-dashboard']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Jury</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [href]="['#/payment-info']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Payment</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [href]="['#/user-queries']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">User Queries</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [href]="['#/leads']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Leads</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [href]="['#/campaign']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Campaign</span>
+            </a>
+          </li>
+          <li class="nav-item" (click)="commonService.setPageOnUrlChange('changeDetect')">
+            <a class="nav-link" [href]="['#/add-blog/new']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Blog</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item" (click)="commonService.setPageOnUrlChange('changeDetect')">
+            <a class="nav-link" [href]="['#/coupon']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Coupon</span>
+            </a>
+          </li> -->
+          <li class="nav-item" (click)="commonService.setPageOnUrlChange('changeDetect')">
+            <a class="nav-link" [href]="['#/profile-upload']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Team Section</span>
+            </a>
+          </li>
+           <li class="nav-item" (click)="commonService.setPageOnUrlChange('changeDetect')">
+            <a class="nav-link" [href]="['#/otp-record']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">OTP Record</span>
+            </a>
+          </li>
+           <li class="nav-item" (click)="commonService.setPageOnUrlChange('changeDetect')">
+            <a class="nav-link" [href]="['#/nomination-record']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Nomination Record</span>
+            </a>
+          </li>
+           <li class="nav-item" (click)="commonService.setPageOnUrlChange('changeDetect')">
+            <a class="nav-link" [href]="['#/nominations']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Nomination</span>
+            </a>
+          </li>
+          <li class="nav-item" (click)="commonService.setPageOnUrlChange('changeDetect')">
+            <a class="nav-link" [href]="['#/nomination-stats']" style="border-top: aliceblue; border-right: aliceblue;">
+              <i class="ni ni-paper-diploma text-primary"></i>
+              <span class="nav-link-text">Nomination Stats</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

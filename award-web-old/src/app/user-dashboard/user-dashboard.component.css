@@ -1,0 +1,76 @@
+
+.dashboard-page .container .row {
+    margin: 0;
+}
+
+.payment-modal {
+  background: rgba(0, 0, 0, 0.8);
+  padding-top: 80px;
+}
+.payment-modal .modal-content {
+    background: #122748;
+}
+
+.payment-modal .modal-header {
+  border-bottom: 1px solid #758DB0;
+}
+
+.payment-modal h5 {
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+.payment-body {
+  width: 100%;
+}
+
+.payment-body p {
+  width: 100%;
+  color: #ffffff;
+}
+
+.payment-body p:last-child {
+  margin: 0 0 5px;
+}
+
+.payment-body p strong {
+  width: 20%;
+  float: left;
+}
+
+.payment-modal .modal-title {
+  color: #fff;
+  line-height: 1.5;
+}
+
+.payment-body span {
+  margin: 0 10px;
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+}
+
+.text-inherit {
+  text-transform: inherit !important;
+}
+
+@media only screen and (max-width:767px) { 
+
+    .banner-div {
+        padding: 20px 0;
+    }
+
+    .table-responsive {
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .dashboard-details {
+        margin-top: 0;
+    }
+    
+
+
+
+}

@@ -1,0 +1,58 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more info rmation see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: deploy-test
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: deploy-web
+        run: |
+             sudo mkdir -p /tmp/builds/ng-award/${{github.sha}}
+             sudo aws s3 cp s3://arachnomesh-build/award/ng-award/${{github.sha}}/ng-award.tgz /tmp/builds/ng-award/${{github.sha}}/ 
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mkdir -p /tmp/ng-award/'
+             sudo scp -i ~/.ssh/arach-test-mumbai.pem /tmp/builds/ng-award/${{github.sha}}/ng-award.tgz ec2-user@3.7.50.8:/tmp/ng-award/
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo rm -rf /var/www/ng-award.bak/'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mv /var/www/ng-award/ /var/www/ng-award.bak/'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mkdir /var/www/ng-award/; sudo tar -xzf /tmp/ng-award/ng-award.tgz -C /var/www/ng-award/'
+             sudo rm -rf /tmp/builds/ng-award/${{github.sha}}
+      - name: deploy-server
+        run: |
+             sudo mkdir -p /tmp/builds/award-server.test/${{github.sha}}
+             sudo aws s3 cp s3://arachnomesh-build/award/award-server/${{github.sha}}/award-server.tgz /tmp/builds/award-server.test/${{github.sha}}/ 
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mkdir -p /tmp/award-server.test/'
+             sudo scp -i ~/.ssh/arach-test-mumbai.pem /tmp/builds/award-server.test/${{github.sha}}/award-server.tgz ec2-user@3.7.50.8:/tmp/award-server.test/
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo rm -rf /opt/node_apps/award-server.bak'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mv /opt/node_apps/award-server /opt/node_apps/award-server.bak || true'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mkdir /opt/node_apps/award-server;sudo tar -xzf /tmp/award-server.test/award-server.tgz -C /opt/node_apps/award-server/'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'cd /opt/node_apps/award-server; npm install;'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'pm2 restart award-server;'
+      - name: deploy-ngweb-test
+        run: |
+             sudo mkdir -p /tmp/builds/award-admin/${{github.sha}}
+             sudo aws s3 cp s3://arachnomesh-build/award/award-admin/${{github.sha}}/award-admin.tgz /tmp/builds/award-admin/${{github.sha}}/ 
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'mkdir -p /tmp/award-admin/'
+             sudo scp -i ~/.ssh/arach-test-mumbai.pem /tmp/builds/award-admin/${{github.sha}}/award-admin.tgz ec2-user@3.7.50.8:/tmp/award-admin/
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo rm -rf /var/www/award-admin.bak/'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mv /var/www/award-admin/ /var/www/award-admin.bak/'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mkdir /var/www/award-admin/; sudo tar -xzf /tmp/award-admin/award-admin.tgz -C /var/www/award-admin/'
+             sudo rm -rf /tmp/builds/award-admin/${{github.sha}}
+      - name: deploy-static-web-test
+        run: |
+             cd web/
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo rm -rf /var/www/award-frontend.bak || true'
+             ssh -i ~/.ssh/arach-test-mumbai.pem ec2-user@3.7.50.8 'sudo mv /var/www/award-frontend /var/www/award-frontend.bak || true ;sudo mkdir -p /var/www/award-frontend'
+             scp -i ~/.ssh/arach-test-mumbai.pem ./* ec2-user@3.7.50.8:/var/www/award-frontend

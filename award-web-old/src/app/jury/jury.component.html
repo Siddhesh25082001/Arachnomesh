@@ -1,0 +1,38 @@
+<app-user-header></app-user-header>
+
+<div class="main-content" id="panel">
+   <section class="bg-brown section-area jury-pag bg-left-design bg-design" id="content">
+      <div class="container container-80">
+         <div class="brown-title">
+            <h1>Jury</h1>
+            <div class="toggleJuryButton">
+               <div *ngIf="selected==='2021'">
+                  <button id="selectedToggle" (click)="toggleSelected()">2021</button>/<button (click)="toggleSelected()">2020</button>
+               </div>
+               <div *ngIf="selected==='2020'">
+                  <button (click)="toggleSelected()">2021</button>/<button (click)="toggleSelected()" id="selectedToggle">2020</button>
+               </div>
+            </div>
+         </div>
+         <div class="jury-sec row" infiniteScroll
+                  [infiniteScrollDistance]="1.5"
+                  [infiniteScrollThrottle]="50"
+                  (scrolled)="onScroll()">
+                     <div class="col-sm-3 col-lg-3" *ngFor="let item of juryList">
+                        <div class="jury-box">
+                           <img [src]="'/uploads/thumbnails-'+item?.file" alt="jury-img">
+                           <div class="jury-detail">
+                              <h3>{{item?.name}}</h3>
+                              <!-- <p>{{item?.description}}</p> -->
+                           </div>
+                           <div class="jury-designation">
+                              <img [src]="'/uploads/thumbnails-'+item?.brand" alt="designation">
+                           </div>
+                        </div>
+                     </div>
+                     
+               </div>
+      </div>
+   </section>
+</div>
+<app-footer></app-footer>

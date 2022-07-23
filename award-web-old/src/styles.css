@@ -1,0 +1,30 @@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+/* blog detail page css */
+
+.blog-detail-page h1, .blog-detail-page h2, .blog-detail-page h3,.blog-detail-page h4,.blog-detail-page h5,.blog-detail-page h6 {
+    color:#e9c557;
+    border-bottom: 1px solid #e9c557;
+    margin-bottom: 15px;
+}
+
+.blog-detail-page a, .blog-detail-page a:hover {
+    color:#e9c557 !important;
+}
+
+.blog-detail-page p br {
+    display: none;
+}
+
+
+.blog-detail-page ol {
+    list-style: inside;
+}
+
+.blog-detail-page p {
+    margin-bottom: 20px;
+}

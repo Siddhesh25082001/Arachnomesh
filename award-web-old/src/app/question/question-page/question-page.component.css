@@ -1,0 +1,249 @@
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end,
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-width: 0px !important;
+  color: transparent;
+}
+
+.answers {
+  color: aliceblue;
+}
+.mat-input-element::placeholder {
+  color: #3d3c38;
+}
+
+.mat-radio-button {
+  color: #ffd740;
+}
+.url_div {
+  width: 200px;
+  height: 40px;
+  margin-left: 20px;
+  background: #030200;
+  box-shadow: 0 0 10px #333;
+  border-radius: 10px;
+}
+.url {
+  color: aliceblue;
+  padding: 5px;
+}
+
+.SubQuestions {
+  padding: 15px;
+}
+
+.cdk-textarea-autosize {
+  line-height: 1.3;
+}
+
+.dashboard-sec {
+  background-position: center 0;
+}
+
+.form-container {
+  width: 100%;
+}
+
+.dashboard-sec {
+  background-position: center 0;
+  background-position: center top;
+}
+
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  background: transparent;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.subOptions {
+  margin-right: 10px;
+}
+
+.fileUpload input[type="file"] {
+  display: none;
+}
+
+.btn {
+  background-color: #e3e3e3;
+  color: #333;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-size: 16px;
+}
+
+textarea {
+  padding: 10px !important;
+  height: 100px !important;
+  resize: inherit !important;
+  min-height: 100px !important;
+}
+
+.multi_custom label {
+  color:#e9c557 !important;
+}
+
+::ng-deep .mat-checkbox label, ::ng-deep .mat-radio-label {
+  color: #e9c557;
+  font-family: 'Poppins';
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: inherit;
+  font-size: 15px;
+  white-space: inherit;
+}
+
+::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+  color: #e9c557;
+}
+
+::ng-deep .mat-radio-disabled .mat-radio-label-content {
+  color: #e9c557 !important;
+}
+
+::ng-deep .mat-checkbox  {
+  width: 50%;
+  display: inline-block;
+}
+
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+  background-color: #fff !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #fff !important;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #fff !important;
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+  stroke: #000 !important;
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-color: #fff;
+}
+
+::ng-deep .mat-radio-outer-circle {
+  border-color: #fff;
+}
+
+:host ::ng-deep .mat-radio-container{
+  height: 15px;
+  width: 15px;
+}
+:host ::ng-deep .mat-radio-outer-circle{
+  height: 15px;
+  width: 15px;
+  border-color:#ffd740 !important;
+}
+:host ::ng-deep .mat-radio-inner-circle{
+  height: 15px;
+  width: 15px;
+  background: #ffd740 !important;
+}
+
+:host ::ng-deep .mat-radio-button .mat-radio-ripple{
+  height: 20px; /*double of your required circle radius*/
+  width: 20px;  /*double of your required circle radius*/
+  left: calc(50% - 10px); /*'10px'-same as your required circle radius*/
+  top: calc(50% - 10px); /*'10px'-same as your required circle radius*/
+}
+
+.web_url_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.web_url_div .mat-checkbox {
+  width: 22%;
+}
+
+.web_url_div .url_div {
+  width: 240px;
+  height: 45px;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.SubQuestions h5 {
+  margin-bottom: 5px;
+}
+
+.SubQuestions .mat-radio-group {
+  margin-bottom:15px;
+  display: inline-block;
+}
+
+::ng-deep .mat-radio-disabled .mat-radio-outer-circle {
+  border-color: #fff !important;
+}
+
+/* custom css for disabled slide range */
+
+::ng-deep .mat-slider-disabled .mat-slider-thumb {
+  background-color: #ffd740 !important;
+  transform: scale(0.8) !important;
+}
+
+::ng-deep .mat-slider-disabled .mat-slider-track-fill {
+  background-color: #ffd740 !important;
+  left: 4px;
+}
+
+.questionire_modal .modal-dialog {
+    max-width: 800px;
+    height: 100vh;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .m-p-0 {
+    padding: 0 !important;
+  }
+
+  .m-m-15 {
+    margin-bottom: 15px;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header {
+    padding: 0;
+  }
+
+  ::ng-deep .mat-checkbox  {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .web_url_div {
+    display: inline-block;
+  }
+
+  .q_ans_div h2 {
+    margin-bottom: 10px;
+  }
+
+}
+/* ===================Mobile Landscape Size to Tablet Portrait (devices and browsers)=================== */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    
+
+
+}
+/* =====================Mobile Portrait Size to Mobile Landscape Size (devices and browsers)===================== */
+@media screen and (max-width: 479px) {
+
+
+
+}
+
+

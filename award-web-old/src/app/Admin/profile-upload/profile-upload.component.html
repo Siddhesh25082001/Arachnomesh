@@ -1,0 +1,135 @@
+
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<!-- Main content -->
+<div class="main main-content admin-dashboard" id="panel">
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Team Section on Arachnomesh</h6>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div style=" display: flex; ">
+          <div class="card-header border-0" style=" padding-right: 686px; ">
+            <h3 class="mb-0">Team Section</h3>
+            <a class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#loginModal">Add Employee</a>
+          </div>
+         
+        </div>
+          <!-- Light table -->
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                 <th scope="col" class="sort" data-sort="name">Employee Name</th>
+                 <th scope="col" class="sort" data-sort="name">Designation</th>
+                 <th scope="col" class="sort" data-sort="budget">Employee Pic</th>
+                 <th scope="col" class="sort" data-sort="status">Edit</th>
+              
+                 
+                 
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr *ngFor="let item of employeeData">   
+                    <td>
+                        {{item?.employeeName}}
+                    </td>
+                    <td>
+                        {{item?.designation}}
+                    </td>
+                    <td>
+                        <img  src="{{item?.employeeImage}}" alt="">
+                     </td>
+                  <td>
+                  <button data-toggle="modal" data-target="#loginModal" (click)="editProfile(item)">Edit</button>
+
+                      
+                  </td>
+                 
+                  
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+   
+        </div>
+      
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade login" id="loginModal">
+  <div class="modal-dialog login animated">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Employyee Name</label>
+            <input
+              class="form-control"
+              type="text"
+              id="example-text-input"
+              name="employeeName"
+              [(ngModel)]="employeeName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Designation</label>
+            <input
+              class="form-control"
+              type="text"
+              id="example-text-input"
+              name="designation"
+              [(ngModel)]="designation"
+            />
+          </div>
+       
+         
+          <div class="form-group">
+            <label for="example-tel-input" class="form-control-label"
+              >Employee pic</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              (change)="handleFileInput($event)"
+              id="employeeImage"
+              name="employeeImage"
+           
+            />
+          </div>
+     
+          <button  *ngIf="!editFlag" class="btn btn-secondary" (click)="postEmployeeData()">Save</button>
+          <button *ngIf="editFlag" class="btn btn-secondary" (click)="editEmployeeProfile()">Edit</button>
+         
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>

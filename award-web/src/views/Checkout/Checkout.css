@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.popupContainer{
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: all 100ms ease-in-out;
+}
+
+.popupContainer.show{
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 100ms ease-in-out;
+}
+
+.popup{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 0 20px 20px;
+    max-width: 80%;
+    text-align: center;
+    color: #333;
+    height: max-content;
+}
+
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow:  0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h2{
+    margin: 0;
+    padding: 0;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.popup .buttons .btns{
+    width: 100%;
+    padding: 10px 0;
+    color: #fff;
+    border: 2px solid #fff;
+    outline: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup .buttons #close1{
+    background-color: #6fd649;;
+}
+
+.popup .buttons #close1:hover{
+    background-color: #fff;
+    border: 2px solid #6fd649;
+    color: #333;
+}
+
+.popup .buttons #close2{
+    background-color: #343a40;
+}
+
+.popup .buttons #close2:hover{
+    background-color: #fff;
+    border: 2px solid #343a40;
+    color: #333;
+}
+
+.popup p{
+    font-size: 14px;
+    justify-content: justify;
+}

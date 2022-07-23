@@ -1,0 +1,51 @@
+{
+  "name": "channelier-award-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node dist/app.js",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "macaddress": "^0.5.1",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.10",
+    "multer": "^1.4.2",
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.6.2",
+    "razorpay": "^2.0.6",
+    "request": "^2.88.2",
+    "underscore": "^1.13.1",
+    "uuid": "^8.3.2",
+    "webp-converter": "^2.2.3",
+    "winston": "^3.2.1",
+    "xlsx": "^0.17.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
+    "@types/jsonwebtoken": "^8.5.4",
+    "@types/lodash": "^4.14.157",
+    "@types/mongoose": "^5.7.12",
+    "@types/multer": "^1.4.3",
+    "@types/node": "^13.13.40",
+    "@types/node-fetch": "^2.5.7",
+    "@types/nodemailer": "^6.4.0",
+    "@types/request": "^2.48.5",
+    "@types/sharp": "^0.25.0",
+    "@types/underscore": "^1.10.0",
+    "@types/uuid": "^8.0.0",
+    "nodemon": "^2.0.3",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 107.3 103" style="enable-background:new 0 0 107.3 103;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#Rounded_Rectangle_5_1_);}
+	.st1{fill:none;stroke:#FFFFFF;stroke-width:4;stroke-linecap:round;}
+</style>
+<linearGradient id="Rounded_Rectangle_5_1_" gradientUnits="userSpaceOnUse" x1="-315.5591" y1="-466.8988" x2="-318.9391" y2="-469.9287" gradientTransform="matrix(34.05 0 0 32.69 10860.9395 15368.2197)">
+	<stop  offset="0" style="stop-color:#3F2300;stop-opacity:0"/>
+	<stop  offset="0" style="stop-color:#430015"/>
+	<stop  offset="1" style="stop-color:#6E3B18"/>
+</linearGradient>
+<path id="Rounded_Rectangle_5" class="st0" d="M1.9,0h103.5c1,0,1.9,2.8,1.9,6.3v90.3c0,3.5-0.8,6.3-1.9,6.3H1.9
+	c-1,0-1.9-2.8-1.9-6.3V6.3C0,2.8,0.8,0,1.9,0z"/>
+<g id="Group_23">
+	<line id="Line_1" class="st1" x1="26.8" y1="79.3" x2="79.7" y2="26.4"/>
+	<line id="Line_2" class="st1" x1="82" y1="79.3" x2="29.1" y2="26.4"/>
+</g>
+</svg>

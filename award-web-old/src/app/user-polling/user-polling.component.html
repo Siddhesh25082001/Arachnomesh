@@ -1,0 +1,341 @@
+<app-user-header></app-user-header>
+<div class="main-content" id="panel">
+      <!-- Content
+            ============================================= -->
+            <section id="content" style="background-color: #000; overflow: visible" *ngIf="page && !searchPage">
+                <div class="content-wrap pt-0 pb-0">
+                   <!-- Section Tickets
+                      ============================================= -->
+                   <div id="" class="section page-section nobg pt-0 clearfix">
+                      <div class="container">
+                         <div class="dark">
+                            <span class="display-4 t700 gradient-underline mb-0">User Poll</span>
+                         </div>
+                      </div>
+                      <div class="position-relative">
+                         <div class="container custom-bg-black pt-5">
+                            
+                            <div class="row category-row">
+                              <div class="col-lg-12 col-sm-12 search-category">
+                                 <form class="mb-0">
+                                    <div class="input-group">
+                                       <input type="text" class="form-control" placeholder="Search by product or company name" aria-label="Recipient's username" aria-describedby="basic-addon2" [ngModelOptions]="{standalone: true}" [(ngModel)]="searchText">
+                                       <div class="input-group-append">
+                                         <input type="submit" value="search" (click)="search()" class="button button-effect">
+                                       </div>
+                                     </div>
+                                 </form>
+                               </div>
+                               <div class="col-lg-12 col-sm-12">
+                                  <div class="choose-category">
+                                     <ul id="award-categories">
+                                       <li *ngFor="let item of dataSource" (click)="getProduct(item)">
+                                          <a>{{item}}</a>
+                                       </li> 
+                                     </ul>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="dotted-bg" style="background: url('./assets/images/dotted-bg.svg') repeat center center / contain; min-height: 75%"></div>
+                   </div>
+                   <!-- #section-awards-category end -->
+                   <div class="clear"></div>
+                </div>
+             </section>
+             <!-- #content end -->  
+             <div class="header pt-6 pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(./assets/images/bg-vote.png); background-size: cover; background-position: center top;" *ngIf="!page && commonService.key">
+               <div class="container">
+                   <div class="row">
+                      <div class="col-lg-12 col-sm-12">
+                         <div class="heading-black">
+                          <h3 class="mb-0">{{headingTitle}}</h3>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-lg-12 col-sm-12">
+                         <div class="vote-product">
+                           <ul>
+                              <li *ngFor="let item of dataSource" (click)="polling(dumpData[item],headingTitle)">
+                                 <h4>{{item}}</h4>
+                                 <h5>{{dumpData[item]['user']['companyName']}}</h5>
+                                 <div class="vote-btn">
+                                    <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                                    <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                                 </div>
+                              </li>
+                           </ul>
+  
+                         <!-- <div class="load-more">
+                            <a href="#" class="btn">Load more</a>
+                         </div> -->
+                         </div>
+                      </div>
+                   </div>
+                   
+                </div>
+             </div>
+</div>
+
+
+
+ 
+ <!-- Modal -->
+ <div class="modal fade vote-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">{{modalText}}</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true"><img width="20px" src="./assets/images/cross.svg"></span>
+         </button>
+       </div>
+       <div class="modal-body">
+
+         <div class="vote-btn active">
+            <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+            <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+         </div>
+       </div>
+      
+     </div>
+   </div>
+ </div>
+
+
+
+<!-- client url page start here -->
+
+<div *ngIf="searchPage && commonService.key" class="header pt-6 pb-6" style="min-height: 500px; background-image: url(./assets/images/bg-vote.png); background-size: cover; background-position: center top;">
+   <div class="container mb-5">
+      <div class="dark">
+         <span class="display-4 t700 gradient-underline mb-0" *ngIf="searchText">{{headingTitle}}</span>
+      </div>
+   </div>
+   
+   <div class="container mb-5" *ngFor="let item of dataSource">
+       <div class="row">
+          <div class="col-lg-12 col-sm-12">
+             <div class="heading-black">
+              <h3 class="mb-0">{{item}}</h3>
+             </div>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-lg-12 col-sm-12">
+             <div class="vote-product client-search">
+               <ul>
+                  <li *ngFor="let child of dumpData[item]" (click)="polling(child,item)">
+                     <h4>{{child['productName']}}</h4>
+                     <h5>{{child['user'][0]['companyName']}}</h5>
+                     <div class="vote-btn">
+                        <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                        <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                     </div>
+                  </li>
+                  <!-- <li>
+                     <h4>Product name</h4>
+                     <h5>Company name</h5>
+                     <div class="vote-btn">
+                        <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                        <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                     </div>
+                  </li>
+                  <li>
+                     <h4>Product name</h4>
+                     <h5>Company name</h5>
+                     <div class="vote-btn">
+                        <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                        <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                     </div>
+                  </li>
+                  <li>
+                     <h4>Product name</h4>
+                     <h5>Company name</h5>
+                     <div class="vote-btn">
+                        <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                        <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                     </div>
+                  </li>
+                  <li>
+                     <h4>Product name</h4>
+                     <h5>Company name</h5>
+                     <div class="vote-btn">
+                        <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                        <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                     </div>
+                  </li>
+                  <li>
+                     <h4>Product name</h4>
+                     <h5>Company name</h5>
+                     <div class="vote-btn">
+                        <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                        <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                     </div>
+                  </li> -->
+                  
+               </ul>
+
+           
+             </div>
+          </div>
+       </div>
+       
+    </div>
+
+
+    <!-- <div class="container mb-5">
+      <div class="row">
+         <div class="col-lg-12 col-sm-12">
+            <div class="heading-black">
+             <h3 class="mb-0">Product of the year - Milk and Dairy</h3>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-lg-12 col-sm-12">
+            <div class="vote-product client-search">
+              <ul>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 
+              </ul>
+
+          
+            </div>
+         </div>
+      </div>
+      
+   </div>
+
+   <div class="container mb-5">
+      <div class="row">
+         <div class="col-lg-12 col-sm-12">
+            <div class="heading-black">
+             <h3 class="mb-0">Product of the year - Milk and Dairy</h3>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-lg-12 col-sm-12">
+            <div class="vote-product client-search">
+              <ul>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 <li>
+                    <h4>Product name</h4>
+                    <h5>Company name</h5>
+                    <div class="vote-btn">
+                       <img class="normal-star" src="./assets/images/vote-star.png" width="50px" alt="plus-icon"/>
+                       <img class="fill-star" src="./assets/images/vote-fill-star.png" width="50px" alt="plus-icon"/>
+                    </div>
+                 </li>
+                 
+              </ul>
+
+          
+            </div>
+         </div>
+      </div>
+      
+   </div> -->
+
+<div class="refresh-btn" *ngIf="searchText"><img src="./assets/images/refresh-icon.png" width="50px" (click)="clear()"></div>
+
+ </div>
+
+
+
+ <li hidden><button id="demo" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+   Launch demo modal
+</button>
+</li>
+
+
+<app-footer></app-footer>

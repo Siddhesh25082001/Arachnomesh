@@ -1,0 +1,103 @@
+<app-admin-dashboard-header></app-admin-dashboard-header>
+<div class="main main-content admin-dashboard" id="panel">
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Nomination Stats</h6>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a (click)="commonService.logout()" class="btn btn-neutral my-4">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--6">
+    <div class="card">
+
+      <div class="row align-items-center py-4">
+        <div class="col-lg-8 col-8">
+          <!-- Filter input -->
+          <mat-form-field class="filter-form" appearance="outline">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Enter product category..." #input>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4 col-4 text-right" style="justify-content: flex-end;display: flex;padding-right: 32px;">
+          <label class="form-control-label">Type</label>
+          <select class="form-control" [(ngModel)]="type" style="margin: 30px 30px 0 0;">
+            <option value="">All</option>
+            <option value="true">Marks Assigned</option>
+          </select>
+          <a class="btn btn-neutral my-4" href="/api/admin/export-category">Export Category</a>
+        </div>
+      </div>
+
+      <!-- Table View-->
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef> Product Category </th>
+          <td mat-cell *matCellDef="let element"
+            [ngClass]="'mat-cell cdk-column-productName mat-column-productName ' + element.level">
+            {{element.productName}} </td>
+        </ng-container>
+
+        <ng-container *ngFor="let awd of awardWiseCount" [matColumnDef]="awd.awardCategoryName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{awd.awardCategoryName}} </th>
+          <td mat-cell *matCellDef="let element"> {{getCountValue(awd.awardCategoryId, element.awardWiseCount)}}
+            <div *ngIf="checkIfLastLevel(element) && getCountValue(awd.awardCategoryId, element.awardWiseCount)!==0">
+              <i
+                class="icon-eye"
+                style="cursor: pointer"
+                (click)="viewAllNominations(element, awd.awardCategoryId)"
+                data-toggle="modal"
+                data-target="#loginModal"
+              ></i></div> </td>
+        </ng-container>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data found...</td>
+        </tr>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          [ngClass]="'mat-row '+ row.level +' ' + row.isBalanced"></tr>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade login questionaireModal" id="loginModal">
+  <div class="modal-dialog login animated">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <table mat-table [dataSource]="nominations" matSort (matSortChange)="announceSortChange($event)">
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell  *matCellDef="let element">{{element.productName}} </td>
+          </ng-container> 
+          <ng-container matColumnDef="totalMarks">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Marks achieved</th>
+            <td mat-cell  *matCellDef="let element">{{element.totalMarks}} </td>
+          </ng-container> 
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+.main {
+  margin: 0 0 0 249px;
+  height: 100%;
+}
+
+/*Tree view Style start*/
+.example-tree {
+  height: 100%;
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.example-tree .mat-nested-tree-node div[role="group"] {
+  padding-left: 40px;
+}
+
+.example-tree div[role="group"] > .mat-tree-node {
+  padding-left: 40px;
+}
+/*Tree view Style end*/

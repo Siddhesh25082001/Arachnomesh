@@ -1,0 +1,40 @@
+.main {
+  margin: 0 0 0 249px;
+}
+.searchDiv {
+  list-style-type: none;
+}
+.searchCompleteDeiv {
+  background-color: darkgray;
+}
+
+.filter-form {
+  width: 40%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.LEVEL_1 {
+  font-weight: 600;
+  padding-left: 10px !important;
+  background-color: darkgray;
+}
+
+.LEVEL_2 {
+  font-weight: 500;
+  padding-left: 25px !important;
+}
+
+.LEVEL_3 {
+  font-weight: 300;
+  padding-left: 50px !important;
+}
+
+.unbalanced-row {
+  background-color: red !important;
+}
+
+.questionaireModal .modal-dialog {
+  max-width: 80%;
+  height: 100vh;
+}

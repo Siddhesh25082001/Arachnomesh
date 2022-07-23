@@ -1,0 +1,301 @@
+.categorySec {
+  background-color: #210e0a;
+  position: relative;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+.awardsCategoryMainnnn {
+  width: 100%;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.awardsCategoryMainnnn > :is(h2, h3, p) {
+  position: absolute;
+  z-index: 12;
+  color: white;
+}
+.awardsCategoryMainnnn > h2 {
+  top: 10%;
+  left: 5%;
+  font-size: 3rem;
+}
+.awardsCategoryMainnnn > h3 {
+  top: 35%;
+  left: 8%;
+  /* font-size: 5vh; */
+  font-size: clamp(1.2rem, 5vh, 2.6rem);
+  font-weight: 400;
+  transition: 1.2s;
+}
+.awardsCategoryMainnnn > p {
+  top: 45%;
+  left: 8%;
+  width: 40ch;
+  font-size: clamp(0.7rem, 3.4vh, 1rem);
+  font-weight: 200;
+}
+
+.onScreenHeading {
+  transform: translateX(0);
+  opacity: 1;
+  transition-timing-function: ease-in;
+}
+.offScreenHeading {
+  opacity: 0;
+  transform: translateX(-50vw);
+  transition-timing-function: ease-out;
+}
+
+.clippedCircle {
+  --size: 140vh;
+  border-radius: 100%;
+  height: var(--size);
+  width: var(--size);
+  /* background-color: #b17c1c; */
+  background: url(../Images/confetti.png) #ffffff;
+
+  position: absolute;
+  bottom: 10%;
+  right: -14%;
+
+  z-index: 10;
+  overflow: hidden;
+}
+.ellipseDashed {
+  height: calc(var(--size) * 0.45);
+  /* width: 80vh; */
+  position: absolute;
+  bottom: 0;
+  left: 48%;
+  transform: translate(-50%, 0) rotate(0);
+  transform-origin: bottom;
+  transition: 0.8s;
+  z-index: 5;
+}
+.ellipseDashed.rotate30 {
+  transform: translate(-50%, 0) rotate(15deg);
+}
+.ellipseDashed.rotate60 {
+  transform: translate(-50%, 0) rotate(30deg);
+}
+
+.productContainer {
+  --sizeProd: calc(var(--size) * 0.8);
+  /* background-color: rgba(255, 255, 255, 0.349); */
+  height: var(--sizeProd);
+  width: var(--sizeProd);
+  border-radius: 50%;
+
+  z-index: 6;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  perspective: 50vh;
+}
+.productImage {
+  --tiltRectifier: 64deg;
+  --tiltAngle: calc(var(--tilt) - var(--tiltRectifier));
+  --rotationTime: 1s;
+  --inwards: -25vh;
+  min-height: calc(var(--size) * 0.11);
+  height: calc(var(--size) * 0.11);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(var(--tiltAngle))
+    translateY(calc(-1 * (var(--sizeProd) / 2)));
+}
+.productImage.rotate0 {
+  animation: rotate0 var(--rotationTime) ease-in forwards;
+}
+@keyframes rotate0 {
+  0% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) - 120deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2)));
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) - 60deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2) - var(--inwards)));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) + 0deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2)));
+  }
+}
+.productImage.rotate60 {
+  animation: rotate60 var(--rotationTime) ease-in forwards;
+}
+@keyframes rotate60 {
+  0% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) + 0deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2)));
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) + 60deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2) - var(--inwards)));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) + 120deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2)));
+  }
+}
+.productImage.rotate120 {
+  animation: rotate120 var(--rotationTime) ease-in forwards;
+}
+@keyframes rotate120 {
+  0% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) + 120deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2)));
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) + 180deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2) - var(--inwards)));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--tiltAngle) + 240deg))
+      translateY(calc(-1 * (var(--sizeProd) / 2)));
+  }
+}
+
+.productContainer > .brandLogo {
+  --animation-duration: 0.8s;
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(0deg);
+
+  height: 30vh;
+  transform-origin: center;
+  transform-style: preserve-3d;
+
+  transition: 0.6s;
+}
+.productContainer > .goDown {
+  /* transform: translate(-50%, -50%) rotateX(0deg); */
+  animation: goDown var(--animation-duration) ease-in forwards;
+}
+@keyframes goDown {
+  0% {
+    transform: translate(-50%, -50%) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 10%) rotateX(80deg) scale(0.4);
+    opacity: 0;
+  }
+}
+.productContainer > .comeUp {
+  transform: translate(-50%, -50%) rotateX(0deg);
+  animation: comeUp var(--animation-duration) ease-in forwards;
+}
+@keyframes comeUp {
+  100% {
+    transform: translate(-50%, -50%) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  0% {
+    transform: translate(-50%, 0%) rotateX(80deg) scale(0.4);
+    opacity: 0;
+  }
+}
+
+.frontText {
+  animation: categoryText 1s ease-in forwards;
+  opacity: 1;
+}
+.behindText {
+  animation: categoryText 0.5s ease-out reverse forwards;
+}
+@keyframes categoryText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media all and (orientation: portrait) {
+  .productImage {
+    --tiltRectifier: 72.5deg;
+    min-height: 10vh;
+    max-height: 10vh;
+  }
+  .clippedCircle {
+    --size: 100vh;
+    position: absolute;
+    bottom: -70%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ellipseDashed {
+    top: 14%;
+    left: 48%;
+    transform: translate(-50%, 0) rotate(0);
+  }
+  .productContainer {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 16%);
+  }
+  .productContainer > .brandLogo {
+    top: 30%;
+    height: 14vh;
+  }
+  .awardsCategoryMainnnn > h3 {
+    font-size: 1.2rem;
+    top: 24%;
+  }
+  .awardsCategoryMainnnn > p {
+    font-size: 0.8rem;
+    top: 34%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1150px) {
+  .productImage {
+    --tiltRectifier: 72.5deg;
+  }
+  .clippedCircle {
+    --size: 100vw;
+    position: absolute;
+    bottom: calc(var(--size) * -0.65);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ellipseDashed {
+    /* height: 40vh; */
+    top: 14%;
+    left: 48%;
+    transform: translate(-50%, 0) rotate(0);
+  }
+  .productContainer {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 16%);
+  }
+  .productContainer > .brandLogo {
+    top: 20%;
+    height: 14vh;
+  }
+  .awardsCategoryMainnnn > h3 {
+    font-size: 1.2rem;
+    top: 24%;
+  }
+  .awardsCategoryMainnnn > p {
+    font-size: 0.8rem;
+    top: 34%;
+  }
+}

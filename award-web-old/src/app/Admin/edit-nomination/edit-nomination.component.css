@@ -1,0 +1,12 @@
+.main {
+  margin: 0 0 0 249px;
+}
+
+.nom-form {
+  padding: 15px;
+}
+
+.nom-form-field {
+  display: flex;
+  flex-direction: column;
+}
